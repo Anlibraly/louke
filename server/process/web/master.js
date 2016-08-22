@@ -4,14 +4,14 @@ var render = require('koa-ejs');
 var staticServer = require('koa-static');
 var path = require('path');
 
-app.use(staticServer(path.join(__dirname,'product/app/')));
+app.use(staticServer(path.join(__dirname,'/product/app/')));
 
 app.on('error', function(err,ctx){
 	console.log(err);
 });
 
 render(app, {
-	root: path.join(__dirname, 'product/app/'),
+	root: path.join(__dirname, '/product/app/'),
 	layout: '__layout',
 	viewExt: 'html',
 	cache: false,
