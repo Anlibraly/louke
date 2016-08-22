@@ -34,7 +34,6 @@ gulp.task('server', function(){
 gulp.task('config', function(){
     combinedServer[2] = combiner.obj([
         gulp.src( './config/**' ),
-        header('module.exports = '),
         gulp.dest('./product/server/common')
     ]);   
     combinedServer[2].on('error', console.error.bind(console));

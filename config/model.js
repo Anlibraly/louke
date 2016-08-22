@@ -1,4 +1,4 @@
-{
+module.exports = {
 
 	contact : {
 		_remote: 'db',
