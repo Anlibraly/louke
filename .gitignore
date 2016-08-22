@@ -1,0 +1,8 @@
+!.gitignore
+node_modules/
+product/
+logs/
+**/.DS_Store
+**/npm-debug.log
+config/settings.js
+config/dbConfig.js
