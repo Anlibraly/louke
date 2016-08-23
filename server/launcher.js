@@ -56,7 +56,7 @@ var start = () => {
 };
 
 Promise.resolve()
-.then(() => msg.spawnSocket('launcher', pmid, {
+.then(() => msg.spawnSocket('launcher', 1, {
 	contact: ( data, res ) => {
 		console.log(`${data.name} - ${data.port} started`);
 		res();
