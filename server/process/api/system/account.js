@@ -1,5 +1,15 @@
 var msg = require('../../../common/msg');
 
+var getThroughDataProc = (type, optype, sendData) => {
+	return msg.send(`data@${type}.${optype}`, sendData)
+	.then(({result, res}) => {
+		if(!res.status){
+			throw new Error(res.msg);
+		}
+		return Promise.resolve(result);
+	});
+};
+
 module.exports = ( router ) => {
 
 	router
@@ -19,7 +29,6 @@ module.exports = ( router ) => {
 
 	})
 	.post('/account/login', function *() {
-
 		yield msg
 		.send('account@loginWithOauth', {
 			autoCode : this.request.body.autoCode
@@ -28,7 +37,6 @@ module.exports = ( router ) => {
 
 	})
 	.post('/account/logout', function *() {
-
 		yield msg
 		.send('account@logout', this.request.body)
 		.then( (result) => (this.body = result) );
