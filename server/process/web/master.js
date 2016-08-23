@@ -1,19 +1,23 @@
 var koa = require('koa');
 var router = require('koa-router');
 var morgan = require('koa-morgan');
+var session = require('koa-session');
 var koaBody = require('koa-body');
 var render = require('koa-ejs');
 var conditional = require('koa-conditional-get');
 var staticServer = require('koa-static');
 var etag = require('koa-etag');
 var path = require('path');
+var msg = require('../../common/msg');
 
 var pmid = process.env.pm_id;
 var app = koa();
-var webRouter 	 = router();
+var webRouter = router();
 
 var webServer = () => {
 
+	app.keys = ['louke-session-2016'];
+	app.use(session(app));
 	app.use(staticServer(path.join(__dirname,'../../../../product/app/')));
 
 	app.on('error', function(err,ctx){
@@ -27,6 +31,11 @@ var webServer = () => {
 		cache: false,
 		debug: true
 	});
+
+	webRouter.get('/sales/ses', function *(next) {
+		this.session.message = 'hi';
+    	this.body = this.session;
+  	})
 
 	app.use(function *(){
 			yield this.render('index',{layout:false});
