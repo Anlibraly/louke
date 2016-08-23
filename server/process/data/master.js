@@ -1,6 +1,6 @@
 var extend 			= require('node.extend');
 var msg 			= require('../../common/msg');
-var pmid 			= process.env.pm_id;
+var pmid 			= 2;
 var action 			= {};
 // ================================================================================
 // Socket / server
