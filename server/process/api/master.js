@@ -44,16 +44,6 @@ var apiServer = () => {
 		debug: true
 	});
 
-	systemRouter.get('/', function *(){
-		if(this.session.userid === undefined || this.session.userid < 0){
-			this.render('index.html');
-		}else if(this.session.type === 1){
-			this.render('salesman/index.html');
-		}else if(this.session.type === 2){
-			this.render('admin/index.html');
-		}
-	});
-
 	app.use(morgan.middleware('dev'))
 	.use(koaBody({
 		jsonLimit : '10mb',
@@ -70,6 +60,10 @@ var apiServer = () => {
 			yield next;
 			if(this.session.userid === undefined || this.session.userid < 0){
 				this.render('index.html');
+			}else if(this.session.type === 1){
+				this.render('salesman/index.html');
+			}else if(this.session.type === 2){
+				this.render('admin/index.html');
 			}
 		}catch(e){
 			this.body = {
