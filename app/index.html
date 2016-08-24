@@ -7,6 +7,7 @@
 		<style type="text/css">
 			.content{
 				padding: 60% 0;
+				display: none;
 				text-align: -webkit-center;
 			}
 			input {
@@ -32,7 +33,6 @@
 		<script type="text/javascript" src="lib/jquery-3.1.0.min.js"></script>
 		<script type="text/javascript" src="lib/common.js"></script>
 		<script type="text/javascript">
-			checkLive();
 			document.querySelector('input[type="button"]')
 			.addEventListener("click", function (event) { 
 				var username = document.querySelector('input[type="text"]').value;
@@ -59,6 +59,11 @@
 		        	alert('用户名密码不能为空');
 		        }		
 			}, false); 
+			if(user_type == 0){
+				$(".content").show();
+			}else{
+				
+			}
 		</script>
 	</body>
 </html>
