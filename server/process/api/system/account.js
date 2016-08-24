@@ -80,7 +80,7 @@ module.exports = ( router ) => {
 			};			
 		});
 	})
-	.post('/account/logout', function *() {
+	.get('/account/logout', function *() {
 		this.session = null;
 		this.render('/');
 	});

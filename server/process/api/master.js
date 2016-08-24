@@ -61,11 +61,6 @@ var apiServer = () => {
 		textLimit : '10mb'
 	}))
 	.use(function *(next){
-		yield next;
-		this.response.set('louke-server', `api/${pmid}`);
-		this.response.set('Access-Control-Allow-Origin', conf.serverAddress.replace(/\/$/, ''));
-	})
-	.use(function *(next){
 		try{
 			yield next;
 			if(this.session.userid === undefined || this.session.userid < 0){
