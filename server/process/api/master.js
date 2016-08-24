@@ -54,12 +54,16 @@ var apiServer = () => {
 		}
 	});
 
-	app.use(morgan.middleware('dev'))
-	.use(koaBody({
+	app.use(koaBody({
 		jsonLimit : '10mb',
 		formLimit : '10mb',
 		textLimit : '10mb'
 	}))
+	.use(function *(next){
+		yield next;
+		this.response.set('louke-server', `api/${pmid}`);
+		this.response.set('Access-Control-Allow-Origin', conf.serverAddress.replace(/\/$/, ''));
+	})
 	.use(function *(next){
 		try{
 			yield next;
