@@ -44,7 +44,7 @@
 					}
 					$.ajax({
 			            type: "post",
-			            url: `${_dirname}/system/account/login`,
+			            url: _dirname + '/system/account/login',
 			            data: params,
 			            dataType: "json",
 			            success: function(data){
