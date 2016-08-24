@@ -82,10 +82,8 @@ module.exports = ( router ) => {
 		});
 	})
 	.post('/account/logout', function *() {
-		yield msg
-		.send('account@logout', this.request.body)
-		.then( (result) => (this.body = result) );
-
+		this.session = null;
+		this.render('/');
 	})
 
 };
