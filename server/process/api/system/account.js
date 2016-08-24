@@ -20,13 +20,25 @@ module.exports = ( router ) => {
     			 this.req.socket.remoteAddress ||
     			 this.req.connection.socket.remoteAddress;
 
+    	this.session.userip = ip;
+
 		this.body = {
-			result : {ip: ip, session: this.session},
+			result : {ip: ip},
 			res : {
 				status : true
 			}
 		};
 
+	})
+	.get('/getip',function *(){
+
+		this.body = {
+			result : {ip: this.session.userip},
+			res : {
+				status : true
+			}
+		};		
+		
 	})
 	.post('/account/login', function *() {
 		yield msg

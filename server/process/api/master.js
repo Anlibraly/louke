@@ -55,7 +55,6 @@ var apiServer = () => {
 	}))
 	.use(function *(next){
 		yield next;
-		this.session.user = {id:-1, code:-1};
 		this.response.set('louke-server', `api/${pmid}`);
 		this.response.set('Access-Control-Allow-Origin', conf.serverAddress.replace(/\/$/, ''));
 	})
