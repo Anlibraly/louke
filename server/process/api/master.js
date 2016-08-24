@@ -5,6 +5,7 @@ var koaBody  = require('koa-body');
 var mount 	 = require('koa-mount');
 var session  = require('koa-session');
 var _ 		 = require('underscore');
+var staticServer = require('koa-static');
 var file 	 = require('../../common/file');
 var msg 	 = require('../../common/msg');
 var pmid 	 = process.env.pm_id;
@@ -38,7 +39,7 @@ var apiServer = () => {
 		cache: false,
 		debug: true
 	});
-	
+
 	app.use(morgan.middleware('dev'))
 	.use(koaBody({
 		jsonLimit : '10mb',
