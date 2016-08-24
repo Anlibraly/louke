@@ -44,7 +44,7 @@ var apiServer = () => {
 		debug: true
 	});
 
-	systemRouter.get('/', function *(){
+/*	systemRouter.get('/', function *(){
 		if(this.session.userid === undefined || this.session.userid < 0){
 			this.render('index.html');
 		}else if(this.session.type === 1){
@@ -52,7 +52,7 @@ var apiServer = () => {
 		}else if(this.session.type === 2){
 			this.render('admin/index.html');
 		}
-	});
+	});*/
 
 	app.use(koaBody({
 		jsonLimit : '10mb',
@@ -67,9 +67,9 @@ var apiServer = () => {
 	.use(function *(next){
 		try{
 			yield next;
-			if(this.session.userid === undefined || this.session.userid < 0){
+/*			if(this.session.userid === undefined || this.session.userid < 0){
 				this.render('index.html');
-			}
+			}*/
 		}catch(e){
 			this.body = {
 				res:{
