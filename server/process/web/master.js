@@ -47,7 +47,7 @@ var webServer = () => {
 		.use(webRouter.routes())
 		.use(webRouter.allowedMethods());
 
-	app.listen(8090);
+	app.listen(80);
 
 }
 
