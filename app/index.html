@@ -30,7 +30,9 @@
 			<input type='button' value='登录'/>
 		</div>
 		<script type="text/javascript" src="lib/jquery-3.1.0.min.js"></script>
+		<script type="text/javascript" src="lib/common.js"></script>
 		<script type="text/javascript">
+			checkLive();
 			document.querySelector('input[type="button"]')
 			.addEventListener("click", function (event) { 
 				var username = document.querySelector('input[type="text"]').value;
@@ -42,12 +44,12 @@
 					}
 					$.ajax({
 			            type: "post",
-			            url: "/system/account/login",
+			            url: `${_dirname}/system/account/login`,
 			            data: params,
 			            dataType: "json",
 			            success: function(data){
 			            	if(data.code > 0){
-			            		window.location.href = data.desc;
+			            		window.location.href = _dirname + data.desc;
 			            	}else{
 			            		alert(data.desc);
 			            	}
