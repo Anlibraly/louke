@@ -1,7 +1,6 @@
 var koa = require('koa');
 var router = require('koa-router');
 var morgan = require('koa-morgan');
-var session = require('koa-session');
 var koaBody = require('koa-body');
 var render = require('koa-ejs');
 var conditional = require('koa-conditional-get');

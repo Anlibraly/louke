@@ -3,6 +3,7 @@ var router 	 = require('koa-router');
 var morgan 	 = require('koa-morgan');
 var koaBody  = require('koa-body');
 var mount 	 = require('koa-mount');
+var session  = require('koa-session');
 var _ 		 = require('underscore');
 var file 	 = require('../../common/file');
 var msg 	 = require('../../common/msg');
@@ -22,7 +23,22 @@ var conf = {
 var apiServer = () => {
 
 	app.listen(conf.apiPort);
+	app.keys = ['louke-session-2016'];
+	app.use(session(app));
 
+	app.use(staticServer(path.join(__dirname,'../../../../product/app/')));
+
+	app.on('error', function(err,ctx){
+		console.log(err);
+	});
+	render(app, {
+		root: path.join(__dirname, '../../../../product/app/'),
+		layout: '__layout',
+		viewExt: 'html',
+		cache: false,
+		debug: true
+	});
+	
 	app.use(morgan.middleware('dev'))
 	.use(koaBody({
 		jsonLimit : '10mb',
