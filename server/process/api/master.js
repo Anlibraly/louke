@@ -5,7 +5,11 @@ var koaBody  = require('koa-body');
 var mount 	 = require('koa-mount');
 var session  = require('koa-session');
 var _ 		 = require('underscore');
+var render = require('koa-ejs');
+var conditional = require('koa-conditional-get');
 var staticServer = require('koa-static');
+var etag = require('koa-etag');
+var path = require('path');
 var file 	 = require('../../common/file');
 var msg 	 = require('../../common/msg');
 var pmid 	 = process.env.pm_id;
@@ -13,7 +17,7 @@ var app 	 = koa();
 var systemApi 	 = koa();
 var systemRouter = router();
 var conf = {
-	apiPort: '8090',
+	apiPort: '80',
 	serverAddress: '139.196.195.37',
 
 };
