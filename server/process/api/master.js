@@ -44,7 +44,7 @@ var apiServer = () => {
 		debug: true
 	});
 
-	webRouter.get('/', function *(){
+	systemRouter.get('/', function *(){
 		if(this.session.userid === undefined || this.session.userid < 0){
 			this.render('index.html');
 		}else if(this.session.type === 1){
