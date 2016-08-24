@@ -30,9 +30,7 @@ var apiServer = () => {
 	app.listen(conf.apiPort);
 	var opts = {};
 	app.keys = ['louke-session-2016'];
-	opts.key = ['louke-session-2016'];
-	opts.maxAge = 2*60*60*1000;
-	app.use(session(opts, app));
+	app.use(session(app));
 
 	app.use(staticServer(path.join(__dirname,'../../../../product/app/')));
 
