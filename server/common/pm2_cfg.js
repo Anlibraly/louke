@@ -38,6 +38,6 @@ exports.servers = {
 
 exports.ports = {
 	'data': 	8100,
-	'api': 		8140,
-	'web': 		8180
+	'api': 		8120,
+	'web': 		8140
 };
