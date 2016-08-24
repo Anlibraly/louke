@@ -43,6 +43,7 @@ module.exports = ( router ) => {
 		
 	})
 	.post('/account/login', function *() {
+		console.log(this.request.body);
 		Promise.resolve()
 		.then(() => getThroughDataProc('db', 'query', {
 			_key: 'user',
@@ -53,6 +54,7 @@ module.exports = ( router ) => {
 			let hasResult = (result.list && result.list.length);
 			let user = null;
 			if(hasResult && result.list[0]){
+				console.log(result.list);
 				user = result.list[0];
 				this.session.userid = user._id;
 				this.session.username = user.username;
@@ -84,6 +86,6 @@ module.exports = ( router ) => {
 	.post('/account/logout', function *() {
 		this.session = null;
 		this.render('/');
-	})
+	});
 
 };
