@@ -41,7 +41,7 @@ module.exports = ( router ) => {
 	})
 	.post('/account/login', function *() {
 		console.log(this.request.body);
-		Promise.resolve()
+		yield Promise.resolve()
 		.then(() => getThroughDataProc('db', 'query', {
 			_key: 'user',
 			username: this.request.body.username,
