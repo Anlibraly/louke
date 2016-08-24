@@ -5,7 +5,6 @@ var md5 = require('md5');
 var getThroughDataProc = (type, optype, sendData) => {
 	return msg.send(`data@${type}.${optype}`, sendData)
 	.then(({result, res}) => {
-		console.log(result,res);
 		return Promise.resolve(result);
 	});
 };
@@ -59,7 +58,7 @@ module.exports = ( router ) => {
 				this.session.nick_name = user.nick_name;
 				this.session.type = user.type;
 				let des = '/salesman/index.html';
-				if(type === 2){
+				if(user.type === 2){
 					des = '/admin/index.html';
 				}
 				this.body = {
