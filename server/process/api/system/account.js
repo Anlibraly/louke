@@ -5,10 +5,7 @@ var md5 = require('md5');
 var getThroughDataProc = (type, optype, sendData) => {
 	return msg.send(`data@${type}.${optype}`, sendData)
 	.then(({result, res}) => {
-		console.log(res);
-		if(!res.status){
-			throw new Error(res.msg);
-		}
+		console.log(result,res);
 		return Promise.resolve(result);
 	});
 };
