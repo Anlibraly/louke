@@ -7,6 +7,7 @@ var conditional = require('koa-conditional-get');
 var staticServer = require('koa-static');
 var etag = require('koa-etag');
 var path = require('path');
+var msg = require('../../common/msg');
 
 var pmid = process.env.pm_id;
 var app = koa();
