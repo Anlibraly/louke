@@ -79,7 +79,7 @@ module.exports = ( router ) => {
 		});
 	})
 	.get('/account/logout', function *() {
-		this.session = null;
+		this.session = {};
 		this.render('/');
 	});
 
