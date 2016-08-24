@@ -29,7 +29,7 @@ var apiServer = () => {
 
 	app.listen(conf.apiPort);
 	var opts = {};
-	opts.key = ['louke-session-2016'];
+	opts.keys = ['louke-session-2016'];
 	opts.maxAge = 2*60*60*1000;
 	app.use(session(opts, app));
 
