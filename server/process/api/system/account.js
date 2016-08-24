@@ -29,10 +29,10 @@ module.exports = ( router ) => {
 		};
 
 	})
-	.get('/getip',function *(){
+	.get('/getsession',function *(){
 
 		this.body = {
-			result : {ip: this.session.userip},
+			result : {type: this.session.type, id: this.session.userid},
 			res : {
 				status : true
 			}
@@ -40,7 +40,6 @@ module.exports = ( router ) => {
 		
 	})
 	.post('/account/login', function *() {
-		console.log(this.request.body);
 		yield Promise.resolve()
 		.then(() => getThroughDataProc('db', 'query', {
 			_key: 'user',
@@ -51,7 +50,6 @@ module.exports = ( router ) => {
 			let hasResult = (result.list && result.list.length);
 			let user = null;
 			if(hasResult && result.list[0]){
-				console.log(result.list);
 				user = result.list[0];
 				this.session.userid = user._id;
 				this.session.username = user.username;
