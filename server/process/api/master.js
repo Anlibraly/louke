@@ -28,8 +28,10 @@ var conf = {
 var apiServer = () => {
 
 	app.listen(conf.apiPort);
-	app.keys = ['louke-session-2016'];
-	app.use(session(app));
+	var opts;
+	opts.key = ['louke-session-2016'];
+	opts.maxAge = 2*60*60*1000;
+	app.use(session(opts, app));
 
 	app.use(staticServer(path.join(__dirname,'../../../../product/app/')));
 
@@ -52,6 +54,8 @@ var apiServer = () => {
 	}))
 	.use(function *(next){
 		yield next;
+		this.session.user = {id:-1, code:-1};
+		this.response.session.user = {id:-1, code:-1};
 		this.response.set('louke-server', `api/${pmid}`);
 		this.response.set('Access-Control-Allow-Origin', conf.serverAddress.replace(/\/$/, ''));
 	})
