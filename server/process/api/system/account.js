@@ -21,7 +21,7 @@ module.exports = ( router ) => {
     			 this.req.connection.socket.remoteAddress;
 
 		this.body = {
-			result : {ip: ip, session: this.req.session},
+			result : {ip: ip, session: this.session},
 			res : {
 				status : true
 			}
