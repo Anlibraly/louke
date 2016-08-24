@@ -17,7 +17,7 @@ var app 	 = koa();
 var systemApi 	 = koa();
 var systemRouter = router();
 var conf = {
-	apiPort: '80',
+	apiPort: '8090',
 	serverAddress: '139.196.195.37',
 
 };
@@ -31,45 +31,21 @@ var apiServer = () => {
 	var opts = {maxAge: 2*60*60*1000, key:'louke-session-2016'};
 	app.keys = ['louke-session-2016'];
 	app.use(session(opts, app));
-	app.use(staticServer(path.join(__dirname,'../../../../product/app/')));
 
-	app.on('error', function(err,ctx){
-		console.log(err);
-	});
-	render(app, {
-		root: path.join(__dirname, '../../../../product/app/'),
-		layout: '__layout',
-		viewExt: 'html',
-		cache: false,
-		debug: true
-	});
-
-/*	systemRouter.get('/', function *(){
-		if(this.session.userid === undefined || this.session.userid < 0){
-			this.render('index.html');
-		}else if(this.session.type === 1){
-			this.render('salesman/index.html');
-		}else if(this.session.type === 2){
-			this.render('admin/index.html');
-		}
-	});*/
-
-	app.use(koaBody({
+	app.use(morgan.middleware('dev'))
+	.use(koaBody({
 		jsonLimit : '10mb',
 		formLimit : '10mb',
 		textLimit : '10mb'
 	}))
 	.use(function *(next){
 		yield next;
-		this.response.set('louke-server', `api/${pmid}`);
+		this.response.set('HMP-Server', `api/${pmid}`);
 		this.response.set('Access-Control-Allow-Origin', conf.serverAddress.replace(/\/$/, ''));
 	})
 	.use(function *(next){
 		try{
 			yield next;
-/*			if(this.session.userid === undefined || this.session.userid < 0){
-				this.render('index.html');
-			}*/
 		}catch(e){
 			this.body = {
 				res:{
