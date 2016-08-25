@@ -39,6 +39,10 @@ module.exports = ( router ) => {
 		};		
 		
 	})
+	.get('/account/logout', function *() {
+		this.session = {};
+		this.render('/');
+	});	
 	.post('/account/login', function *() {
 		yield Promise.resolve()
 		.then(() => getThroughDataProc('db', 'query', {
@@ -78,9 +82,5 @@ module.exports = ( router ) => {
 			};			
 		});
 	})
-	.get('/account/logout', function *() {
-		this.session = {};
-		this.render('/');
-	});
 
 };
