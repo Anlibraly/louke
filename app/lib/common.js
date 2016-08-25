@@ -1,17 +1,15 @@
+var _search = '';
 function getRootPath(){
     var curWwwPath = window.document.location.href;
     var pathName = window.document.location.pathname;
-    var pos = curWwwPath.indexOf(pathName);
+    var pos = curWwwPath.lastIndexOf(pathName);
+    _search = window.document.location.search;
     if(pos > 8){
     	return curWwwPath.substring(0,pos);
 	}
     return curWwwPath;
 }
 var _dirname = getRootPath();
-
-if(_dirname.lastIndexOf("/") == _dirname.length -1){
-	_dirname = _dirname.substring(0, _dirname.length -1);
-}
 
 $.ajax({
     type: 'get',
@@ -24,10 +22,10 @@ $.ajax({
     	}else if(data&&data.result.type === 2){
     		href = _dirname + '/admin/index.html';
     	}else{
-    		href = _dirname + '/'
+    		href = _dirname + '/';
     	}
 	
-	if(window.location.href != href){
+	if(window.location.href != href && window.location.href != href + _search){
 		window.location.href = href;
 	}
     }
