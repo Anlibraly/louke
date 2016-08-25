@@ -56,11 +56,11 @@ var apiServer = () => {
 		console.log(this.request);
 		this.response.set('louke-server', `api/${pmid}`);
 		this.response.set('Access-Control-Allow-Origin', conf.serverAddress.replace(/\/$/, ''));
-		if((this.session == {} || this.session.userid == undefined)&&!_.string.fp.startsWith(url, '/account')){
+		if((this.session == {} || this.session.userid == undefined)&&url.indexOf('/system/account')!=0){
 			this.redirect('/');
-		}else if(this.session.type == 1 && _.string.fp.startsWith(url, '/system/admin')){
+		}else if(this.session.type == 1 && url.indexOf('/system/admin')==0){
 			this.redirect('/salesman');
-		}else if(this.session.type == 2 && _.string.fp.startsWith(url, '/system/salesman')){
+		}else if(this.session.type == 2 && url.indexOf('/system/salesman')==0){
 			this.redirect('/admin');
 		}		
 	})
