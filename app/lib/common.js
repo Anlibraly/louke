@@ -15,12 +15,12 @@ $.ajax({
     url: _dirname + '/system/account/getsession',
     dataType: "json",
     success: function(data){
-	var href = '';
-    	if(data&&data.result.type == 1&&_path.indexOf('/admin') != 0){
+	var href = window.location.href;
+    	if(data&&data.result.type == 1&&_path.indexOf('/admin') == 0){
     		href = _dirname + '/salesman/index.html';
-    	}else if(data&&data.result.type == 2&&_path.indexOf('/salesman')!=0){
+    	}else if(data&&data.result.type == 2&&_path.indexOf('/salesman')==0){
     		href = _dirname + '/admin/index.html';
-    	}else{
+    	}else if(data.result.type == undefined){
     		href = _dirname + '/';
     	}
 	
