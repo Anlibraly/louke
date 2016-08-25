@@ -12,7 +12,7 @@ var getThroughDataProc = (type, optype, sendData) => {
 module.exports = ( router ) => {
 
 	router
-	.get('/getUserIp', function *() {
+	.get('/account/getUserIp', function *() {
 
 		let ip = this.req.headers['x-forwarded-for'] ||
     			 this.req.connection.remoteAddress ||
@@ -29,7 +29,7 @@ module.exports = ( router ) => {
 		};
 
 	})
-	.get('/getsession',function *(){
+	.get('/account/getsession',function *(){
 
 		this.body = {
 			result : {type: this.session.type, id: this.session.userid},
