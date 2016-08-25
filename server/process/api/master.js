@@ -52,11 +52,14 @@ var apiServer = () => {
 	}))
 	.use(function *(next){
 		yield next;
+		console.log(11111);
 		this.response.set('louke-server', `api/${pmid}`);
 		this.response.set('Access-Control-Allow-Origin', conf.serverAddress.replace(/\/$/, ''));
+		console.log(this.session);
 		if(this.session == {} || this.session.userid == undefined){
-			this.response.render('/');
+			this.redirect('/login');
 		}		
+		console.log(2222);
 	})
 	.use(function *(next){
 		try{

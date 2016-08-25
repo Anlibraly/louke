@@ -41,7 +41,7 @@ module.exports = ( router ) => {
 	})
 	.get('/account/logout', function *() {
 		this.session = {};
-		this.render('/');
+		this.redirect('/');
 	})
 	.post('/account/login', function *() {
 		yield Promise.resolve()
