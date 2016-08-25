@@ -81,6 +81,110 @@ module.exports = ( router ) => {
 				desc: `[error] ${err.message}\n${err.stack}`
 			};			
 		});
+	})
+	.get('/admin/', function *() {
+
+	})
+	.get('/salesman/getcustom', function *() {
+		yield Promise.resolve()
+		.then(() => getThroughDataProc('db', 'query', {
+			_key: 'custom',
+			userid: this.session.userid,
+		}))
+		.then((result) => {
+			this.body = {
+				code: 1,
+				customs: result.list
+			};				
+		})
+		.catch((err) => {
+			console.log(`[error] ${err.message}\n${err.stack}`)
+			this.body = {
+				code: -1,
+				desc: `[error] ${err.message}\n${err.stack}`
+			};			
+		});		
+	})
+	.get('/salesman/getcotact/:cid', function *() {
+		yield Promise.resolve()
+		.then(() => getThroughDataProc('db', 'query', {
+			_key: 'contact',
+			custom_id: this.params.cid,
+			sort: {'contact_time': 'desc'}
+		}))
+		.then((result) => {
+			this.body = {
+				code: 1,
+				contacts: result.list
+			};				
+		})
+		.catch((err) => {
+			console.log(`[error] ${err.message}\n${err.stack}`)
+			this.body = {
+				code: -1,
+				desc: `[error] ${err.message}\n${err.stack}`
+			};			
+		});		
+	})
+	.post('/salesman/addcotact', function *() {
+		var in_data = this.request.body;
+		var cid = in_data.cid,
+			status = in_data.status;
+		if (!cid||cid<0||typeof(cid)!='number'||!(status>0&&status<6)) {
+			this.body = {
+				code: -1,
+				desc: '请传入正确的客户id和跟进进度'
+			};	
+		}
+		var data = {}, 
+			ctm = in_data.ctime, 
+			dt = in_data.detail;
+
+		data.custom_id = cid;
+		data.contact_time = (ctm == undefined||ctm < 1272141884)?(+new Date()) : ctm;
+		data.detail = (dt == undefined || dt.length < 1)? '暂无详情':dt;
+		data.status = status;
+		data.userid = this.session.userid;
+		data.add_time = (+new Date());
+
+		yield Promise.resolve()
+		.then(() => getThroughDataProc('db', 'save', {
+			_key: 'contact',
+			_save: data
+		}))
+		.then((result) => {
+			this.body = {
+				code: 1,
+				desc: '添加成功'
+			};				
+		})
+		.catch((err) => {
+			console.log(`[error] ${err.message}\n${err.stack}`)
+			this.body = {
+				code: -1,
+				desc: `[error] ${err.message}\n${err.stack}`
+			};			
+		});		
+	})
+	.get('/salesman/getfang/:fid', function *() {
+		yield Promise.resolve()
+		.then(() => getThroughDataProc('db', 'query', {
+			_key: 'fang',
+			_id: this.params.fid
+		}))
+		.then((result) => {
+			this.body = {
+				code: 1,
+				contacts: result.list
+			};				
+		})
+		.catch((err) => {
+			console.log(`[error] ${err.message}\n${err.stack}`)
+			this.body = {
+				code: -1,
+				desc: `[error] ${err.message}\n${err.stack}`
+			};			
+		});		
 	});
 
 };

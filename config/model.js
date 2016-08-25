@@ -5,7 +5,8 @@ module.exports = {
 	  	custom_id: Number,
 	    contact_time: Number,
 	    detail: String,
-	    status: String ,
+	    userid: Number,
+	    status: Number ,
 	    add_time: Number
 	},
 
@@ -23,7 +24,8 @@ module.exports = {
 	  	move_reason: String,
 	  	now_address: String,
 	  	other_mark: String,
-	  	add_time: Number
+	  	add_time: Number,
+	  	status: Number
   	},
 
 	fang : {
