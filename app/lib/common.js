@@ -21,7 +21,6 @@ $.ajax({
     	}else if(data&&data.result.type == 2&&_path.indexOf('/salesman')!=0){
     		href = _dirname + '/admin/index.html';
     	}else{
-		alert(111);
     		href = _dirname + '/';
     	}
 	
