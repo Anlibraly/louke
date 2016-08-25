@@ -1,8 +1,8 @@
-var _search = '';
+var _search = '', _path = '';
 function getRootPath(){
     var curWwwPath = window.document.location.href;
-    var pathName = window.document.location.pathname;
-    var pos = curWwwPath.lastIndexOf(pathName);
+    _path = window.document.location.pathname;
+    var pos = curWwwPath.lastIndexOf(_path);
     _search = window.document.location.search;
     if(pos > 8){
     	return curWwwPath.substring(0,pos);
@@ -17,9 +17,9 @@ $.ajax({
     dataType: "json",
     success: function(data){
 	var href = '';
-    	if(data&&data.result.type === 1){
+    	if(data&&data.result.type == 1&&_path.indexOf('/admin') == 0){
     		href = _dirname + '/salesman/index.html';
-    	}else if(data&&data.result.type === 2){
+    	}else if(data&&data.result.type == 2&&_path.indexOf('/salesman')==0){
     		href = _dirname + '/admin/index.html';
     	}else{
     		href = _dirname + '/';
