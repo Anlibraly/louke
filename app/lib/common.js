@@ -18,12 +18,17 @@ $.ajax({
     url: _dirname + '/system/getsession',
     dataType: "json",
     success: function(data){
+	var href = '';
     	if(data&&data.result.type === 1){
-    		window.location.href = _dirname + '/salesman/index.html';
+    		href = _dirname + '/salesman/index.html';
     	}else if(data&&data.result.type === 2){
-    		window.location.href = _dirname + '/admin/index.html';
+    		href = _dirname + '/admin/index.html';
     	}else{
-    		window.location.href = _dirname;
+    		href = _dirname + '/'
     	}
+	
+	if(window.location.href != href){
+		window.location.href = href;
+	}
     }
 });
