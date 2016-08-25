@@ -13,7 +13,7 @@ var _dirname = getRootPath();
 
 $.ajax({
     type: 'get',
-    url: _dirname + '/system/getsession',
+    url: _dirname + '/system/account/getsession',
     dataType: "json",
     success: function(data){
 	var href = '';
