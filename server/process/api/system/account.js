@@ -40,7 +40,12 @@ module.exports = ( router ) => {
 		
 	})
 	.get('/account/logout', function *() {
-		this.session = {};
+		this.session.userid = null;
+                this.session.username = null;
+                this.session.nick_name = null;
+                this.session.type = -1;
+
+		this.redirect('/');
 	})
 	.post('/account/login', function *() {
 		yield Promise.resolve()

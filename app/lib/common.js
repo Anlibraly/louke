@@ -20,7 +20,7 @@ $.ajax({
     		href = _dirname + '/salesman/index.html';
     	}else if(data&&data.result.type == 2&&_path.indexOf('/admin')!=0){
     		href = _dirname + '/admin/index.html';
-    	}else if(data.result.type == undefined){
+    	}else if(data.result.type == undefined||data.result.type < 0){
     		href = _dirname + '/';
     	}
 	
