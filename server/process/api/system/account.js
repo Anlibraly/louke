@@ -214,11 +214,11 @@ module.exports = ( router ) => {
 
 		yield Promise.resolve()
 		.then(() => getThroughDataProc('db', 'queryFang', {
-			fsize: JSON.parse(this.params.fsize),
-			per_price: JSON.parse(this.params.per_price),
-			total_price: JSON.parse(this.params.total_price),
-			update: this.params.update,
-			f_name: this.params.f_name
+			_fsize: JSON.parse(this.params.fsize),
+			_per_price: JSON.parse(this.params.per_price),
+			_total_price: JSON.parse(this.params.total_price),
+			_update: this.params.update,
+			_f_name: this.params.f_name
 		}))
 		.then((result) => {
 			this.body = {
