@@ -211,14 +211,15 @@ module.exports = ( router ) => {
 		});		
 	})
 	.post('/salesman/soufang', function *() {
-
+		var in_data = this.request.body;
+		
 		yield Promise.resolve()
 		.then(() => getThroughDataProc('db', 'queryFang', {
-			_fsize: this.params.fsize,
-			_per_price: this.params.per_price,
-			_total_price: this.params.total_price,
-			_update: this.params.update,
-			_f_name: this.params.f_name
+			_fsize: in_data.fsize,
+			_per_price: in_data.per_price,
+			_total_price: in_data.total_price,
+			_update: in_data.update,
+			_f_name: in_data.f_name
 		}))
 		.then((result) => {
 			this.body = {
