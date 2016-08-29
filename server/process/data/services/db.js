@@ -101,7 +101,7 @@ Action.db.query = (req = {}, res) => {
 
 Action.db.queryFang = (req = {}, res) => {
 
-	let quer{
+	let {
 		fsize: {low: -1, high: -1},
 		per_price: {low: -1, high: -1},
 		total_price: {low: -1, high: -1},
