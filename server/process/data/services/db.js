@@ -114,11 +114,11 @@ Action.db.queryFang = (req = {}, res) => {
 	mysql.queryFang(query, update)
 	.then(({rows}) => {
 		let list = [];
-		console.log('db', rows.size);
+		console.log('db', rows.length);
 		_.each(rows, (v) => {
 			list.push(helper.modelValueDecode(key, v));
 		});
-		console.log('db list', list.size);
+		console.log('db list', list.length);
 		return Promise.resolve({list});
 	})
 	.then((result) => helper.cbResponse(result, res))
