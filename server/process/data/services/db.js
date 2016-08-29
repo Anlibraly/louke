@@ -114,7 +114,6 @@ Action.db.queryFang = (req = {}, res) => {
 	mysql.queryFang(query, update)
 	.then(({rows}) => {
 		let list = [];
-		console.log('db', rows.length);
 		return Promise.resolve({rows});
 	})
 	.then((result) => helper.cbResponse(result, res))

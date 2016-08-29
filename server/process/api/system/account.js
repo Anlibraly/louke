@@ -222,10 +222,9 @@ module.exports = ( router ) => {
 			_f_name: in_data.f_name
 		}))
 		.then((result) => {
-			console.log('account', result);
 			this.body = {
 				code: 1,
-				contacts: result.list
+				fangs: result
 			};				
 		})
 		.catch((err) => {
