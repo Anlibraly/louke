@@ -244,6 +244,7 @@ module.exports = {
 			sql += `and f_name like'%${query.f_name}%'`
 		}
 		sql += ') as f left join (select * from lou) as l on f.lou_id=l._id;'
+		console.log(sql);
 		return Promise.resolve()
 		.then(() => promisifyQuery(sql))
 		.then((rows) => ({rows}));
