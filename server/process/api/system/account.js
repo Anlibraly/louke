@@ -210,13 +210,13 @@ module.exports = ( router ) => {
 			};			
 		});		
 	})
-	.get('/salesman/soufang/:fsize/:per_price/:total_price/:update/:f_name', function *() {
+	.post('/salesman/soufang', function *() {
 
 		yield Promise.resolve()
 		.then(() => getThroughDataProc('db', 'queryFang', {
-			_fsize: JSON.parse(this.params.fsize),
-			_per_price: JSON.parse(this.params.per_price),
-			_total_price: JSON.parse(this.params.total_price),
+			_fsize: this.params.fsize,
+			_per_price: this.params.per_price,
+			_total_price: this.params.total_price,
 			_update: this.params.update,
 			_f_name: this.params.f_name
 		}))
