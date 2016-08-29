@@ -131,6 +131,8 @@ var updateSql = (key, qv, upd) => {
 		return `and ${key}='未更新' or (${key}>=${qv.low} and ${key}<${qv.high})`;
 	}else if(upd&&qv.low>=0&&qv.high>0){
 		return `and ${key}>=${qv.low} and ${key}<${qv.high}`;
+	}else if(upd){
+		return `and ${key}!='未更新'`;
 	}	
 	return '';
 }
