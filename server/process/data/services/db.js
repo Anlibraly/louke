@@ -114,7 +114,7 @@ Action.db.queryFang = (req = {}, res) => {
 	mysql.queryFang(query, update)
 	.then(({rows}) => {
 		let list = [];
-
+		console.log('db', rows);
 		_.each(rows, (v) => {
 			list.push(helper.modelValueDecode(key, v));
 		});

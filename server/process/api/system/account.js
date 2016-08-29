@@ -212,7 +212,7 @@ module.exports = ( router ) => {
 	})
 	.post('/salesman/soufang', function *() {
 		var in_data = this.request.body;
-		
+
 		yield Promise.resolve()
 		.then(() => getThroughDataProc('db', 'queryFang', {
 			_fsize: in_data.fsize,
@@ -222,6 +222,7 @@ module.exports = ( router ) => {
 			_f_name: in_data.f_name
 		}))
 		.then((result) => {
+			console.log('account', result);
 			this.body = {
 				code: 1,
 				contacts: result.list
