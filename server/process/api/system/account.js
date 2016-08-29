@@ -189,6 +189,50 @@ module.exports = ( router ) => {
 				desc: `[error] ${err.message}\n${err.stack}`
 			};			
 		});		
+	})
+	.get('/salesman/getlou/:lid', function *() {
+		yield Promise.resolve()
+		.then(() => getThroughDataProc('db', 'query', {
+			_key: 'lou',
+			_id: this.params.lid
+		}))
+		.then((result) => {
+			this.body = {
+				code: 1,
+				contacts: result.list
+			};				
+		})
+		.catch((err) => {
+			console.log(`[error] ${err.message}\n${err.stack}`)
+			this.body = {
+				code: -1,
+				desc: `[error] ${err.message}\n${err.stack}`
+			};			
+		});		
+	})
+	.get('/salesman/soufang/:fsize/:per_price/:total_price/:update/:f_name', function *() {
+
+		yield Promise.resolve()
+		.then(() => getThroughDataProc('db', 'queryFang', {
+			fsize: JSON.parse(this.params.fsize),
+			per_price: JSON.parse(this.params.per_price),
+			total_price: JSON.parse(this.params.total_price),
+			update: this.params.update,
+			f_name: this.params.f_name
+		}))
+		.then((result) => {
+			this.body = {
+				code: 1,
+				contacts: result.list
+			};				
+		})
+		.catch((err) => {
+			console.log(`[error] ${err.message}\n${err.stack}`)
+			this.body = {
+				code: -1,
+				desc: `[error] ${err.message}\n${err.stack}`
+			};			
+		});		
 	});
 
 };

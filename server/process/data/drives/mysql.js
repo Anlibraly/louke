@@ -126,18 +126,25 @@ var cpiToSql = (field, cpi) => {
 	return subsql;
 };
 
+var updateSql(key, qv, upd){
+	if (!upd&&qv.low>=0&&qv>0) {
+		return `and ${key}='未更新' or (${key}>=${qv.low} and ${key}<${qv.high})`;
+	}else if(upd&&qv.low>=0&&qv.high>0){
+		return `and ${key}>=${qv.low} and ${key}<${qv.high}`;
+	}	
+	return '';
+}
+
 module.exports = {
 	getTableList(){
-		console.log('getTableList would deprecated in the fulture, please use listDbTables');
 		this.listDbTables();
 	},
 
 	listDbTables(){
-		return promisifyQuery(`select * from information_schema.tables where table_schema='hmp';`);
+		return promisifyQuery(`select * from information_schema.tables where table_schema='louke';`);
 	},
 
 	getTableStruct(tableKey){
-		console.log('getTableStruct would deprecated in the fulture, please use listTableColumns');
 		this.listTableColumns(tableKey);
 	},
 
@@ -146,7 +153,6 @@ module.exports = {
 	},
 
 	resetTable(tableKey){
-		console.log('resetTable would deprecated in the fulture, please use truncateTable');
 		this.truncateTable(tableKey);
 	},
 	
@@ -226,6 +232,22 @@ module.exports = {
 		.then(() => promisifyQuery(sql))
 		.then((rows) => ({rows, page, size, total}));
 	},
+
+	queryFang(query, update){
+		let sql = 'select ';
+		sql += 'f._id,f.f_name,f.lou_id,f.tel_num,f.size,f.per_price,f.total_price,l.lou_name,l.type,l.alti,l.lont,l.lou_address ';
+		sql += 'from (select * from fang where 1=1 '
+		sql += updateSql('size', query.fsize, update);
+		sql += updateSql('per_price', query.per_price, update);
+		sql += updateSql('total_price', query.total_price, update);
+		if(query.f_name!=undefined && query.f_name.length > 0){
+			sql += `and f_name like'%${query.f_name}%'`
+		}
+		sql += ') as f left join (select * from lou) as l on f.lou_id=l._id;'
+		return Promise.resolve()
+		.then(() => promisifyQuery(sql))
+		.then((rows) => ({rows}));
+	}
 
 	save({ key, add, update, del }){
 		let savePromise = [];

@@ -99,4 +99,30 @@ Action.db.query = (req = {}, res) => {
 	.catch((err)   => helper.cbCatch(err, res));
 };
 
+Action.db.queryFang = (req = {}, res) => {
+
+	let quer{
+		fsize: {low: -1, high: -1},
+		per_price: {low: -1, high: -1},
+		total_price: {low: -1, high: -1},
+		update: false,
+		f_name: ''
+	} = req;
+
+	let query = {fsize, per_price, total_price, f_name};
+
+	mysql.queryFang(query, update)
+	.then(({rows}) => {
+		let list = [];
+
+		_.each(rows, (v) => {
+			list.push(helper.modelValueDecode(key, v));
+		});
+
+		return Promise.resolve({list});
+	})
+	.then((result) => helper.cbResponse(result, res))
+	.catch((err)   => helper.cbCatch(err, res));
+};
+
 module.exports = Action;
