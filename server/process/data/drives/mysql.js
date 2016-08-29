@@ -247,7 +247,7 @@ module.exports = {
 		return Promise.resolve()
 		.then(() => promisifyQuery(sql))
 		.then((rows) => ({rows}));
-	}
+	},
 
 	save({ key, add, update, del }){
 		let savePromise = [];
