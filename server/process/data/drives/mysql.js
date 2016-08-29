@@ -126,7 +126,7 @@ var cpiToSql = (field, cpi) => {
 	return subsql;
 };
 
-var updateSql(key, qv, upd){
+var updateSql = (key, qv, upd) => {
 	if (!upd&&qv.low>=0&&qv>0) {
 		return `and ${key}='未更新' or (${key}>=${qv.low} and ${key}<${qv.high})`;
 	}else if(upd&&qv.low>=0&&qv.high>0){
