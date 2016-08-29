@@ -245,7 +245,11 @@ module.exports = {
 		if(query.f_name!=undefined && query.f_name.length > 0){
 			sql += `and f_name like'%${query.f_name}%'`
 		}
-		sql += ') as f left join (select * from lou) as l on f.lou_id=l._id order by f.lou_id;'
+		sql += ') as f left join (select * from where 1=1'
+		if(query.ftype!=undefined && query.ftype.length > 0){
+			sql += `and type=${query.ftype}`
+		}		
+		sql += ' lou) as l on f.lou_id=l._id order by f.lou_id;'
 		return Promise.resolve()
 		.then(() => promisifyQuery(sql))
 		.then((rows) => ({rows}));

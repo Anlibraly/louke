@@ -218,6 +218,7 @@ module.exports = ( router ) => {
 			_fsize: in_data.fsize,
 			_per_price: in_data.per_price,
 			_total_price: in_data.total_price,
+			_ftype: in_data.ftype,
 			_update: in_data.update,
 			_f_name: in_data.f_name
 		}))

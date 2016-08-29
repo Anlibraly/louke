@@ -105,11 +105,12 @@ Action.db.queryFang = (req = {}, res) => {
 		_fsize: fsize = {low: -1, high: -1},
 		_per_price: per_price = {low: -1, high: -1},
 		_total_price: total_price = {low: -1, high: -1},
+		_ftype: ftype = '',
 		_update: update = false,
 		_f_name: f_name = ''
 	} = req;
 
-	let query = {fsize, per_price, total_price, f_name};
+	let query = {fsize, per_price, total_price, ftype, f_name};
 
 	mysql.queryFang(query, update)
 	.then(({rows}) => {
