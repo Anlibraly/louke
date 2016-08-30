@@ -247,9 +247,10 @@ module.exports = {
 		}
 		sql += ') as f left join (select * from lou where 1=1'
 		if(query.ftype!=undefined && query.ftype.length > 0){
-			sql += `and type=${query.ftype}`
+			sql += `and type='${query.ftype}'`
 		}		
 		sql += ') as l on f.lou_id=l._id order by f.lou_id;'
+		console.log(sql);
 		return Promise.resolve()
 		.then(() => promisifyQuery(sql))
 		.then((rows) => ({rows}));

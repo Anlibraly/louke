@@ -111,7 +111,7 @@ Action.db.queryFang = (req = {}, res) => {
 	} = req;
 
 	let query = {fsize, per_price, total_price, ftype, f_name};
-
+	console.log(11111,query);
 	mysql.queryFang(query, update)
 	.then(({rows}) => {
 		let list = [];
