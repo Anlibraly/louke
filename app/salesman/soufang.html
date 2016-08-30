@@ -41,7 +41,7 @@
 					<div class="sel_status r_status" style="margin-right: 10px;">
 			           <span id="PP">类型</span>
 			           <ul id="peos">
-			           		<li onclick="queryPeo('','所有');">所有</li>
+			           		<li onclick="queryPeo(-1,'所有');">所有</li>
 			           		<li onclick="queryPeo(0,'写字楼');">写字楼</li>
 			           		<li onclick="queryPeo(1,'商务中心');">商务中心</li>
 			           		<li onclick="queryPeo(2,'创意园区');">创意园区</li>
@@ -197,7 +197,11 @@
 	}
 	
 	function queryPeo(u,pp){
-		type = pp;
+		if(u != -1){
+			type = pp;
+		}else{
+			type = '';
+		}
 		$("#PP").html(pp);
 	}
 	function queryTime(t,tm){
