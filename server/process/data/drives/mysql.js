@@ -242,14 +242,15 @@ module.exports = {
 		sql += updateSql('size', query.fsize, update);
 		sql += updateSql('per_price', query.per_price, update);
 		sql += updateSql('total_price', query.total_price, update);
-		if(query.f_name!=undefined && query.f_name.length > 0){
-			sql += `and f_name like'%${query.f_name}%'`
-		}
-		sql += ') as f left join (select * from lou where 1=1 '
+		sql += ') as f join (select * from lou where 1=1 '
 		if(query.ftype!=undefined && query.ftype.length > 0){
 			sql += `and type='${query.ftype}'`
 		}		
-		sql += ') as l on f.lou_id=l._id order by f.lou_id;'
+		sql += ') as l on f.lou_id=l._id ';
+		if(query.f_name!=undefined && query.f_name.length > 0){
+			sql += `and (f.f_name like'%${query.f_name}%' or l.lou_name like'%${query.f_name}%') `;
+		}
+		sql += ' order by f.lou_id;';
 		console.log(sql);
 		return Promise.resolve()
 		.then(() => promisifyQuery(sql))
