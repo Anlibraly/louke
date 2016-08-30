@@ -254,7 +254,6 @@
 	        dataType: "json",
 	        success: function(data){
 	        	orgs = data.fangs.rows;
-	        	console.log(111,orgs);
 	        	search();
 	        }
 	    });			
@@ -287,19 +286,15 @@
 					mPoint = point;
 					mapPoint = new BMap.Marker(point);
 					//map.addOverlay(mapPoint);
-					//console.log(orgs);
 					var tmp = new Array();
 					for(var i in orgs){
 						var pointA = new BMap.Point(orgs[i].lont,orgs[i].alti);  
 						var dis = map.getDistance(pointA,point).toFixed(2);
-						console.log(dis+"---"+r);
 						if(dis*1.0 <= r*1.0){
 							tmp.push(orgs[i]);
-							//console.log('a');
 						}
 					}
 					orgs = tmp;
-					console.log(222,orgs);
 					circle = new BMap.Circle(mPoint,r,{fillColor:"blue", strokeWeight: 1 ,fillOpacity: 0.3, strokeOpacity: 0.3});
 				    map.addOverlay(circle);
 					var tpl = $("#orgs-template").text();
@@ -312,7 +307,6 @@
 				}
 			}, "上海市");
 		}else{
-			console.log(222,orgs);
 			var tpl = $("#orgs-template").text();
 			var tempFn = doT.template(tpl);
 			var rHtml = tempFn(orgs);
@@ -336,7 +330,6 @@
 		}
 	}
 	function showOrgs(){
-		console.log(333,orgs);
 		removeMk();
 		marks = new Array();
 		for(var i in orgs){
