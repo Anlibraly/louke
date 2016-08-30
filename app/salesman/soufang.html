@@ -282,7 +282,7 @@
 			myGeo.getPoint($("#search").val(), function(point){
 				if (point) {
 					var r = $("#r").val();
-					map.centerAndZoom(point, 16);
+					map.centerAndZoom(point, 14);
 					mPoint = point;
 					mapPoint = new BMap.Marker(point);
 					//map.addOverlay(mapPoint);
@@ -291,7 +291,7 @@
 					for(var i in orgs){
 						var pointA = new BMap.Point(orgs[i].lont,orgs[i].alti);  
 						var dis = map.getDistance(pointA,point).toFixed(2);
-						//console.log(dis+"---"+r);
+						console.log(dis+"---"+r);
 						if(dis*1.0 <= r*1.0){
 							tmp.push(orgs[i]);
 							//console.log('a');
