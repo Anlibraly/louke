@@ -93,24 +93,24 @@
 			        </div>
 			        <button onclick="getFang()" style="padding: 8px 10px;width:30%;">确定</button>
 		        </div>
-				<div id="lists" style="display:none;">
-					<ul>
+				<table id="lists" style="display:none;">
 
-					</ul>
-				</div>
+				</table>
 				<script id="orgs-template" type="text/x-dot-template">
 					{{ for(var i in it) { }}
-						<li>
-							<span>房源ID:{{=it[i]._id}}</span>
-							<span>房源名:{{=it[i].f_name}}</span> 
-							<span>类型:{{=it[i].type}}</span> 
-							<span>面积:{{=it[i].size}}平</span>
-							<span>单价:{{=it[i].per_price}}</span> 
-							<span>总价:{{=it[i].total_price}}</span>    
-							<span>tel:{{=it[i].tel_num}}</span>    
-							<span>楼名:{{=it.lou_name}}</span>    
-							<span>地址:{{=it.lou_address}}</span>
-						</li>
+						<tr>
+							<td>
+								房源ID:{{=it[i]._id}}<br>
+								房源名:{{=it[i].f_name}}<br> 
+								类型:{{=it[i].type}}<br> 
+								面积:{{=it[i].size}}平<br>
+								单价:{{=it[i].per_price}}<br> 
+								总价:{{=it[i].total_price}}<br>    
+								tel:{{=it[i].tel_num}}<br>    
+								楼名:{{=it.lou_name}}<br>    
+								地址:{{=it.lou_address}}
+							</td>
+						</tr>
 					{{ } }}
 				</script>			        
 			</div>		
@@ -142,7 +142,7 @@
 	var markerClusterer;
 	var opts = {
 		  width : 200,     // 信息窗口宽度
-		  height: 180,     // 信息窗口高度
+		  height: 200,     // 信息窗口高度
 		  title : "房源信息", // 信息窗口标题
 		  enableMessage:true,//设置允许信息窗发送短息
 		  message:"房源信息"
@@ -180,10 +180,11 @@
 	function openInfo(content,e){
 		var p = e.target;
 		var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
-		var infoWindow = new BMap.InfoWindow("房ID:"+content._id+"<br>房源名:"+content.f_name+"<br>楼名:"+content.lou_name+"<br>地址:"+content.lou_address
-		+"<br>电话:"+content.tel_num+"<br>大小:"+content.size+"<br>单价:"+content.per_price+"<br>总价:"+content.total_price,opts);  // 创建信息窗口对象 
-		map.openInfoWindow(infoWindow,point); //开启信息窗口
-		//console.log(content+"   "+lou_info[content.lou_id].lou_name);
+		// 创建信息窗口对象
+		var infoWindow = new BMap.InfoWindow(`房源ID:${content._id}<br>房源名:${content.f_name}<br>楼名:${content.lou_name}<br>地址:${content.lou_address}
+						<br>电话:${content.tel_num}<br>大小:${content.size}<br>单价:${content.per_price}<br>总价:${content.total_price}, opts);  
+		//开启信息窗
+		map.openInfoWindow(infoWindow,point); 口
 	}
 
 	function removeMk(){

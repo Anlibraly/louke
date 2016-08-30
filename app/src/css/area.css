@@ -16,6 +16,9 @@ header{
 	background: url(../img/logo2.png) left center no-repeat;
 	float: left;
 }
+#list td{
+	border: 1px solid #666666;
+}
 .u_info{
 	width: 64px;
 	height: 62px;
