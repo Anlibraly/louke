@@ -122,7 +122,7 @@
 <script type="text/javascript" src="../lib/doT.min.js"></script>
 <script type="text/javascript">
 	// 百度地图API功能
-	var show_s = false;
+	var show_s = true;
 	var map = new BMap.Map("allmap");
 	var loc_nums = 0;
 	var mapPoint = null;
@@ -180,7 +180,7 @@
 	function openInfo(content,e){
 		var p = e.target;
 		var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
-		var infoWindow = new BMap.InfoWindow("ID:"+content._id+"<br>房源名:"+content.f_name+"-"+content.lou_name
+		var infoWindow = new BMap.InfoWindow("房ID:"+content._id+"<br>房源名:"+content.f_name+"<br>楼名:"+content.lou_name+"<br>地址:"+content.lou_address
 		+"<br>电话:"+content.tel_num+"<br>大小:"+content.size+"<br>单价:"+content.per_price+"<br>总价:"+content.total_price,opts);  // 创建信息窗口对象 
 		map.openInfoWindow(infoWindow,point); //开启信息窗口
 		//console.log(content+"   "+lou_info[content.lou_id].lou_name);
