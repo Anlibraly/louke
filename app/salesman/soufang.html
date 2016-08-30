@@ -182,7 +182,7 @@
 		var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
 		// 创建信息窗口对象
 		var infoWindow = new BMap.InfoWindow(`房源ID:${content._id}<br>房源名:${content.f_name}<br>楼名:${content.lou_name}<br>地址:${content.lou_address}
-						<br>电话:${content.tel_num}<br>大小:${content.size}<br>单价:${content.per_price}<br>总价:${content.total_price}, opts);  
+						<br>电话:${content.tel_num}<br>大小:${content.size}<br>单价:${content.per_price}<br>总价:${content.total_price}`, opts);  
 		//开启信息窗
 		map.openInfoWindow(infoWindow,point); 口
 	}
