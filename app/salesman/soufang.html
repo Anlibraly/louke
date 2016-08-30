@@ -21,9 +21,9 @@
 	<header>
 		<div class="header_box clearfix">
 			<a href=""></a>
-			<input type="text" id="search" value="" placeholder="搜索楼名或地址关键字" style="margin-left: 2%;padding: 5px;width: 55%;font-size: 16px;"/>
-			<input type="number" id="r" value="1000" placeholder="搜索楼名或地址关键字" style="margin-left: 2%;padding: 5px;width: 10%;font-size: 14px;"/>
-			<button style="margin-left: 2%px;padding: 9px 10px;" onclick="showSearch()">更多</button>
+			<input type="text" id="search" value="" placeholder="搜索地址关键字" style="margin-left: 2%;padding: 5px;width: 55%;font-size: 16px;"/>
+			<input type="number" id="r" value="1000" placeholder="搜索半径(米)" style="margin-left: 2%;padding: 5px;width: 10%;font-size: 14px;"/>
+			<button id="more" style="margin-left: 2%px;padding: 9px 10px;" onclick="showSearch()">收起</button>
 		</div>
 	</header>
 	
@@ -87,29 +87,33 @@
 							
 			           </ul>
 			        </div>
-			        
+			        <div class="r_status">
+			        	<i style="height: 35px;line-height: 35px;">楼房名关键字</i>
+			        	<input type="text" style="height: 20px;line-height: 20px;" placeholder="楼房名关键字" id="fang_name"/>
+			        </div>
 			        <button onclick="getFang()" style="padding: 8px 10px;width:30%;">确定</button>
 		        </div>
-			</div>
-			<div id="lists" style="display:none;">
-				<ul>
+				<div id="lists" style="display:none;">
+					<ul>
 
-				</ul>
-			</div>
-			<script id="orgs-template" type="text/x-dot-template">
-				{{ for(var i in it) { }}
-					<li>
-						<span>房源ID:{{=it[i]._id}}</span>
-						<span>房源名:{{=it[i].f_name}}</span> 
-						<span>面积:{{=it[i].size}}</span>
-						<span>单价:{{=it[i].per_price}}</span> 
-						<span>总价:{{=it[i].total_price}}</span>    
-						<span>tel:{{=it[i].tel_num}}</span>    
-						<span>楼名:{{=it.lou_name}}</span>    
-						<span>地址:{{=it.lou_address}}</span>
-					</li>
-				{{ } }}
-			</script>			
+					</ul>
+				</div>
+				<script id="orgs-template" type="text/x-dot-template">
+					{{ for(var i in it) { }}
+						<li>
+							<span>房源ID:{{=it[i]._id}}</span>
+							<span>房源名:{{=it[i].f_name}}</span> 
+							<span>类型:{{=it[i].type}}</span> 
+							<span>面积:{{=it[i].size}}平</span>
+							<span>单价:{{=it[i].per_price}}</span> 
+							<span>总价:{{=it[i].total_price}}</span>    
+							<span>tel:{{=it[i].tel_num}}</span>    
+							<span>楼名:{{=it.lou_name}}</span>    
+							<span>地址:{{=it.lou_address}}</span>
+						</li>
+					{{ } }}
+				</script>			        
+			</div>		
 	</div>
 	</div>
 </body>
@@ -176,7 +180,7 @@
 	function openInfo(content,e){
 		var p = e.target;
 		var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
-		var infoWindow = new BMap.InfoWindow("ID:"+content.f_id+"<br>房源名:"+content.f_name+"-"+lou_info[content.lou_id].lou_name
+		var infoWindow = new BMap.InfoWindow("ID:"+content._id+"<br>房源名:"+content.f_name+"-"+content.lou_name
 		+"<br>电话:"+content.tel_num+"<br>大小:"+content.size+"<br>单价:"+content.per_price+"<br>总价:"+content.total_price,opts);  // 创建信息窗口对象 
 		map.openInfoWindow(infoWindow,point); //开启信息窗口
 		//console.log(content+"   "+lou_info[content.lou_id].lou_name);
@@ -239,8 +243,8 @@
 				params.per_price = {low: per_price-5, high: per_price};
 			}			
 		}		
-		if ($("#search").val()!='' && $("#search").val().length>0) {
-			params.f_name = $("#search").val();
+		if ($("#fang_name").val()!='' && $("#fang_name").val().length>0) {
+			params.f_name = $("#fang_name").val();
 		};
 		$.ajax({
 	        type: "post",
@@ -256,9 +260,11 @@
 	function showSearch(){
 		if(show_s){
 			$(".org_wrap").hide();
+			$("#more").html('更多');
 			show_s = false;
 		}else{
 			$(".org_wrap").show();
+			$("#more").html('收起');
 			show_s = true;
 		}
 	}
@@ -291,7 +297,7 @@
 						}
 					}
 					orgs = tmp;
-					//console.log(tmp);
+					console.log(orgs);
 					circle = new BMap.Circle(mPoint,r,{fillColor:"blue", strokeWeight: 1 ,fillOpacity: 0.3, strokeOpacity: 0.3});
 				    map.addOverlay(circle);
 					var tpl = $("#orgs-template").text();
@@ -304,6 +310,7 @@
 				}
 			}, "上海市");
 		}else{
+			console.log(orgs);
 			var tpl = $("#orgs-template").text();
 			var tempFn = doT.template(tpl);
 			var rHtml = tempFn(orgs);
@@ -327,6 +334,7 @@
 		}
 	}
 	function showOrgs(){
+		console.log(orgs);
 		removeMk();
 		marks = new Array();
 		for(var i in orgs){
@@ -336,8 +344,8 @@
 			
 			addClickHandler(orgs[i],marker);
 		}
-		showSearch();
 		markerClusterer = new BMapLib.MarkerClusterer(map, {markers:marks,maxZoom:15});
+		showSearch();
 	}
 </script>
 

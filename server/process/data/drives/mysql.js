@@ -250,7 +250,6 @@ module.exports = {
 			sql += `and type='${query.ftype}'`
 		}		
 		sql += ') as l on f.lou_id=l._id order by f.lou_id;'
-		console.log(sql);
 		return Promise.resolve()
 		.then(() => promisifyQuery(sql))
 		.then((rows) => ({rows}));
