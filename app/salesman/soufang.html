@@ -91,6 +91,9 @@
 			        	<i style="height: 35px;line-height: 35px;">楼房名关键字</i>
 			        	<input type="text" style="height: 20px;line-height: 20px;" placeholder="楼房名关键字" id="fang_name"/>
 			        </div>
+			        <div class="r_status">
+			        	<input name="checkbox" type="checkbox" value="包含未更新数据" checked="checked" onclick="hasUpdate()"/>
+			        </div>
 			        <button onclick="getFang()" style="padding: 8px 10px;width:30%;">确定</button>
 		        </div>
 				<table id="lists" style="display:none;">
@@ -125,6 +128,7 @@
 	var show_s = true;
 	var map = new BMap.Map("allmap");
 	var loc_nums = 0;
+	var update = 0;
 	var mapPoint = null;
 	var circle = null;
 	var orgs = [];
@@ -142,7 +146,7 @@
 	var markerClusterer;
 	var opts = {
 		  width : 200,     // 信息窗口宽度
-		  height: 200,     // 信息窗口高度
+		  height: 230,     // 信息窗口高度
 		  title : "房源信息", // 信息窗口标题
 		  enableMessage:true,//设置允许信息窗发送短息
 		  message:"房源信息"
@@ -172,6 +176,14 @@
 		
 	});
 	
+	function hasUpdate(){
+		if(update == 0){
+			update = 1;
+		}else{
+			update = 0;
+		}
+	}
+
 	function addClickHandler(content,marker){
 			marker.addEventListener("click", function(e){
 				openInfo(content,e);
@@ -224,7 +236,7 @@
 			per_price: {low: -1, high: -1},
 			total_price: {low: -1, high: -1},
 			ftype: type,
-			update: 0,
+			update: update,
 			f_name: ''
 		};
 		if(size != -1){
