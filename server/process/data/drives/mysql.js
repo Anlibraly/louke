@@ -251,7 +251,7 @@ module.exports = {
 			sql += `and (f.f_name like'%${query.f_name}%' or l.lou_name like'%${query.f_name}%') `;
 		}
 		sql += ' order by f.lou_id;';
-		//console.log(sql);
+		console.log(sql);
 		return Promise.resolve()
 		.then(() => promisifyQuery(sql))
 		.then((rows) => ({rows}));
