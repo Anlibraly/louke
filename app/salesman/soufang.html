@@ -252,7 +252,8 @@
 	        data: params,
 	        dataType: "json",
 	        success: function(data){
-	        	orgs = data.fangs;
+	        	orgs = data.fangs.rows;
+	        	console.log(111,orgs);
 	        	search();
 	        }
 	    });			
@@ -297,7 +298,7 @@
 						}
 					}
 					orgs = tmp;
-					console.log(orgs);
+					console.log(222,orgs);
 					circle = new BMap.Circle(mPoint,r,{fillColor:"blue", strokeWeight: 1 ,fillOpacity: 0.3, strokeOpacity: 0.3});
 				    map.addOverlay(circle);
 					var tpl = $("#orgs-template").text();
@@ -310,7 +311,7 @@
 				}
 			}, "上海市");
 		}else{
-			console.log(orgs);
+			console.log(222,orgs);
 			var tpl = $("#orgs-template").text();
 			var tempFn = doT.template(tpl);
 			var rHtml = tempFn(orgs);
@@ -334,7 +335,7 @@
 		}
 	}
 	function showOrgs(){
-		console.log(orgs);
+		console.log(333,orgs);
 		removeMk();
 		marks = new Array();
 		for(var i in orgs){
@@ -344,7 +345,7 @@
 			
 			addClickHandler(orgs[i],marker);
 		}
-		markerClusterer = new BMapLib.MarkerClusterer(map, {markers:marks,maxZoom:15});
+		markerClusterer = new BMapLib.MarkerClusterer(map, {markers:marks,maxZoom:14});
 		showSearch();
 	}
 </script>
