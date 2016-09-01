@@ -117,6 +117,7 @@ module.exports = ( router ) => {
 			sort: {'contact_time': 'desc'}
 		}))
 		.then((result) => {
+			console.log(result);
 			this.body = {
 				code: 1,
 				contacts: result.list
