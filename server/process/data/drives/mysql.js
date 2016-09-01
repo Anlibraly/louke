@@ -231,7 +231,10 @@ module.exports = {
 				});
 			}
 		})
-		.then(() => promisifyQuery(sql))
+		.then(() => {
+			console.log(sql);
+			return promisifyQuery(sql);
+		})
 		.then((rows) => ({rows, page, size, total}));
 	},
 
