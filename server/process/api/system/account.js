@@ -110,13 +110,15 @@ module.exports = ( router ) => {
 		});		
 	})
 	.get('/salesman/getcotact/:cid', function *() {
+		console.log(this.params.cid);
 		yield Promise.resolve()
 		.then(() => getThroughDataProc('db', 'query', {
 			_key: 'contact',
-			custom_id: this.params.cid
+			custom_id: this.params.cid,
+			sort: {'contact_time': 'desc'}
 		}))
 		.then((result) => {
-			console.log(result);
+			console.log(this.params.cid, result);
 			this.body = {
 				code: 1,
 				contacts: result.list
