@@ -8,6 +8,7 @@
     "api": "pm2 start product/server/launcher.js -- api",
     "web": "pm2 start product/server/launcher.js -- web",
     "data": "pm2 start product/server/launcher.js -- data",
+    "allup": "pm2 kill && npm run data && npm run api && pm2 logs",
     "stop": "pm2 kill"
   },
   "keywords": [
