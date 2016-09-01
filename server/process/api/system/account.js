@@ -113,8 +113,7 @@ module.exports = ( router ) => {
 		yield Promise.resolve()
 		.then(() => getThroughDataProc('db', 'query', {
 			_key: 'contact',
-			custom_id: this.params.cid,
-			sort: {'contact_time': 'desc'}
+			custom_id: this.params.cid
 		}))
 		.then((result) => {
 			console.log(result);
