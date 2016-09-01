@@ -221,7 +221,7 @@ module.exports = {
 		countSql.splice(0, 1, 'select count(*) as total');
 		countSql.pop();
 		countSql = countSql.join('\n');
-		console.log(countSql);
+		console.log(sql);
 		return Promise.resolve()
 		.then(() => {
 			if(hasSize){
@@ -231,10 +231,7 @@ module.exports = {
 				});
 			}
 		})
-		.then(() => {
-			console.log(sql);
-			return promisifyQuery(sql);
-		})
+		.then(() => promisifyQuery(sql))
 		.then((rows) => ({rows, page, size, total}));
 	},
 
