@@ -221,7 +221,7 @@ module.exports = {
 		countSql.splice(0, 1, 'select count(*) as total');
 		countSql.pop();
 		countSql = countSql.join('\n');
-
+		console.log(countSql);
 		return Promise.resolve()
 		.then(() => {
 			if(hasSize){
