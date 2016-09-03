@@ -1,12 +1,82 @@
+<!DOCTYPE HTML>
 <html>
-	<head>
-		
-	</head>
-	<body>
-		<h1>业务员页面</h1>
-		<script type="text/javascript" src="../lib/jquery-3.1.0.min.js"></script>
-		<script type="text/javascript" src="../lib/common.js"></script>
-		<script type="text/javascript">
-		</script>		
-	</body>
+<head>
+	<title>客户列表</title>
+	<meta name="description" content=""/>
+	<meta name="keywords" content=""/>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<!-- 加载当前项目专用css js -->
+	<script type="text/javascript" src="../lib/jquery-3.1.0.min.js"></script>
+	<link type="text/css" href="css/custom.css" rel="stylesheet">
+</head>
+
+<body>
+	<div class="status_bar">
+		<span>客户列表</span>
+		<select onchange="seeStatus(this.options[this.options.selectedIndex].value)">
+		  <option value="0">所有</option>
+		  <option value="1">推楼带看</option>
+		  <option value="2">成交手续</option>
+		  <option value="3">成功</option>
+		  <option value="4">死亡</option>
+		  <option value="5">搁置</option>
+		</select>
+	</div>
+	<ul id="customs"></ul>
+
+	<script id="customs-template" type="text/x-dot-template">
+		{{ for(var i in it) { }}
+			<li class="cunstom">
+				<span style="display: -webkit-box;margin: 2% 0;">
+					{{=it[i].update_time}}    {{=it[i].status}}
+				</span>
+				<div class="cus_info">
+					<span>客户: {{=it[i].cname}}</span>
+					<span>电话: {{=it[i].tel_num}}</span>
+				</div>
+				<div class="cus_info">
+					<span>目标: {{=it[i].goal_fang}}</span>
+					<span>行业: {{=it[i].job}}</span>
+				</div>
+				<div class="cus_info">
+					<span>面积: {{=it[i].size}}</span>
+					<span>预算: {{=it[i].price}}</span>
+				</div>
+				<div class="mark">
+					<span>其他:</span>
+					<i>{{=it[i].other_mark}}</i>
+				</div>
+				<div class="btns">
+					<input type="button" value="详情"/>
+					<input type="button" value="更新"/>
+				</div>
+			</li>
+		{{ } }}
+	</script>	
+</body>
 </html>
+<script type="text/javascript" src="../lib/common.js"></script>
+<script type="text/javascript" src="../lib/doT.min.js"></script>
+<script type="text/javascript">
+	function seeStatus(status){
+		$.ajax({
+	        type: "get",
+	        url: _dirname + '/system/salesman/getcustom/'+status,
+	        dataType: "json",
+	        success: function(data){
+	        	try{
+		        	if(data.code == 1){
+						var tpl = $("#customs-template").text();
+						var tempFn = doT.template(tpl);
+						var rHtml = tempFn(data.customs);
+						$("#customs").html(rHtml);		        		
+		        	}
+		        }catch{
+		        	alert('数据出错，稍后再试');
+		        }
+	        }
+	    });	
+	}
+</script>
+

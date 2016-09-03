@@ -24,6 +24,7 @@ module.exports = {
 	  	move_reason: String,
 	  	now_address: String,
 	  	other_mark: String,
+	  	update_time: Number,
 	  	add_time: Number,
 	  	status: Number
   	},

@@ -95,12 +95,14 @@ module.exports = ( router ) => {
 			qs = {
 				_key: 'custom',
 				userid: this.session.userid,
-				status: this.params.status
+				status: this.params.status,
+				_sort: 'update_time:desc'
 			};
 		}else{
 			qs = {
 				_key: 'custom',
-				userid: this.session.userid
+				userid: this.session.userid,
+				_sort: 'update_time:desc'
 			};
 		}
 		yield Promise.resolve()
