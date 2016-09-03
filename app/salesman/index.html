@@ -71,6 +71,8 @@
 						var tpl = $("#customs-template").text();
 						var tempFn = doT.template(tpl);
 						for (var i = 0; i < data.customs.length; i++) {
+							alert(data.customs[i].status);
+							alert(status[+data.customs[i].status]);
 							data.customs[i].statu = status[+data.customs[i].status];
 						};
 						var rHtml = tempFn(data.customs);
