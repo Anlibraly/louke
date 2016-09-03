@@ -59,7 +59,7 @@
 <script type="text/javascript" src="../lib/common.js"></script>
 <script type="text/javascript" src="../lib/doT.min.js"></script>
 <script type="text/javascript">
-	var status = ['', '推楼带看', '成交手续', '成功', '死亡', '搁置'];
+	var allstatus = ['', '推楼带看', '成交手续', '成功', '死亡', '搁置'];
 	function seeStatus(status){
 		$.ajax({
 	        type: "get",
@@ -71,9 +71,7 @@
 						var tpl = $("#customs-template").text();
 						var tempFn = doT.template(tpl);
 						for (var i = 0; i < data.customs.length; i++) {
-							alert(data.customs[i].status);
-							alert(status[+data.customs[i].status]);
-							data.customs[i].statu = status[+data.customs[i].status];
+							data.customs[i].statu = allstatus[+data.customs[i].status];
 						};
 						var rHtml = tempFn(data.customs);
 						$("#customs").html(rHtml);		        		
