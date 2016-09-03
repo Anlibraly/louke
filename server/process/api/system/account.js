@@ -122,7 +122,7 @@ module.exports = ( router ) => {
 		});		
 	})
 	.get('/salesman/custom/:cid',function *(){
-		this.render("/product/app/salesman/custom.html",{title: '客户详情'});
+		this.redirect("/salesman/custom.html",{title: '客户详情'});
 	})
 	.get('/salesman/getcotact/:cid', function *() {
 		yield Promise.resolve()
