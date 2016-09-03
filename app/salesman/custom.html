@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title>客户列表</title>
+	<title>客户详情</title>
 	<meta name="description" content=""/>
 	<meta name="keywords" content=""/>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -12,20 +12,36 @@
 </head>
 
 <body>
-	<div class="status_bar">
-		<span>客户列表</span>
-		<select onchange="seeStatus(this.options[this.options.selectedIndex].value)">
-		  <option value="0">所有</option>
-		  <option value="1">推楼带看</option>
-		  <option value="2">成交手续</option>
-		  <option value="3">成功</option>
-		  <option value="4">死亡</option>
-		  <option value="5">搁置</option>
-		</select>
-	</div>
-	<ul id="customs"></ul>
+	<ul id="customs">
+		<li class="cunstom">
+			<span style="display: -webkit-box;margin: 2% 0;">
+				2016-08-29    推楼带看
+			</span>
+			<div class="cus_info">
+				<span>客户: 李先生</span>
+				<span>电话:13674635324</span>
+			</div>
+			<div class="cus_info">
+				<span>目标: 金茂大厦</span>
+				<span>行业: 互联网金融</span>
+			</div>
+			<div class="cus_info">
+				<span>面积: 300平</span>
+				<span>预算:50000元</span>
+			</div>
+			<div class="mark">
+				<span>其他:</span>
+				<i>其他需求其他需求其他需求其他需求其他需求其他需求其他需求其他需求
+					其他需求其他需求其他需求其他需求其他需求其他需求其他需求其他需求</i>
+			</div>
+			<div class="btns">
+				<input type="button" value="详情"/>
+				<input type="button" value="更新"/>
+			</div>
+		</li>
+	</ul>
 
-	<script id="customs-template" type="text/x-dot-template">
+	<script id="contacts-template" type="text/x-dot-template">
 		{{ for(var i in it) { }}
 			<li class="cunstom">
 				<span style="display: -webkit-box;margin: 2% 0;">
@@ -82,6 +98,6 @@
 	        }
 	    });	
 	}
-	seeStatus(0);
+
 </script>
 

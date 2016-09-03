@@ -121,6 +121,9 @@ module.exports = ( router ) => {
 			};			
 		});		
 	})
+	.get('/salesman/custom/:cid',function *(){
+		this.render("/salesman/custom.html",{title: '客户详情'});
+	})
 	.get('/salesman/getcotact/:cid', function *() {
 		yield Promise.resolve()
 		.then(() => getThroughDataProc('db', 'query', {
