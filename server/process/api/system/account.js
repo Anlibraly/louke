@@ -89,12 +89,22 @@ module.exports = ( router ) => {
 	.get('/admin/', function *() {
 
 	})
-	.get('/salesman/getcustom', function *() {
+	.get('/salesman/getcustom/:status', function *() {
+		let qs = null;
+		if(this.params.status != undefined && this.params.status > 0){
+			qs = {
+				_key: 'custom',
+				userid: this.session.userid,
+				status: this.params.status
+			};
+		}else{
+			qs = {
+				_key: 'custom',
+				userid: this.session.userid
+			};
+		}
 		yield Promise.resolve()
-		.then(() => getThroughDataProc('db', 'query', {
-			_key: 'custom',
-			userid: this.session.userid,
-		}))
+		.then(() => getThroughDataProc('db', 'query', qs))
 		.then((result) => {
 			this.body = {
 				code: 1,
