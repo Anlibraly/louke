@@ -129,19 +129,17 @@ module.exports = ( router ) => {
 			custom_id: this.params.cid
 		}))
 		.then((result) => {
-/*			this.body = {
+			this.body = {
 				code: 1,
 				contacts: result.list
-			};*/		
-			this.render('custom.html',{title:'客户详情'});		
+			};				
 		})
 		.catch((err) => {
 			console.log(`[error] ${err.message}\n${err.stack}`)
-/*			this.body = {
+			this.body = {
 				code: -1,
 				desc: `[error] ${err.message}\n${err.stack}`
-			};	*/	
-			this.render('custom.html',{title:'客户详情'});		
+			};			
 		});		
 	})
 	.post('/salesman/addcotact', function *() {
