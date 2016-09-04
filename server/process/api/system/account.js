@@ -191,6 +191,7 @@ module.exports = ( router ) => {
 			data.status = +status;
 			data.userid = +this.session.userid;
 			data.add_time = (+new Date());
+			console.log(data);
 
 			yield Promise.resolve()
 			.then(() => getThroughDataProc('db', 'save', {
