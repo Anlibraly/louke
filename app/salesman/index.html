@@ -29,7 +29,7 @@
 		{{ for(var i in it) { }}
 			<li class="cunstom">
 				<span style="display: -webkit-box;margin: 2% 0;">
-					{{=it[i].statu}}
+					{{=it[i].status}}
 				</span>
 				<div class="cus_info">
 					<span>客户: {{=it[i].cname}}</span>
@@ -71,7 +71,7 @@
 						var tpl = $("#customs-template").text();
 						var tempFn = doT.template(tpl);
 						for (var i = 0; i < data.customs.length; i++) {
-							data.customs[i].statu = allstatus[+data.customs[i].status];
+							data.customs[i].status = allstatus[+data.customs[i].status];
 						};
 						var rHtml = tempFn(data.customs);
 						$("#customs").html(rHtml);		        		
