@@ -263,6 +263,7 @@ module.exports = {
 		let savePromise = [];
 		let saveResult = {ar: [], ur: [], dr: []};
 		let done = () => Promise.resolve(saveResult);
+		console.log({key:key},{add:add},{update:update},{del:del});
 
 		return Promise.resolve()
 		.then(() => {

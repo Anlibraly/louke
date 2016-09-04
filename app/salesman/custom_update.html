@@ -79,6 +79,9 @@
 <script type="text/javascript">
 	var allstatus = ['', '推楼带看', '成交手续', '成功', '死亡', '搁置'];
 	var cid = getParameter('cid');
+	if(!check(cid)){
+		alert('缺少客户id');
+	}
 	var constatus = 1, ctime = '', detail = '';
 
 	function setStatus(s){
@@ -87,7 +90,7 @@
 
 	function addContact(){
 		ctime = $("#contact_time").val(), detail = $("#detail").val();
-		if(check(ctime) && check(detail) && check(cid)){
+		if(check(ctime) && check(detail)){
 			var params = {
 				cid: cid,
 				ctime: ctime,
