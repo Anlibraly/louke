@@ -15,7 +15,7 @@ function getParameter(name) {
     return value;  
 } 
 
-var _search = '', _path = '', ;
+var _search = '', _path = '';
 function getRootPath(){
     var curWwwPath = window.document.location.href;
     _path = window.document.location.pathname;
