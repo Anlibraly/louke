@@ -199,33 +199,19 @@ module.exports = ( router ) => {
 				_key: 'contact',
 				_save: save
 			}))
-			.then((result) => {
-				save = [];
-				data = {};
-				data._id = +cid;
-				data.add_status = +status;
-				data.update_time = ctm;
-				save.push(data);
-				console.log(save);
-				
-				yield Promise.resolve()
-				.then(() => getThroughDataProc('db', 'save', {
+			.then((result) => getThroughDataProc('db', 'save', {
 					_key: 'custom',
-					_save: save
-				}))
-				.then((result) => {	
-					this.body = {
-						code: 1,
-						desc: '添加成功'
-					};	
-				})
-				.catch((err) => {
-					console.log(`[error] ${err.message}\n${err.stack}`)
-					this.body = {
-						code: -1,
-						desc: `[error] ${err.message}\n${err.stack}`
-					};			
-				});						
+					_save: [{
+						_id: +cid,
+						add_status: +status,
+						update_time: ctm						
+					}]
+			}))
+			.then((result) => {	
+				this.body = {
+					code: 1,
+					desc: '添加成功'
+				};	
 			})
 			.catch((err) => {
 				console.log(`[error] ${err.message}\n${err.stack}`)
