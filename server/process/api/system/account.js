@@ -203,7 +203,7 @@ module.exports = ( router ) => {
 					_key: 'custom',
 					_save: [{
 						_id: +cid,
-						add_status: +status,
+						status: +status,
 						update_time: ctm						
 					}]
 			}))
