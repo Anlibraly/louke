@@ -37,7 +37,7 @@
 			.addEventListener("click", function (event) { 
 				var username = document.querySelector('input[type="text"]').value;
 				var password = document.querySelector('input[type="password"]').value; 
-				if(username !== undefined && password !== undefined && username.length > 0 && password.length > 0){
+				if(check(username) && check(password)){
 					var params = {
 						username: username,
 						password: password

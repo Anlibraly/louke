@@ -1,3 +1,9 @@
+function check(v){
+    if(v != undefined && (v > 0 || v.length>0)){
+        return true;
+    }
+    return false;
+}
 function getParameter(name) {  
     var url = document.location.href;  
     var start = url.indexOf("?")+1;  

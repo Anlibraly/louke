@@ -12,9 +12,37 @@
 </head>
 
 <body>
+	<div class="top_bar">
+		<input class="back" type="button" value="返回" onclick="history.go(-1)"/>
+		客户更新
+	</div>
 	<ul id="customs">
 		<div id="custom"></div>
-		<div id="contacts"></div>
+		<div>
+			<div class="contact_item">
+				<span class="tt">联系日期</span>
+				<span>
+					<input type="date" id="contact_time" />
+				</span>
+			</div>
+			<div class="contact_item">
+				<span class="tt">具体情况</span>
+				<textarea id="detail" rows="6"></textarea>
+			</div>
+			<div class="contact_item">
+				<span class="tt">状态更新</span>
+				<select style="width:40%;" onchange="setStatus(this.options[this.options.selectedIndex].value)">
+				  <option value="1">推楼带看</option>
+				  <option value="2">成交手续</option>
+				  <option value="3">成功</option>
+				  <option value="4">死亡</option>
+				  <option value="5">搁置</option>
+				</select>				
+			</div>
+			<div class="btns">
+				<input type="button" value="提交" onclick="addContact()"/>
+			</div>
+		</div>
 	</ul>
 
 	<script id="custom-template" type="text/x-dot-template">
@@ -44,19 +72,6 @@
 			</li>
 	</script>	
 
-	<script id="contacts-template" type="text/x-dot-template">
-		{{ for(var i in it) { }}
-			<li class="cunstom">
-				<span style="display: -webkit-box;margin: 2% 0;">
-					{{=it[i].contact_time}}  {{=it[i].status}}
-				</span>
-				<div class="mark">
-					<span>联系详情:</span>
-					<i>{{=it[i].detail}}</i>
-				</div>
-			</li>
-		{{ } }}
-	</script>	
 </body>
 </html>
 <script type="text/javascript" src="../lib/common.js"></script>
@@ -64,6 +79,38 @@
 <script type="text/javascript">
 	var allstatus = ['', '推楼带看', '成交手续', '成功', '死亡', '搁置'];
 	var cid = getParameter('cid');
+	var constatus = 1, ctime = '', detail = '';
+
+	function setStatus(s){
+		constatus = s;
+	}
+
+	function addContact(){
+		ctime = $("#contact_time").val(), detail = $("#detail").val();
+		if(check(ctime) && check(detail) && check(cid)){
+			var params = {
+				cid: cid,
+				ctime: ctime,
+				status: constatus,
+				detail: detail
+			}
+			$.ajax({
+	            type: "post",
+	            url: _dirname + '/system/salesman/addcotact',
+	            data: params,
+	            dataType: "json",
+	            success: function(data){
+	            	if(data.code > 0){
+	            		window.location.href = _dirname + data.desc;
+	            	}else{
+	            		alert(data.desc);
+	            	}
+	            }
+	        });				
+		}else{
+			alert('请输入完整信息');
+		}
+	}
 
 	$.ajax({
         type: "get",
@@ -95,32 +142,8 @@
 	        }
         }
     });	
-	$.ajax({
-        type: "get",
-        url: _dirname + '/system/salesman/getcotact/'+cid,
-        dataType: "json",
-        success: function(data){
-        	try{
-	        	if(data.code == 1){
-					var tpl = $("#contacts-template").text();
-					var tempFn = doT.template(tpl);
-					var date = new Date();
-						for (var i = 0; i < data.contacts.length; i++) {
-						data.contacts[i].status = allstatus[+data.contacts[i].status];
-						date.setTime(data.contacts[i].contact_time);
-						data.contacts[i].contact_time = date.getFullYear() + '-' 
-						+ (date.getMonth()+1) + '-' + date.getDate();
-					};
-					var rHtml = tempFn(data.contacts);
-					$("#contacts").html(rHtml);		        		
-	        	}else{
-	        		alert('客户暂无跟踪联系信息');
-	        	}
-	        }catch(e){
-	        	alert('数据出错，稍后再试');
-	        }
-        }
-    });	    
+	
+	
 
 </script>
 
