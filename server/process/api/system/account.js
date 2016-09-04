@@ -200,10 +200,31 @@ module.exports = ( router ) => {
 				_save: save
 			}))
 			.then((result) => {
-				this.body = {
-					code: 1,
-					desc: '添加成功'
-				};				
+				save = [];
+				data = {};
+				data._id = +cid;
+				data.add_status = +status;
+				data.update_time = ctm;
+				save.push(data);
+
+				yield Promise.resolve()
+				.then(() => getThroughDataProc('db', 'save', {
+					_key: 'custom',
+					_save: save
+				}))
+				.then((result) => {	
+					this.body = {
+						code: 1,
+						desc: '添加成功'
+					};	
+				})
+				.catch((err) => {
+					console.log(`[error] ${err.message}\n${err.stack}`)
+					this.body = {
+						code: -1,
+						desc: `[error] ${err.message}\n${err.stack}`
+					};			
+				});						
 			})
 			.catch((err) => {
 				console.log(`[error] ${err.message}\n${err.stack}`)
