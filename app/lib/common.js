@@ -14,6 +14,21 @@ function getParameter(name) {
     }  
     return value;  
 } 
+function getParameterName(str) {  
+    var start = str.indexOf("=");  
+    if (start==-1) {  
+        return str;  
+    }  
+    return str.substring(0,start);  
+}  
+  
+function getParameterValue(str) {  
+    var start = str.indexOf("=");  
+    if (start==-1) {  
+        return "";  
+    }  
+    return str.substring(start+1);  
+}  
 
 var _search = '', _path = '';
 function getRootPath(){
