@@ -199,6 +199,7 @@ module.exports = ( router ) => {
 				_save: data
 			}))
 			.then((result) => {
+				console.log(result);
 				this.body = {
 					code: 1,
 					desc: '添加成功'
