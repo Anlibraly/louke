@@ -100,11 +100,7 @@
 	            data: params,
 	            dataType: "json",
 	            success: function(data){
-	            	if(data.code > 0){
-	            		window.location.href = _dirname + data.desc;
-	            	}else{
-	            		alert(data.desc);
-	            	}
+	            	alert(data.desc);
 	            }
 	        });				
 		}else{

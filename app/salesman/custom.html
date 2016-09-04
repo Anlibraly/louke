@@ -68,7 +68,10 @@
 <script type="text/javascript">
 	var allstatus = ['', '推楼带看', '成交手续', '成功', '死亡', '搁置'];
 	var cid = getParameter('cid');
-
+	if(!check(cid)){
+		alert('缺少客户id');
+	}
+	
 	$.ajax({
         type: "get",
         url: _dirname + '/system/salesman/custom/'+cid,
