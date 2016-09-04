@@ -185,14 +185,13 @@ module.exports = ( router ) => {
 			d.setMonth(+t[1]-1);
 			d.setDate(+t[2]);
 			ctm = d.getTime();
-			data.custom_id = cid;
+			data.custom_id = +cid;
 			data.contact_time = (ctm == undefined||ctm < 1272141884)?(+new Date()) : ctm;
 			data.detail = (dt == undefined || dt.length < 1)? '暂无详情':dt;
-			data.status = status;
-			data.userid = this.session.userid;
+			data.status = +status;
+			data.userid = +this.session.userid;
 			data.add_time = (+new Date());
-			console.log(data);
-			
+
 			yield Promise.resolve()
 			.then(() => getThroughDataProc('db', 'save', {
 				_key: 'contact',
