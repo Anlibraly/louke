@@ -81,11 +81,12 @@
 						data.customs[i].update_time = date.getFullYear() + '-' 
 						+ (date.getMonth()+1) + '-' + date.getDate();
 					};
-					var rHtml = tempFn(data.customs);
+					var rHtml = tempFn(data.customs[0]);
 					$("#custom").html(rHtml);		        		
+	        	}else{
+	        		alert('客户id信息错误');
 	        	}
 	        }catch(e){
-	        	console.log(e);
 	        	alert('数据出错，稍后再试');
 	        }
         }
@@ -108,6 +109,8 @@
 					};
 					var rHtml = tempFn(data.contacts);
 					$("#contacts").html(rHtml);		        		
+	        	}else{
+	        		alert('客户暂无跟踪联系信息');
 	        	}
 	        }catch(e){
 	        	alert('数据出错，稍后再试');
