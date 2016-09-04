@@ -1,10 +1,16 @@
 .status_bar {
-	text-align: right;
+	text-align: center;
 	font-size: 14px;
 	padding: 2%;
 }
 .status_bar span{
-	float: left;
+	line-height: 30px;
+	height: 30px;
+	font-size: 16px;
+}
+.status_bar select{
+	height: 30px;
+	float: right;
 }
 #customs {
 	padding: 1% 5%;
@@ -28,4 +34,15 @@
 .btns input{
 	padding: 1% 5%;
 	margin: 5% 10%;
+}
+.top_bar{
+    text-align: center;
+    font-size: 16px;
+    height: 30px;
+    line-height: 30px;
+}
+.back{
+    float: left;
+    height: 30px;
+    padding: 0 2%;
 }
