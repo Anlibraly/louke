@@ -48,7 +48,7 @@
 		{{ for(var i in it) { }}
 			<li class="cunstom">
 				<span style="display: -webkit-box;margin: 2% 0;">
-					{{=it[i].contact_time}}  {{=it[i].statu}}
+					{{=it[i].contact_time}}  {{=it[i].status}}
 				</span>
 				<div class="mark">
 					<span>联系详情:</span>
@@ -86,7 +86,7 @@
 	        	}
 	        }catch(e){
 	        	console.log(e);
-	        	alert('数据出错，稍后再试1');
+	        	alert('数据出错，稍后再试');
 	        }
         }
     });	
@@ -101,7 +101,7 @@
 					var tempFn = doT.template(tpl);
 					var date = new Date();
 						for (var i = 0; i < data.contacts.length; i++) {
-						data.customs[i].statu = allstatus[+data.contacts[i].status];
+						data.contacts[i].status = allstatus[+data.contacts[i].status];
 						date.setTime(data.contacts[i].contact_time);
 						data.contacts[i].contact_time = date.getFullYear() + '-' 
 						+ (date.getMonth()+1) + '-' + date.getDate();
@@ -110,8 +110,7 @@
 					$("#contacts").html(rHtml);		        		
 	        	}
 	        }catch(e){
-	        	console.log(e);
-	        	alert('数据出错，稍后再试2');
+	        	alert('数据出错，稍后再试');
 	        }
         }
     });	    
