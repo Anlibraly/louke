@@ -122,7 +122,27 @@ module.exports = ( router ) => {
 		});		
 	})
 	.get('/salesman/custom/:cid',function *(){
-		this.redirect("/salesman/custom.html",{title: '客户详情'});
+		let qs = {
+				_key: 'custom',
+				_id: this.params.cid,
+				userid: this.session.userid
+		};
+
+		yield Promise.resolve()
+		.then(() => getThroughDataProc('db', 'query', qs))
+		.then((result) => {
+			this.body = {
+				code: 1,
+				customs: result.list
+			};				
+		})
+		.catch((err) => {
+			console.log(`[error] ${err.message}\n${err.stack}`)
+			this.body = {
+				code: -1,
+				desc: `[error] ${err.message}\n${err.stack}`
+			};			
+		});		
 	})
 	.get('/salesman/getcotact/:cid', function *() {
 		yield Promise.resolve()

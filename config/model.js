@@ -26,7 +26,8 @@ module.exports = {
 	  	other_mark: String,
 	  	update_time: Number,
 	  	add_time: Number,
-	  	status: Number
+	  	status: Number,
+	  	add_status: Number
   	},
 
 	fang : {

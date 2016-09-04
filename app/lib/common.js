@@ -1,4 +1,21 @@
-var _search = '', _path = '';
+function getParameter(name) {  
+    var url = document.location.href;  
+    var start = url.indexOf("?")+1;  
+    if (start==0) {  
+        return "";  
+    }  
+    var value = "";  
+    var queryString = url.substring(start);  
+    var paraNames = queryString.split("&");  
+    for (var i=0; i<paraNames.length; i++) {  
+        if (name==getParameterName(paraNames[i])) {  
+            value = getParameterValue(paraNames[i])  
+        }  
+    }  
+    return value;  
+} 
+
+var _search = '', _path = '', ;
 function getRootPath(){
     var curWwwPath = window.document.location.href;
     _path = window.document.location.pathname;
@@ -9,6 +26,7 @@ function getRootPath(){
 	}
     return curWwwPath;
 }
+
 var _dirname = getRootPath();
 $.ajax({
     type: 'get',
