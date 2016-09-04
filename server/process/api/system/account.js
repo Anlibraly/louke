@@ -206,7 +206,8 @@ module.exports = ( router ) => {
 				data.add_status = +status;
 				data.update_time = ctm;
 				save.push(data);
-
+				console.log(save);
+				
 				yield Promise.resolve()
 				.then(() => getThroughDataProc('db', 'save', {
 					_key: 'custom',
