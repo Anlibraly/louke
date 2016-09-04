@@ -53,8 +53,6 @@ var addRecord = (key, value) => {
 	let sql = `insert into ${key} (\`${attrKeys.join('\`, \`')}\`)
 			   values ('${attrValues.join('\', \'')}');`;
 
-	console.log(sql);
-
 	return Promise.resolve()
 	.then(() => promisifyQuery(sql))
 	.then((rows) => +rows.insertId);
@@ -263,7 +261,6 @@ module.exports = {
 		let savePromise = [];
 		let saveResult = {ar: [], ur: [], dr: []};
 		let done = () => Promise.resolve(saveResult);
-		console.log({key:key},{add:add},{update:update},{del:del});
 
 		return Promise.resolve()
 		.then(() => {

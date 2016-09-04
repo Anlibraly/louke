@@ -191,15 +191,15 @@ module.exports = ( router ) => {
 			data.status = +status;
 			data.userid = +this.session.userid;
 			data.add_time = (+new Date());
-			console.log(data);
+			let save = [];
+			save.push(data);
 
 			yield Promise.resolve()
 			.then(() => getThroughDataProc('db', 'save', {
 				_key: 'contact',
-				_save: data
+				_save: save
 			}))
 			.then((result) => {
-				console.log(result);
 				this.body = {
 					code: 1,
 					desc: '添加成功'
