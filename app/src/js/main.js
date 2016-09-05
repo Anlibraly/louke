@@ -3,7 +3,7 @@ $(document).ready(function(){
 });
 
 function bdsize(){
-	var bdWidth=$(window).width() ;
+	var bdWidth=$(window).width() -62;
 	var bdHeight=$(window).height()  ;
 	var mainHeight=$(window).height() - 62;
 	$("#wrapper").css({"width":bdWidth, "height": mainHeight});
