@@ -41,6 +41,7 @@
     font-size: 16px;
     height: 30px;
     line-height: 30px;
+    margin-bottom: 5px;
     padding-right: 30px;
 }
 .back{
@@ -55,7 +56,7 @@
 	display: -webkit-inline-box;
 	margin-right: 10%; 
     line-height: 35px;
-    width: 20%;
+    width: 30%;
     height: 35px;
 }
 #detail{
