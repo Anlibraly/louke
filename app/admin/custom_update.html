@@ -1,0 +1,148 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>客户修改</title>
+	<meta name="description" content=""/>
+	<meta name="keywords" content=""/>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<!-- 加载当前项目专用css js -->
+	<script type="text/javascript" src="../lib/jquery-3.1.0.min.js"></script>
+	<link type="text/css" href="css/custom.css" rel="stylesheet">
+</head>
+
+<body>
+	<div class="top_bar">
+		<input class="back" type="button" value="返回" onclick="history.go(-1)"/>
+		客户更新
+	</div>
+	<ul id="customs">
+		<div id="custom"></div>
+		<div>
+			<div class="contact_item">
+				<span class="tt">分配业务员</span>
+				<select id="salesman" style="width:40%;" onchange="setSalesman(this.options[this.options.selectedIndex].value)"></select>				
+			</div>
+			<div class="btns">
+				<input type="button" value="确定" onclick="updateCustom()"/>
+			</div>
+		</div>
+	</ul>
+
+	<script id="salesman-template" type="text/x-dot-template">
+		<option value="1">推楼带看</option>
+	</script>	
+
+	<script id="custom-template" type="text/x-dot-template">
+			<li class="cunstom">
+				<span style="display: -webkit-box;margin: 2% 0;">
+					更新时间状态: {{=it.update_time}}  {{=it.status}}
+				</span>
+				<span style="display: -webkit-box;margin: 2% 0;">
+					创建时间状态: {{=it.add_time}}  {{=it.add_status}}
+				</span>
+				<div class="cus_info">
+					<span>客户: {{=it.cname}}</span>
+					<span>电话: {{=it.tel_num}}</span>
+				</div>
+				<div class="cus_info">
+					<span>目标: {{=it.goal_fang}}</span>
+					<span>行业: {{=it.job}}</span>
+				</div>
+				<div class="cus_info">
+					<span>面积: {{=it.size}}</span>
+					<span>预算: {{=it.price}}</span>
+				</div>
+				<div class="mark">
+					<span>其他:</span>
+					<i>{{=it.other_mark}}</i>
+				</div>
+			</li>
+	</script>	
+</body>
+</html>
+<script type="text/javascript" src="../lib/common.js"></script>
+<script type="text/javascript" src="../lib/doT.min.js"></script>
+<script type="text/javascript">
+	var allstatus = ['', '推楼带看', '成交手续', '成功', '死亡', '搁置'];
+	var cid = getParameter('cid');
+	if(!check(cid)){
+		alert('缺少客户id');
+	}
+	var salesman = 1, ctime = '', detail = '';
+
+	function setSalesman(s){
+		salesman = s;
+	}
+
+	function updateCustom(){
+		var params = {
+			userid: cid,
+			salesman: salesman
+		}
+		$.ajax({
+            type: "post",
+            url: _dirname + '/system/admin/updateCustom',
+            data: params,
+            dataType: "json",
+            success: function(data){
+            	alert(data.desc);
+            }
+        });				
+	}
+
+	$.ajax({
+        type: "get",
+        url: _dirname + '/system/admin/custom/'+cid,
+        dataType: "json",
+        success: function(data){
+        	try{
+	        	if(data.code == 1){
+					var tpl = $("#custom-template").text();
+					var tempFn = doT.template(tpl);
+					salesman = +data.customs[0].userid;
+					var date = new Date();
+					for (var i = 0; i < data.customs.length; i++) {
+						data.customs[i].status = allstatus[+data.customs[i].status];
+						date.setTime(data.customs[i].update_time);
+						data.customs[i].update_time = date.getFullYear() + '-' 
+						+ (date.getMonth()+1) + '-' + date.getDate();
+						data.customs[i].add_status = allstatus[+data.customs[i].add_status];
+						date.setTime(data.customs[i].add_time);
+						data.customs[i].add_time = date.getFullYear() + '-' 
+						+ (date.getMonth()+1) + '-' + date.getDate();						
+					};
+					var rHtml = tempFn(data.customs[0]);
+					$("#custom").html(rHtml);		        		
+	        	}else{
+	        		alert('客户id信息错误');
+	        	}
+	        }catch(e){
+	        	alert('数据出错，稍后再试');
+	        }
+        }
+    });	
+	
+	$.ajax({
+        type: "get",
+        url: _dirname + '/admin/getSalesman',
+        dataType: "json",
+        success: function(data){
+        	try{
+	        	if(data.code == 1){
+					var tpl = $("#salesman-template").text();
+					var tempFn = doT.template(tpl);
+					var rHtml = tempFn(data.salesmans);
+					$("#salesman").html(rHtml);		
+					$("#salesman").val(salesman);        		
+	        	}else{
+	        		alert('客户id信息错误');
+	        	}
+	        }catch(e){
+	        	alert('数据出错，稍后再试');
+	        }
+        }
+    });		
+
+</script>
+

@@ -86,8 +86,99 @@ module.exports = ( router ) => {
 			};			
 		});
 	})
-	.get('/admin/', function *() {
-
+	.get('/admin/getcustom/:status', function *() {
+		let qs = null;
+		if(this.params.status != undefined && this.params.status > 0){
+			qs = {
+				_key: 'custom',
+				status: this.params.status,
+				_sort: 'update_time:desc'
+			};
+		}else{
+			qs = {
+				_key: 'custom',
+				_sort: 'update_time:desc'
+			};
+		}
+		yield Promise.resolve()
+		.then(() => getThroughDataProc('db', 'query', qs))
+		.then((result) => {
+			this.body = {
+				code: 1,
+				customs: result.list
+			};				
+		})
+		.catch((err) => {
+			console.log(`[error] ${err.message}\n${err.stack}`)
+			this.body = {
+				code: -1,
+				desc: `[error] ${err.message}\n${err.stack}`
+			};			
+		});		
+	})
+	.get('/admin/custom/:cid',function *(){
+		let qs = {
+				_key: 'custom',
+				_id: this.params.cid
+		};
+		yield Promise.resolve()
+		.then(() => getThroughDataProc('db', 'query', qs))
+		.then((result) => {
+			this.body = {
+				code: 1,
+				customs: result.list
+			};				
+		})
+		.catch((err) => {
+			console.log(`[error] ${err.message}\n${err.stack}`)
+			this.body = {
+				code: -1,
+				desc: `[error] ${err.message}\n${err.stack}`
+			};			
+		});		
+	})
+	.get('/admin/getSalesman',function *(){
+		let qs = {
+				_key: 'user',
+				type: 1
+		};
+		yield Promise.resolve()
+		.then(() => getThroughDataProc('db', 'query', qs))
+		.then((result) => {
+			this.body = {
+				code: 1,
+				salesmans: result.list
+			};				
+		})
+		.catch((err) => {
+			console.log(`[error] ${err.message}\n${err.stack}`)
+			this.body = {
+				code: -1,
+				desc: `[error] ${err.message}\n${err.stack}`
+			};			
+		});		
+	})
+	.post('/admin/updateCustom',function *(){
+		let qs = {
+				_key: 'user',
+				_id: this.request.body.userid
+				type: this.request.body.salesman
+		};
+		yield Promise.resolve()
+		.then(() => getThroughDataProc('db', 'query', qs))
+		.then((result) => {
+			this.body = {
+				code: 1,
+				desc: '更新成功'
+			};				
+		})
+		.catch((err) => {
+			console.log(`[error] ${err.message}\n${err.stack}`)
+			this.body = {
+				code: -1,
+				desc: `[error] ${err.message}\n${err.stack}`
+			};			
+		});		
 	})
 	.get('/salesman/getcustom/:status', function *() {
 		let qs = null;
