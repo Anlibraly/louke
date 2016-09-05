@@ -20,7 +20,6 @@
 
 <body>
 	<div class="top_bar">
-		<input class="back" type="button" value="返回" onclick="history.go(-1)"/>
 		搜房
 	</div>
 	<header>
@@ -105,6 +104,10 @@
 				<table id="lists" style="display:none;">
 
 				</table>
+				<div class="menu_bar">
+					<a href="index.html"><span>客户</span></a>
+					<a href="soufang.html"><span>房源</span></a>
+				</div>
 				<script id="orgs-template" type="text/x-dot-template">
 					{{ for(var i in it) { }}
 						<tr>
@@ -118,7 +121,7 @@
 								tel_{{=it[i].tel_num}}<br>    
 								楼名:{{=it[i].lou_name}}<br>    
 								地址:{{=it[i].lou_address}}
-								<input type="button" onclick="window.open('../salesman/fang.html?fid={{=it[i]._id}}')" value="更多信息" style="float:right;    margin-right: 10px;">
+								<input type="button" onclick="window.open('fang.html?fid={{=it[i]._id}}')" value="更多信息" style="float:right;    margin-right: 10px;">
 							</td>
 						</tr>
 					{{ } }}

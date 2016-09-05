@@ -26,8 +26,8 @@
 	<ul id="customs"></ul>
 	
 	<div class="menu_bar">
-		<a href="../salesman/index.html"><span>客户</span></a>
-		<a href="../salesman/soufang.html"><span>房源</span></a>
+		<a href="index.html"><span>客户</span></a>
+		<a href="soufang.html"><span>房源</span></a>
 	</div>
 	<script id="customs-template" type="text/x-dot-template">
 		{{ for(var i in it) { }}
@@ -52,8 +52,8 @@
 					<i>{{=it[i].other_mark}}</i>
 				</div>
 				<div class="btns">
-					<a href="../salesman/custom.html?cid={{=it[i]._id}}"><input type="button" value="详情"/></a>
-					<a href="../salesman/custom_update.html?cid={{=it[i]._id}}"><input type="button" value="更新"/></a>
+					<a href="custom.html?cid={{=it[i]._id}}"><input type="button" value="详情"/></a>
+					<a href="custom_update.html?cid={{=it[i]._id}}"><input type="button" value="更新"/></a>
 				</div>
 			</li>
 		{{ } }}
