@@ -30,6 +30,11 @@
 			<button id="more" style="margin-left: 2%px;padding: 9px 10px;" onclick="showSearch()">收起</button>
 		</div>
 	</header>
+
+	<div class="menu_bar">
+		<a href="index.html"><span>客户</span></a>
+		<a href="soufang.html"><span>房源</span></a>
+	</div>
 	
 	<div id="main_wrap">
 		<div id="allmap" class="map"></div>
@@ -104,10 +109,6 @@
 				<table id="lists" style="display:none;">
 
 				</table>
-				<div class="menu_bar">
-					<a href="index.html"><span>客户</span></a>
-					<a href="soufang.html"><span>房源</span></a>
-				</div>
 				<script id="orgs-template" type="text/x-dot-template">
 					{{ for(var i in it) { }}
 						<tr>
@@ -127,7 +128,7 @@
 					{{ } }}
 				</script>			        
 			</div>		
-	</div>
+		</div>
 	</div>
 </body>
 </html>
