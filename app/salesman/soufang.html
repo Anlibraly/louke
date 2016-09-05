@@ -118,11 +118,7 @@
 								tel_{{=it[i].tel_num}}<br>    
 								楼名:{{=it[i].lou_name}}<br>    
 								地址:{{=it[i].lou_address}}
-							</td>
-							<td>
-								<a href="/salesman/fang.html?fid={{=it[i]._id}}">
-									<input type="button" value="更多">
-								</a>
+								<input type="button" onclick="window.open('/salesman/fang.html?fid={{=it[i]._id}}')" value="更多" style="float:right;">
 							</td>
 						</tr>
 					{{ } }}
