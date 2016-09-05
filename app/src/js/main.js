@@ -6,7 +6,7 @@ function bdsize(){
 	var bdWidth=$(window).width() ;
 	var bdHeight=$(window).height()  ;
 	var mainHeight=$(window).height() - 62;
-	$("#wrapper").css({"width":bdWidth, "height": bdHeight});
+	$("#wrapper").css({"width":bdWidth, "height": mainHeight});
 	$("#main_wrap").css({"width":bdWidth, "height": mainHeight});
 	$(".menu_bar").css({"bottom": 0});
 }
