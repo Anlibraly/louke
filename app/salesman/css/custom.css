@@ -63,3 +63,19 @@
 	display: -webkit-box;
     width: 100%;
 }
+.menu_bar{
+	position:fixed;
+	text-align: center;
+	z-index:999;
+	left:0;
+	right:0;
+	bottom:0;
+}
+.menu_bar span{
+    display: -webkit-inline-box;
+    text-align: -webkit-center;
+    border: 1px solid #666;
+    color: #666;
+    padding: 2% 0;
+    width: 48.4%;
+}
