@@ -161,11 +161,13 @@ module.exports = ( router ) => {
 	.post('/admin/updateCustom',function *(){
 		let qs = {
 				_key: 'user',
-				_id: this.request.body.userid,
-				type: this.request.body.salesman
+				_save: [{
+					_id: +this.request.body.userid,
+					type: +this.request.body.salesman
+				}]
 		};
 		yield Promise.resolve()
-		.then(() => getThroughDataProc('db', 'query', qs))
+		.then(() => getThroughDataProc('db', 'save', qs))
 		.then((result) => {
 			this.body = {
 				code: 1,
