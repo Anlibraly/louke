@@ -68,5 +68,7 @@ $.ajax({
 	}
     }
 });
-
+function logout(){
+    window.location.href = _dirname + '/system/account/logout';
+}
 var allstatus = ['暂无', '推楼带看', '成交手续', '成功', '死亡', '搁置'];

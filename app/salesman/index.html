@@ -8,11 +8,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 	<!-- 加载当前项目专用css js -->
 	<script type="text/javascript" src="../lib/jquery-3.1.0.min.js"></script>
-	<link type="text/css" href="./css/custom.css" rel="stylesheet">
+	<link type="text/css" href="salescss/custom.css" rel="stylesheet">
 </head>
 
 <body>
 	<div class="status_bar">
+		<input class="back" type="button" value="注销" onclick="logout();"/>
 		<span>客户列表</span>
 		<select onchange="seeStatus(this.options[this.options.selectedIndex].value)">
 		  <option value="0">所有</option>
