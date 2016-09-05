@@ -160,10 +160,10 @@ module.exports = ( router ) => {
 	})
 	.post('/admin/updateCustom',function *(){
 		let qs = {
-				_key: 'user',
+				_key: 'custom',
 				_save: [{
 					_id: +this.request.body.userid,
-					type: +this.request.body.salesman
+					userid: +this.request.body.salesman
 				}]
 		};
 		yield Promise.resolve()
