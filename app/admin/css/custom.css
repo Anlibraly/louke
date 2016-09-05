@@ -1,0 +1,82 @@
+.status_bar {
+	text-align: center;
+	font-size: 14px;
+	padding: 2%;
+	margin-left: 30px;
+}
+.status_bar span{
+	line-height: 30px;
+	height: 30px;
+	font-size: 16px;
+}
+.status_bar select{
+	height: 30px;
+	float: right;
+}
+#customs {
+	padding: 1% 5%;
+}
+#customs li {
+	list-style:none;
+	border-bottom: 1px solid #aaa;
+}
+.cus_info span{
+	display: -webkit-inline-box;
+	padding: 1% 0;
+    width: 48%;
+}
+.mark{
+    margin: 2% 0;
+}
+.btns{
+    text-align: center;
+    padding: 2%;
+}
+.btns input{
+	padding: 1% 5%;
+	margin: 5% 10%;
+}
+.top_bar{
+    text-align: center;
+    font-size: 16px;
+    height: 30px;
+    line-height: 30px;
+    margin-bottom: 5px;
+    padding-right: 30px;
+}
+.back{
+    float: left;
+    height: 30px;
+    padding: 0 2%;
+}
+.contact_item{
+    padding-top: 5%;
+}
+.tt{
+	display: -webkit-inline-box;
+	margin-right: 10%; 
+    line-height: 35px;
+    width: 30%;
+    height: 35px;
+}
+#detail{
+	display: -webkit-box;
+    width: 100%;
+}
+.menu_bar{
+	position:fixed;
+	text-align: center;
+	background: #fff;
+	z-index:999;
+	left:0;
+	right:0;
+	bottom:0;
+}
+.menu_bar span{
+    display: -webkit-inline-box;
+    text-align: -webkit-center;
+    border: 1px solid #666;
+    color: #666;
+    padding: 2% 0;
+    width: 99%;
+}
