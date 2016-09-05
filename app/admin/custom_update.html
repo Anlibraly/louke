@@ -30,34 +30,36 @@
 	</ul>
 
 	<script id="salesman-template" type="text/x-dot-template">
-		<option value="1">推楼带看</option>
+		{{ for(var i in it) { }}
+			<option value="{{=it[i]._id}}">{{=it[i].nick_name}}</option>
+		{{ } }}
 	</script>	
 
 	<script id="custom-template" type="text/x-dot-template">
-			<li class="cunstom">
-				<span style="display: -webkit-box;margin: 2% 0;">
-					更新时间状态: {{=it.update_time}}  {{=it.status}}
-				</span>
-				<span style="display: -webkit-box;margin: 2% 0;">
-					创建时间状态: {{=it.add_time}}  {{=it.add_status}}
-				</span>
-				<div class="cus_info">
-					<span>客户: {{=it.cname}}</span>
-					<span>电话: {{=it.tel_num}}</span>
-				</div>
-				<div class="cus_info">
-					<span>目标: {{=it.goal_fang}}</span>
-					<span>行业: {{=it.job}}</span>
-				</div>
-				<div class="cus_info">
-					<span>面积: {{=it.size}}</span>
-					<span>预算: {{=it.price}}</span>
-				</div>
-				<div class="mark">
-					<span>其他:</span>
-					<i>{{=it.other_mark}}</i>
-				</div>
-			</li>
+		<li class="cunstom">
+			<span style="display: -webkit-box;margin: 2% 0;">
+				更新时间状态: {{=it.update_time}}  {{=it.status}}
+			</span>
+			<span style="display: -webkit-box;margin: 2% 0;">
+				创建时间状态: {{=it.add_time}}  {{=it.add_status}}
+			</span>
+			<div class="cus_info">
+				<span>客户: {{=it.cname}}</span>
+				<span>电话: {{=it.tel_num}}</span>
+			</div>
+			<div class="cus_info">
+				<span>目标: {{=it.goal_fang}}</span>
+				<span>行业: {{=it.job}}</span>
+			</div>
+			<div class="cus_info">
+				<span>面积: {{=it.size}}</span>
+				<span>预算: {{=it.price}}</span>
+			</div>
+			<div class="mark">
+				<span>其他:</span>
+				<i>{{=it.other_mark}}</i>
+			</div>
+		</li>
 	</script>	
 </body>
 </html>
