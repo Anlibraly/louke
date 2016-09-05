@@ -50,6 +50,10 @@
 			</li>			
 		</div>
 	</ul>
+	<div class="menu_bar">
+		<span onclick="addCustom();">确定</span>
+	</div>
+
 	<script id="salesman-template" type="text/x-dot-template">
 		{{ for(var i in it) { }}
 			<option value="{{=it[i]._id}}">{{=it[i].nick_name}}</option>
@@ -60,6 +64,52 @@
 <script type="text/javascript" src="../lib/common.js"></script>
 <script type="text/javascript" src="../lib/doT.min.js"></script>
 <script type="text/javascript">	
+	var salesman = 1;
+
+	function setSalesman(s){
+		salesman = s;
+	}
+	function addCustom(){
+		var cname = $("#cname").val(),
+			tel_num = $("#tel_num").val(),
+			goal_fang = $("#goal_fang").val(),
+			size = $("#size").val(),
+		    price = $("#price").val(),
+			deadline = $("#deadline").val(),
+		    reason = $("#reason").val()，
+		 	job = $("#job").val(), 
+			now_address = $("#now_address").val(),
+			other_mark = $("#other_mark").val();
+
+		if(check(cname) && check(tel_num) && check(goal_fang) && check(size)
+		&& check(price) && check(deadline) && check(reason) && check(salesman)){
+			var params = {
+				cname: cid,
+				tel_num: ctime,
+				goal_fang: constatus,
+				size: detail,
+				price: cid,
+				deadline: ctime,
+				reason: constatus,
+				salesman: salesman,
+				job: job,
+				now_address: now_address,
+				other_mark: other_mark
+			}
+			$.ajax({
+	            type: "post",
+	            url: _dirname + '/system/admin/addCustom',
+	            data: params,
+	            dataType: "json",
+	            success: function(data){
+	            	alert(data.desc);
+	            }
+	        });				
+		}else{
+			alert('请输入完整信息');
+		}		
+	}
+
 	$.ajax({
         type: "get",
         url: _dirname + '/system/admin/getSalesman',

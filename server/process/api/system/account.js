@@ -166,29 +166,62 @@ module.exports = ( router ) => {
 		});		
 	})
 	.post('/admin/addCustom',function *(){
-		
-		let qs = {
-				_key: 'custom',
-				_save: [{
-					_id: +this.request.body.userid,
-					userid: +this.request.body.salesman
-				}]
-		};
-		yield Promise.resolve()
-		.then(() => getThroughDataProc('db', 'save', qs))
-		.then((result) => {
+		let {cname, tel_num, goal_fang, job, size,
+			 price, deadline, reason, now_address,
+			 other_mark, salesman} = this.request.body;
+		let date = new Date();
+		if(check(cname) && check(tel_num) && check(goal_fang) && check(size)
+		&& check(price) && check(deadline) && check(reason) && check(salesman)){
+			let addtime = date.getTime();
+			let t = deadline.split('-');
+			if(t.length == 3){
+				date.setFullYear(+t[0]);
+				date.setMonth(+t[1]-1);
+				date.setDate(+t[2]);
+			}			
+			let custom = {
+			  	userid: +salesman,
+			  	cname: cname,
+			  	tel_num: 'num_'+tel_num,
+			  	goal_fang: goal_fang,
+			  	goal_fang_id: -1,
+			  	job: job == undefined ? '' : job,
+			  	size: size+'平',
+			  	price: price+'元/月',
+			  	deadline: +date.getTime(),
+			  	move_reason: reason,
+			  	now_address: now_address == undefined ? '' : now_address,
+			  	other_mark: other_mark == undefined ? '' : other_mark,
+			  	update_time: +addtime,
+			  	add_time: +addtime,
+			  	status: 0,
+			  	add_status: 0
+			};
+			let qs = {
+					_key: 'custom',
+					_save: [custom]
+			};
+			yield Promise.resolve()
+			.then(() => getThroughDataProc('db', 'save', qs))
+			.then((result) => {
+				this.body = {
+					code: 1,
+					desc: '添加成功'
+				};				
+			})
+			.catch((err) => {
+				console.log(`[error] ${err.message}\n${err.stack}`)
+				this.body = {
+					code: -1,
+					desc: `[error] ${err.message}\n${err.stack}`
+				};			
+			});
+		}else{
 			this.body = {
 				code: 1,
-				desc: '添加成功'
+				desc: '请输入完整客户信息'
 			};				
-		})
-		.catch((err) => {
-			console.log(`[error] ${err.message}\n${err.stack}`)
-			this.body = {
-				code: -1,
-				desc: `[error] ${err.message}\n${err.stack}`
-			};			
-		});		
+		}		
 	})
 	.post('/admin/updateCustom',function *(){
 		let qs = {
