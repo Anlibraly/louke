@@ -161,7 +161,7 @@ module.exports = ( router ) => {
 	.post('/admin/updateCustom',function *(){
 		let qs = {
 				_key: 'user',
-				_id: this.request.body.userid
+				_id: this.request.body.userid,
 				type: this.request.body.salesman
 		};
 		yield Promise.resolve()
