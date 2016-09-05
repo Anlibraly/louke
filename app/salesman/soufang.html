@@ -110,9 +110,14 @@
 								面积:{{=it[i].size}}平<br>
 								单价:{{=it[i].per_price}}<br> 
 								总价:{{=it[i].total_price}}<br>    
-								tel:{{=it[i].tel_num}}<br>    
+								tel_{{=it[i].tel_num}}<br>    
 								楼名:{{=it[i].lou_name}}<br>    
 								地址:{{=it[i].lou_address}}
+							</td>
+							<td>
+								<a href="/salesman/fang.html?fid={{=it[i]._id}}">
+									<input type="button" value="更多">
+								</a>
 							</td>
 						</tr>
 					{{ } }}

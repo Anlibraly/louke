@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>客户更新</title>
+	<meta name="description" content=""/>
+	<meta name="keywords" content=""/>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<!-- 加载当前项目专用css js -->
+	<script type="text/javascript" src="../lib/jquery-3.1.0.min.js"></script>
+	<link type="text/css" href="css/custom.css" rel="stylesheet">
+</head>
+
+<body>
+	<div class="top_bar">
+		<input class="back" type="button" value="返回" onclick="history.go(-1)"/>
+		房源详情
+	</div>
+	<ul id="customs">
+		<div id="custom"></div>
+	</ul>
+
+	<script id="custom-template" type="text/x-dot-template">
+			<li class="cunstom">
+				<span style="display: -webkit-box;margin: 2% 0;">
+					{{=it.f_name}}-{{=it.lou_name}}
+				</span>
+				<div class="cus_info">
+					<span>业主电话:</span>
+					<span> {{=it.tel_num}}</span>
+				</div>
+				<div class="cus_info">
+					<span>面积: {{=it.size}}</span>
+					<span>物业: 暂无信息</span>
+				</div>
+				<div class="cus_info">
+					<span>单价: {{=it.per_price}}</span>
+					<span>总价: {{=it.total_price}}</span>
+				</div>
+				<div class="cus_info">
+					<span>类型：{{=it.type}}</span>
+					<span>更新时间: {{=it.time}}</span>
+				</div>
+				<div class="cus_info">
+					<span>地址: {{=it.lou_address}}</span>
+				</div>
+				<div class="mark">
+					<span>其他:</span>
+					<i>{{=it.other_mark}}</i>
+				</div>				
+			</li>
+	</script>	
+
+</body>
+</html>
+<script type="text/javascript" src="../lib/common.js"></script>
+<script type="text/javascript" src="../lib/doT.min.js"></script>
+<script type="text/javascript">
+	var allstatus = ['', '推楼带看', '成交手续', '成功', '死亡', '搁置'];
+	var fid = getParameter('fid');
+	if(!check(fid)){
+		alert('缺少房源id');
+	}
+	var fang = {};
+
+	$.ajax({
+        type: "get",
+        url: _dirname + '/system/salesman/getfang/'+fid,
+        dataType: "json",
+        success: function(fdata){
+        	try{
+	        	if(fdata.code == 1){
+        			$.ajax({
+				        type: "get",
+				        url: _dirname + '/system/salesman/getlou/'+fdata.contacts[0].lou_id,
+				        dataType: "json",
+				        success: function(ldata){
+				        	try{
+				        		if(ldata.code == 1){
+				        			fang = fdata.contacts[0];
+				        			fang.lou_name = ldata.contacts[0].lou_name;
+				        			fang.lou_address = ldata.contacts[0].lou_address;
+				        			fang.type = ldata.contacts[0].type;
+			        				var tpl = $("#custom-template").text();
+									var tempFn = doT.template(tpl);
+									var rHtml = tempFn(fang);
+									$("#custom").html(rHtml);	
+				        		}
+				        	}
+				        }
+				    });	        		
+	        	}else{
+	        		alert('房源id信息错误');
+	        	}
+	        }catch(e){
+	        	alert('数据出错，稍后再试');
+	        }
+        }
+    });	
+	
+	
+
+</script>
+
