@@ -2,6 +2,13 @@ var msg = require('../../../common/msg');
 var _   = require('underscore');
 var md5 = require('md5');
 
+var check = (v) => {
+    if(v != undefined && (v > 0 || v.length>0)){
+        return true;
+    }
+    return false;
+}
+
 var getThroughDataProc = (type, optype, sendData) => {
 	return msg.send(`data@${type}.${optype}`, sendData)
 	.then(({result, res}) => {
@@ -148,6 +155,31 @@ module.exports = ( router ) => {
 			this.body = {
 				code: 1,
 				salesmans: result.list
+			};				
+		})
+		.catch((err) => {
+			console.log(`[error] ${err.message}\n${err.stack}`)
+			this.body = {
+				code: -1,
+				desc: `[error] ${err.message}\n${err.stack}`
+			};			
+		});		
+	})
+	.post('/admin/addCustom',function *(){
+		
+		let qs = {
+				_key: 'custom',
+				_save: [{
+					_id: +this.request.body.userid,
+					userid: +this.request.body.salesman
+				}]
+		};
+		yield Promise.resolve()
+		.then(() => getThroughDataProc('db', 'save', qs))
+		.then((result) => {
+			this.body = {
+				code: 1,
+				desc: '添加成功'
 			};				
 		})
 		.catch((err) => {
