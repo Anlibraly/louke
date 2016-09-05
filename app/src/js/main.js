@@ -8,6 +8,7 @@ function bdsize(){
 	var mainHeight=$(window).height() - 62;
 	$("#wrapper").css({"width":bdWidth, "height": bdHeight});
 	$("#main_wrap").css({"width":bdWidth, "height": mainHeight});
+	$(".menu_bar").css({"bottom": 0});
 }
 
 $(window).resize(function(){
