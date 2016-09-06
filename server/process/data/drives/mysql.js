@@ -237,7 +237,8 @@ module.exports = {
 
 	queryFang(query, update){
 		let sql = 'select ';
-		sql += 'f._id,f.f_name,f.lou_id,f.tel_num,f.size,f.per_price,f.total_price,l.lou_name,l.type,l.alti,l.lont,l.lou_address ';
+		//sql += 'f._id,f.f_name,f.lou_id,f.tel_num,f.size,f.per_price,f.total_price,l.lou_name,l.type,l.alti,l.lont,l.lou_address ';
+		sql += 'f._id,f.f_name,f.size,f.total_price,l.lou_name,l.alti,l.lont ';
 		sql += 'from (select * from fang where 1=1 '
 		sql += updateSql('size', query.fsize, update);
 		sql += updateSql('per_price', query.per_price, update);

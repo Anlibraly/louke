@@ -112,13 +112,13 @@
 							<td>
 								房源ID:{{=it[i]._id}}<br>
 								房源名:{{=it[i].f_name}}<br> 
-								类型:{{=it[i].type}}<br> 
+								/*类型:{{=it[i].type}}<br>*/ 
 								面积:{{=it[i].size}}平<br>
-								单价:{{=it[i].per_price}}<br> 
+								/*单价:{{=it[i].per_price}}<br> */
 								总价:{{=it[i].total_price}}<br>    
-								tel_{{=it[i].tel_num}}<br>    
+								/*tel_{{=it[i].tel_num}}<br> */   
 								楼名:{{=it[i].lou_name}}<br>    
-								地址:{{=it[i].lou_address}}
+								/*地址:{{=it[i].lou_address}}*/
 								<input type="button" onclick="window.open('fang.html?fid={{=it[i]._id}}')" value="更多信息" style="float:right;margin-right: 10px;">
 							</td>
 						</tr>
@@ -201,8 +201,11 @@
 		var p = e.target;
 		var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
 		// 创建信息窗口对象
-		var infoWindow = new BMap.InfoWindow(`房源ID:${content._id}<br>房源名:${content.f_name}<br>楼名:${content.lou_name}<br>地址:${content.lou_address}
-						<br>电话:${content.tel_num}<br>大小:${content.size}<br>单价:${content.per_price}<br>总价:${content.total_price}<input type='button' onclick="window.open('fang.html?fid=${content._id}')" value='更多信息' style='float:right;margin-right: 10px;'>`, opts);  
+		/*var infoWindow = new BMap.InfoWindow(`房源ID:${content._id}<br>房源名:${content.f_name}<br>楼名:${content.lou_name}<br>地址:${content.lou_address}
+						<br>电话:${content.tel_num}<br>大小:${content.size}<br>单价:${content.per_price}<br>总价:${content.total_price}<input type='button' onclick="window.open('fang.html?fid=${content._id}')" value='更多信息' style='float:right;margin-right: 10px;'>`, opts); */
+		var infoWindow = new BMap.InfoWindow(`房源ID:${content._id}<br>房源名:${content.f_name}<br>
+						楼名:${content.lou_name}<br>大小:${content.size}<br>总价:${content.total_price}
+						<input type='button' onclick="window.open('fang.html?fid=${content._id}')" value='更多信息' style='float:right;margin-right: 10px;'>`, opts); 						 
 		//开启信息窗
 		map.openInfoWindow(infoWindow,point);
 	}
