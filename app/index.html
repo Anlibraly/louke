@@ -1,35 +1,29 @@
 <html>
 	<head>
-		<meta charset="utf-8" />
-		<title>登录</title>
+	    <meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="description" content="louke, login, search, cms" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-		<style type="text/css">
-			.content{
-				padding: 60% 0;
-				display: none;
-				text-align: -webkit-center;
-			}
-			input {
-				display: -webkit-inline-box;
-				height: 35px;
-				margin: 3%;
-				font-size: 16px;
-			}
-			input[type='button'] {
-				width: 120px;
-				font-size: 14px;
-			}
-		</style>
-	</head>
+	    <meta name="author" content="anlibraly">
+	    <link rel="icon" href="src/img/favicon.ico">
+	    <title>登录</title>
+	    <!-- Bootstrap core CSS -->
+	    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	    <!-- Custom styles for this template -->
+	    <link href="src/css/signin.css" rel="stylesheet">
+	  </head>
 	<body>
-		<div class="content">
-			<span>
-				<input type='text' placeholder='用户名'/>
-				<input type='password' placeholder='密码'/>			
-			</span> 
-			<input type='button' value='登录'/>
-		</div>
+		<div class="container">
+			<form class="form-signin" role="form">
+				<h2 class="form-signin-heading">请登录</h2>
+				<input type="text" class="form-control" placeholder="用户名" required="" autofocus="">
+				<input type="password" class="form-control" placeholder="密码" required="">
+				<div class="checkbox">
+					<label><input type="checkbox" value="remember-me"> 记住</label>
+				</div>
+				<button class="btn btn-lg btn-primary btn-block" type="button">登录</button>
+			</form>
+	    </div>
 		<script type="text/javascript" src="lib/jquery-3.1.0.min.js"></script>
 		<script type="text/javascript" src="lib/common.js"></script>
 		<script type="text/javascript">
