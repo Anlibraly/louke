@@ -19,6 +19,9 @@
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
+          <button type="button" style="color: #fff;border-color: #fff;" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" onclick="addCustom();">
+				确定
+          </button>
 		  <input style="margin: 2.6%;" class="back" type="button" value="返回" onclick="history.go(-1)"/>		
           <a class="navbar-brand" href="#">楼客-新增客户</a>
         </div>
@@ -58,9 +61,6 @@
 			</li>			
 		</div>
 	</ul>
-	<div class="menu_bar">
-		<span onclick="addCustom();">确定</span>
-	</div>
 
 	<script id="salesman-template" type="text/x-dot-template">
 		{{ for(var i in it) { }}
