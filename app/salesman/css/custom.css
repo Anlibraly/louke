@@ -15,9 +15,6 @@ body {
 	height: 30px;
 	float: right;
 }
-#customs {
-	padding: 1% 5%;
-}
 #customs li {
 	list-style:none;
 	border-bottom: 1px solid #aaa;
