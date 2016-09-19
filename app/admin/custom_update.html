@@ -46,12 +46,6 @@
 
 	<script id="custom-template" type="text/x-dot-template">
 		<li class="cunstom">
-			<span style="display: -webkit-box;margin: 2% 0;">
-				更新时间状态: {{=it.update_time}}  {{=it.status}}
-			</span>
-			<span style="display: -webkit-box;margin: 2% 0;">
-				创建时间状态: {{=it.add_time}}  {{=it.add_status}}
-			</span>
 			<div class="cus_info">
 				<span>客户: {{=it.cname}}</span>
 				<span>电话: {{=it.tel_num}}</span>
@@ -68,6 +62,12 @@
 				<span>其他:</span>
 				<i>{{=it.other_mark}}</i>
 			</div>
+			<span style="display: -webkit-box;margin: 2% 0;">
+				更新时间状态: {{=it.update_time}}  {{=it.status}}
+			</span>
+			<span style="display: -webkit-box;margin: 2% 0;">
+				创建时间状态: {{=it.add_time}}  {{=it.add_status}}
+			</span>			
 		</li>
 	</script>	
 </body>
