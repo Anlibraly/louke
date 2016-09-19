@@ -2,10 +2,14 @@
 <html>
 <head>
 	<title>搜楼</title>
-	<meta name="description" content=""/>
-	<meta name="keywords" content=""/>
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="louke, login, search, cms" />
+    <meta name="author" content="anlibraly">
+    <link rel="icon" href="../src/img/favicon.ico">
+    <!-- Bootstrap core CSS -->
+    <link href="../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<!-- 加载公用样式 reset.css 和 jquery -->
 	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=D8f94ec14389e07107a581e160f0e15a"></script>
 	<script type="text/javascript" src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js"></script>
@@ -19,112 +23,129 @@
 </head>
 
 <body>
-	<header>
-		<div class="header_box clearfix">
-			<a href=""></a>
-			<input type="text" id="search" value="" placeholder="搜索地址关键字" style="margin-left: 2%;padding: 5px;width: 55%;font-size: 16px;"/>
-			<input type="number" id="r" value="1000" placeholder="搜索半径(米)" style="margin-left: 2%;padding: 5px;width: 10%;font-size: 14px;"/>
-			<button id="more" style="margin-left: 2%px;padding: 9px 10px;" onclick="showSearch()">收起</button>
-		</div>
-	</header>
-
-	<div class="menu_bar">
-		<a href="index.html"><span>客户</span></a>
-		<a href="soufang.html"><span>房源</span></a>
-	</div>
-	
-	<div id="main_wrap">
-		<div id="allmap" class="map"></div>
-		<div class="org_wrap">
-			<div class="nav_box clearfix">
-				<div class="org_ta">
-					<div class="dl_box clearfix" style="width: 100%;margin-left: -10px;">
-						<a onclick="show('0')" class="lb ld">列表</a>
-						<a onclick="show('1')" class="dt ld active2">地图</a>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">楼客-房源搜索</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="index.html">客户</a></li>
+            <li><a href="soufang.html">房源</a></li>
+            <li><a href="#" onclick="logout();">注销</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>	
+    <div>
+		<header>
+			<div class="header_box clearfix">
+				<a href=""></a>
+				<input type="text" id="search" value="" placeholder="搜索地址关键字" style="margin-left: 2%;padding: 5px;width: 60%;font-size: 16px;"/>
+				<input type="number" id="r" value="1000" placeholder="搜索半径(米)" style="margin-left: 2%;padding: 5px;width: 15%;font-size: 14px;"/>
+				<button id="more" style="margin-left: 2%px;padding: 5px 10px;float: right;" onclick="showSearch()">收起</button>
+			</div>
+		</header>
+		
+		<div id="main_wrap" style="margin: auto;">
+			<div id="allmap" class="map"></div>
+			<div class="org_wrap">
+				<div class="nav_box clearfix">
+					<div class="org_ta">
+						<div class="dl_box clearfix" style="width: 100%;margin-left: -10px;">
+							<a onclick="show('0')" class="lb ld">列表</a>
+							<a onclick="show('1')" class="dt ld active2">地图</a>
+						</div>
 					</div>
-				</div>
-				<div id="search_choice" style="text-align: center;">
-					<div class="sel_status r_status" style="margin-right: 10px;">
-			           <span id="PP">类型</span>
-			           <ul id="peos">
-			           		<li onclick="queryPeo(-1,'所有');">所有</li>
-			           		<li onclick="queryPeo(0,'写字楼');">写字楼</li>
-			           		<li onclick="queryPeo(1,'商务中心');">商务中心</li>
-			           		<li onclick="queryPeo(2,'创意园区');">创意园区</li>
-			           		<li onclick="queryPeo(3,'产业园区');">产业园区</li>
-			           </ul>           
-			        </div>
-			        <div id="datatime" class="sel_status r_status" style="margin-right: 10px;">
-			           <span id="TM">面积</span>
-			           <ul>
-							<li onclick="queryTime(-1,'所有')">所有</li>
-							<li onclick="queryTime(100,'0-100平')">0-100</li>
-							<li onclick="queryTime(200,'100-200平')">100-200</li>
-							<li onclick="queryTime(300,'200-300平')">200-300</li>
-							<li onclick="queryTime(400,'300-400平')">300-400</li>
-							<li onclick="queryTime(0,'400平以上')">400以上</li>
-			           </ul>
-			        </div>
+					<div id="search_choice" style="text-align: center;">
+						<div class="sel_status r_status" style="margin-right: 10px;">
+				           <span id="PP">类型</span>
+				           <ul id="peos">
+				           		<li onclick="queryPeo(-1,'所有');">所有</li>
+				           		<li onclick="queryPeo(0,'写字楼');">写字楼</li>
+				           		<li onclick="queryPeo(1,'商务中心');">商务中心</li>
+				           		<li onclick="queryPeo(2,'创意园区');">创意园区</li>
+				           		<li onclick="queryPeo(3,'产业园区');">产业园区</li>
+				           </ul>           
+				        </div>
+				        <div id="datatime" class="sel_status r_status" style="margin-right: 10px;">
+				           <span id="TM">面积</span>
+				           <ul>
+								<li onclick="queryTime(-1,'所有')">所有</li>
+								<li onclick="queryTime(100,'0-100平')">0-100</li>
+								<li onclick="queryTime(200,'100-200平')">100-200</li>
+								<li onclick="queryTime(300,'200-300平')">200-300</li>
+								<li onclick="queryTime(400,'300-400平')">300-400</li>
+								<li onclick="queryTime(0,'400平以上')">400以上</li>
+				           </ul>
+				        </div>
 
-			        <div class="sel_status r_status" style="margin-right: 10px;">
-			           <span id="DJ">单价</span>
-			           <ul>
-							<li onclick="changeD(-1,'所有');">所有</li>
-							<li onclick="changeD(5,'0-5');">0-5</li>
-							<li onclick="changeD(10,'5-10');">5-10</li>
-							<li onclick="changeD(15,'10-15');">10-15</li>
-							<li onclick="changeD(20,'15-20');">15-20</li>
-							<li onclick="changeD(25,'20-25');">20-25</li>
-							<li onclick="changeD(0,'25以上');">25以上</li>
-							
-			           </ul>
-			        </div>
+				        <div class="sel_status r_status" style="margin-right: 10px;">
+				           <span id="DJ">单价</span>
+				           <ul>
+								<li onclick="changeD(-1,'所有');">所有</li>
+								<li onclick="changeD(5,'0-5');">0-5</li>
+								<li onclick="changeD(10,'5-10');">5-10</li>
+								<li onclick="changeD(15,'10-15');">10-15</li>
+								<li onclick="changeD(20,'15-20');">15-20</li>
+								<li onclick="changeD(25,'20-25');">20-25</li>
+								<li onclick="changeD(0,'25以上');">25以上</li>
+								
+				           </ul>
+				        </div>
 
-			        <div class="sel_status r_status" >
-			           <span id="ST">总价</span>
-			           <ul>
-							<li onclick="changeT(-1,'所有');">所有</li>
-							<li onclick="changeT(10000,'0-10000');">0-10000</li>
-							<li onclick="changeT(20000,'10000-20000');">10000-20000</li>
-							<li onclick="changeT(30000,'20000-30000');">20000-30000</li>
-							<li onclick="changeT(40000,'30000-40000');">30000-40000</li>
-							<li onclick="changeT(50000,'40000-50000');">40000-50000</li>
-							<li onclick="changeT(0,'50000以上');">50000以上</li>
-							
-			           </ul>
+				        <div class="sel_status r_status" >
+				           <span id="ST">总价</span>
+				           <ul>
+								<li onclick="changeT(-1,'所有');">所有</li>
+								<li onclick="changeT(10000,'0-10000');">0-10000</li>
+								<li onclick="changeT(20000,'10000-20000');">10000-20000</li>
+								<li onclick="changeT(30000,'20000-30000');">20000-30000</li>
+								<li onclick="changeT(40000,'30000-40000');">30000-40000</li>
+								<li onclick="changeT(50000,'40000-50000');">40000-50000</li>
+								<li onclick="changeT(0,'50000以上');">50000以上</li>
+								
+				           </ul>
+				        </div>
+				        <div class="r_status">
+				        	<i style="height: 35px;line-height: 35px;">关键字</i>
+				        	<input type="text" style="height: 20px;line-height: 20px;" placeholder="楼房名关键字" id="fang_name"/>
+				        </div>
+				        <div class="r_status">
+				        	<input name="checkbox" type="checkbox" value="包含未更新数据" checked="checked" onclick="hasUpdate()"/>
+				        	<i style="height: 35px;line-height: 35px;">包含未更新数据</i>
+				        </div>
+				        <button onclick="getFang()" style="padding: 8px 10px;width:30%;">确定</button>
 			        </div>
-			        <div class="r_status">
-			        	<i style="height: 35px;line-height: 35px;">关键字</i>
-			        	<input type="text" style="height: 20px;line-height: 20px;" placeholder="楼房名关键字" id="fang_name"/>
-			        </div>
-			        <div class="r_status">
-			        	<input name="checkbox" type="checkbox" value="包含未更新数据" checked="checked" onclick="hasUpdate()"/>
-			        	<i style="height: 35px;line-height: 35px;">包含未更新数据</i>
-			        </div>
-			        <button onclick="getFang()" style="padding: 8px 10px;width:30%;">确定</button>
-		        </div>
-				<table id="lists" style="margin-bottom:40px;width:100%;display:none;">
+					<table id="lists" style="margin-bottom:40px;width:100%;display:none;">
 
-				</table>
-				<script id="orgs-template" type="text/x-dot-template">
-					{{ for(var i in it) { }}
-						<tr>
-							<td>
-								房源ID:{{=it[i]._id}}<br>
-								房源名:{{=it[i].f_name}}<br> 
-								/*类型:{{=it[i].type}}<br>*/ 
-								面积:{{=it[i].size}}平<br>
-								/*单价:{{=it[i].per_price}}<br> */
-								总价:{{=it[i].total_price}}<br>    
-								/*tel_{{=it[i].tel_num}}<br> */   
-								楼名:{{=it[i].lou_name}}<br>    
-								/*地址:{{=it[i].lou_address}}*/
-								<input type="button" onclick="window.open('fang.html?fid={{=it[i]._id}}')" value="更多信息" style="float:right;margin-right: 10px;">
-							</td>
-						</tr>
-					{{ } }}
-				</script>			        
-			</div>		
+					</table>
+					<script id="orgs-template" type="text/x-dot-template">
+						{{ for(var i in it) { }}
+							<tr>
+								<td>
+									房源ID:{{=it[i]._id}}<br>
+									房源名:{{=it[i].f_name}}<br> 
+									/*类型:{{=it[i].type}}<br>*/ 
+									面积:{{=it[i].size}}平<br>
+									/*单价:{{=it[i].per_price}}<br> */
+									总价:{{=it[i].total_price}}<br>    
+									/*tel_{{=it[i].tel_num}}<br> */   
+									楼名:{{=it[i].lou_name}}<br>    
+									/*地址:{{=it[i].lou_address}}*/
+									<input type="button" onclick="window.open('fang.html?fid={{=it[i]._id}}')" value="更多信息" style="float:right;margin-right: 10px;">
+								</td>
+							</tr>
+						{{ } }}
+					</script>			        
+				</div>		
+			</div>
 		</div>
 	</div>
 </body>

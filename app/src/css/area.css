@@ -1,12 +1,10 @@
 header{
 	width: 100%;
 	background-color: #16a8e0;
-	line-height: 62px;
 }
 .header_box{
-	width: 95%;
 	margin: auto;
-	
+	padding: 2% 0 1% 0;
 }
 .logo{
 	width: 62px;
@@ -521,8 +519,7 @@ header{
 .nav_box{
     background-color: #FFFFFF;
     padding: 5%;
-    width: 90%;
-    height: 95%;
+    height: 100%;
 }
 .data_table li {
 	border-bottom: 1px solid #dddddd;
