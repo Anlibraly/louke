@@ -52,12 +52,12 @@
 			</ul>
 		</div>
 	
-		<ul id="customs"></ul>
+		<ul id="customs" class="list-group"></ul>
 	</div>
 	<script id="customs-template" type="text/x-dot-template">
 		{{ for(var i in it) { }}
-			<li class="cunstom">
-				<span style="display: -webkit-box;margin: 2% 0;">
+			<li class="cunstom list-group-item">
+				<span style="display: -webkit-box;margin: 4% 0 2% 0;font-size: 16px;font-weight: bold;">
 					{{=it[i].update_time}} {{=it[i].status}}
 				</span>
 				<div class="cus_info">

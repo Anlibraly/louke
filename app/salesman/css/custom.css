@@ -37,6 +37,7 @@ body {
 .btns input{
 	padding: 1% 5%;
 	margin: 5% 10%;
+	color: #000;
 }
 .top_bar{
     text-align: center;
