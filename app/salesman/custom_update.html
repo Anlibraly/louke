@@ -2,20 +2,28 @@
 <html>
 <head>
 	<title>客户更新</title>
-	<meta name="description" content=""/>
-	<meta name="keywords" content=""/>
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="louke, login, search, cms" />
+    <meta name="author" content="anlibraly">
+    <link rel="icon" href="../src/img/favicon.ico">
+    <!-- Bootstrap core CSS -->
+    <link href="../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<!-- 加载当前项目专用css js -->
 	<script type="text/javascript" src="../lib/jquery-3.1.0.min.js"></script>
 	<link type="text/css" href="css/custom.css" rel="stylesheet">
 </head>
 
 <body>
-	<div class="top_bar">
-		<input class="back" type="button" value="返回" onclick="history.go(-1)"/>
-		客户更新
-	</div>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+		  <input style="margin: 2.6%;" class="back" type="button" value="返回" onclick="window.close();"/>		
+          <a class="navbar-brand" href="#">楼客-客户更新</a>
+        </div>
+      </div>
+    </nav>
 	<ul id="customs">
 		<div id="custom"></div>
 		<div>
@@ -74,6 +82,8 @@
 
 </body>
 </html>
+
+<script type="text/javascript" src="../lib/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../lib/common.js"></script>
 <script type="text/javascript" src="../lib/doT.min.js"></script>
 <script type="text/javascript">
