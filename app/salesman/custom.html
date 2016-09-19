@@ -27,7 +27,7 @@
 
 	<ul id="customs" style="padding: 1% 5%;">
 		<ul id="custom" class="list-group"></ul>
-		<div id="contacts"></div>
+		<ul id="contacts" class="list-group"></ul>
 	</ul>
 
 	<script id="custom-template" type="text/x-dot-template">
@@ -59,7 +59,7 @@
 
 	<script id="contacts-template" type="text/x-dot-template">
 		{{ for(var i in it) { }}
-			<li class="cunstom">
+			<li class="cunstom list-group-item">
 				<span style="display: -webkit-box;margin: 2% 0;">
 					{{=it[i].contact_time}}  {{=it[i].status}}
 				</span>

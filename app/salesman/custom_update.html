@@ -25,7 +25,7 @@
       </div>
     </nav>
 	<ul id="customs" style="padding: 1% 5%;">
-		<div id="custom"></div>
+		<ul id="custom" class="list-group"></ul>
 		<div>
 			<div class="contact_item">
 				<span class="tt">联系日期</span>
@@ -54,7 +54,7 @@
 	</ul>
 
 	<script id="custom-template" type="text/x-dot-template">
-			<li class="cunstom">
+			<li class="cunstom list-group-item">
 				<span style="display: -webkit-box;margin: 2% 0;">
 					更新时间状态: {{=it.update_time}}  {{=it.status}}
 				</span>
