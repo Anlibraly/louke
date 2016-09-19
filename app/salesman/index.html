@@ -37,29 +37,21 @@
       </div>
     </nav>
     <div class="container">
-		<div class="dropdown">
+		<div class="dropdown" style="padding-top: 15px;">
 			<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown">
-				客户
+				<span id="status">所有</span>
 				<span class="caret"></span>
 			</button>
 			<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-				<li role="presentation"><a role="menuitem" tabindex="-1" href="#">所有</a></li>
-				<li role="presentation"><a role="menuitem" tabindex="-1" href="#">推楼带看</a></li>
-				<li role="presentation"><a role="menuitem" tabindex="-1" href="#">成交手续</a></li>
-				<li role="presentation"><a role="menuitem" tabindex="-1" href="#">成功</a></li>
-				<li role="presentation"><a role="menuitem" tabindex="-1" href="#">死亡</a></li>
-				<li role="presentation"><a role="menuitem" tabindex="-1" href="#">搁置</a></li>
+				<li role="presentation"><a role="menuitem" tabindex="0" href="#">所有</a></li>
+				<li role="presentation"><a role="menuitem" tabindex="1" href="#">推楼带看</a></li>
+				<li role="presentation"><a role="menuitem" tabindex="2" href="#">成交手续</a></li>
+				<li role="presentation"><a role="menuitem" tabindex="3" href="#">成功</a></li>
+				<li role="presentation"><a role="menuitem" tabindex="4" href="#">死亡</a></li>
+				<li role="presentation"><a role="menuitem" tabindex="5" href="#">搁置</a></li>
 			</ul>
 		</div>
-<!-- 			<select onchange="seeStatus(this.options[this.options.selectedIndex].value)">
-			  <option value="0">所有</option>
-			  <option value="1">推楼带看</option>
-			  <option value="2">成交手续</option>
-			  <option value="3">成功</option>
-			  <option value="4">死亡</option>
-			  <option value="5">搁置</option>
-			</select>
- -->		
+	
 		<ul id="customs"></ul>
 	</div>
 	<script id="customs-template" type="text/x-dot-template">
@@ -96,6 +88,17 @@
 	<script type="text/javascript" src="../lib/common.js"></script>
 	<script type="text/javascript" src="../lib/doT.min.js"></script>
 	<script type="text/javascript">
+		var status  = 0;
+
+		$(".dropdown-menu a").click(function(){
+			$("#status").html($(this).text());
+
+			if (status != +$(this).attr("tabindex")) {
+				status = +$(this).attr("tabindex");
+				seeStatus(status);
+			}
+		});
+
 		function seeStatus(status){
 			$.ajax({
 		        type: "get",
@@ -122,7 +125,8 @@
 		        }
 		    });	
 		}
-		seeStatus(0);
+
+		seeStatus(status);
 	</script>
 </body>
 </html>
