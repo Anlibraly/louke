@@ -1,34 +1,59 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title>客户列表</title>
-	<meta name="description" content=""/>
-	<meta name="keywords" content=""/>
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<title>客户管理</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="louke, login, search, cms" />
+    <meta name="author" content="anlibraly">
+    <link rel="icon" href="../src/img/favicon.ico">
+    <!-- Bootstrap core CSS -->
+    <link href="../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<!-- 加载当前项目专用css js -->
 	<script type="text/javascript" src="../lib/jquery-3.1.0.min.js"></script>
 	<link type="text/css" href="css/custom.css" rel="stylesheet">
 </head>
 
 <body>
-	<div class="status_bar">
-		<input class="back" type="button" value="注销" onclick="logout();"/>
-		<span>客户列表</span>
-		<select onchange="seeStatus(this.options[this.options.selectedIndex].value)">
-		  <option value="0">所有</option>
-		  <option value="1">推楼带看</option>
-		  <option value="2">成交手续</option>
-		  <option value="3">成功</option>
-		  <option value="4">死亡</option>
-		  <option value="5">搁置</option>
-		</select>
-	</div>
-	<ul id="customs"></ul>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">楼客-客户管理</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
+          <ul class="nav navbar-nav">
+            <li><a href="custom.html">新增客户</a></li>
+            <li><a href="#" onclick="logout();">注销</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    <div class="container">
+		<div class="dropdown" style="padding-top: 15px;">
+			<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown">
+				<span id="status">所有</span>
+				<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+				<li role="presentation"><a role="menuitem" tabindex="0" href="#">所有</a></li>
+				<li role="presentation"><a role="menuitem" tabindex="1" href="#">推楼带看</a></li>
+				<li role="presentation"><a role="menuitem" tabindex="2" href="#">成交手续</a></li>
+				<li role="presentation"><a role="menuitem" tabindex="3" href="#">成功</a></li>
+				<li role="presentation"><a role="menuitem" tabindex="4" href="#">死亡</a></li>
+				<li role="presentation"><a role="menuitem" tabindex="5" href="#">搁置</a></li>
+			</ul>
+		</div>
 	
-	<div class="menu_bar">
-		<a href="custom.html"><span>新增客户</span></a>
+		<ul id="customs" class="list-group"></ul>
 	</div>
+
 	<script id="customs-template" type="text/x-dot-template">
 		{{ for(var i in it) { }}
 			<li class="cunstom">
@@ -59,9 +84,22 @@
 	</script>	
 </body>
 </html>
+
+<script type="text/javascript" src="../lib/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../lib/common.js"></script>
 <script type="text/javascript" src="../lib/doT.min.js"></script>
 <script type="text/javascript">
+	var status  = 0;
+
+	$(".dropdown-menu a").click(function(){
+		$("#status").html($(this).text());
+
+		if (status != +$(this).attr("tabindex")) {
+			status = +$(this).attr("tabindex");
+			seeStatus(status);
+		}
+	});
+
 	function seeStatus(status){
 		$.ajax({
 	        type: "get",
