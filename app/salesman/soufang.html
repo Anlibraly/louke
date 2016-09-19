@@ -49,7 +49,7 @@
 				<a href=""></a>
 				<input type="text" id="search" value="" placeholder="搜索地址关键字" style="margin-left: 2%;padding: 5px;width: 60%;font-size: 16px;"/>
 				<input type="number" id="r" value="1000" placeholder="搜索半径(米)" style="margin-left: 2%;padding: 5px;width: 15%;font-size: 14px;"/>
-				<button id="more" style="margin-left: 2%px;padding: 5px 10px;float: right;" onclick="showSearch()">收起</button>
+				<button id="more" style="margin: 0 2%;padding: 5px 10px;float: right;" onclick="showSearch()">收起</button>
 			</div>
 		</header>
 		
@@ -123,25 +123,27 @@
 				        </div>
 				        <button onclick="getFang()" style="padding: 8px 10px;width:30%;">确定</button>
 			        </div>
-					<table id="lists" style="margin-bottom:40px;width:100%;display:none;">
+					<div id="lists" style="margin-bottom:40px;width:100%;display:none;">
 
-					</table>
+					</div>
 					<script id="orgs-template" type="text/x-dot-template">
 						{{ for(var i in it) { }}
-							<tr>
-								<td>
-									房源ID:{{=it[i]._id}}<br>
-									房源名:{{=it[i].f_name}}<br> 
-									/*类型:{{=it[i].type}}<br>*/ 
-									面积:{{=it[i].size}}平<br>
-									/*单价:{{=it[i].per_price}}<br> */
-									总价:{{=it[i].total_price}}<br>    
-									/*tel_{{=it[i].tel_num}}<br> */   
-									楼名:{{=it[i].lou_name}}<br>    
-									/*地址:{{=it[i].lou_address}}*/
-									<input type="button" onclick="window.open('fang.html?fid={{=it[i]._id}}')" value="更多信息" style="float:right;margin-right: 10px;">
-								</td>
-							</tr>
+							<div class="fang_item">
+								<div class="info_con1 fix">
+                                    <div class="l_sub fl">
+                                        <h2>
+                                            <a href="#" onclick="window.open('fang.html?fid={{=it[i]._id}}')" target="_blank">{{=it[i].lou_name}}-{{=it[i].f_name}}</a>
+                                            <span></span>
+                                        </h2>
+
+                                        <div class="Word">{{=it[i].size}}平</div>
+
+                                    </div>
+                                    <div class="Price fr">
+                                        <p><em>{{=it[i].total_price}}</em></p>元/月
+                                    </div>
+                                </div>							
+							</div>
 						{{ } }}
 					</script>			        
 				</div>		
