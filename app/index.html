@@ -19,7 +19,7 @@
 				<input type="text" class="form-control" placeholder="用户名" required="" autofocus="">
 				<input type="password" class="form-control" placeholder="密码" required="">
 				<div class="checkbox">
-					<label><input type="checkbox" value="remember-me"> 记住</label>
+					<label><input id="remember" type="checkbox" value="remember-me"> 记住</label>
 				</div>
 				<input class="btn btn-lg btn-primary btn-block" type="button" value="登录"/>
 			</form>
@@ -27,11 +27,25 @@
 		<script type="text/javascript" src="lib/jquery-3.1.0.min.js"></script>
 		<script type="text/javascript" src="lib/common.js"></script>
 		<script type="text/javascript">
+			if ($.cookie("louUser") == "true") { 
+				$("#remember").prop("checked", true); 
+				document.querySelector('input[type="text"]').value = $.cookie("username"); 
+				document.querySelector('input[type="password"]').value = $.cookie("password"); 
+			} 
 			document.querySelector('input[type="button"]')
 			.addEventListener("click", function (event) { 
 				var username = document.querySelector('input[type="text"]').value;
 				var password = document.querySelector('input[type="password"]').value; 
 				if(check(username) && check(password)){
+					if ($("#remember").prop("checked")) { 
+						$.cookie("louUser", "true", { expires: 7 }); 
+						$.cookie("username", username, { expires: 7 }); 
+						$.cookie("password", password, { expires: 7 }); 
+					}else{ 
+						$.cookie("louUser", "false", { expire: -1 }); 
+						$.cookie("username", "", { expires: -1 }); 
+						$.cookie("password", "", { expires: -1 }); 
+					} 
 					var params = {
 						username: username,
 						password: password
