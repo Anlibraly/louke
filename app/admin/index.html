@@ -58,7 +58,7 @@
 		{{ for(var i in it) { }}
 			<li class="cunstom">
 				<span style="display: -webkit-box;margin: 2% 0;">
-					{{=it[i].update_time}} {{=it[i].status}}
+					{{=it[i]._id}}_{{=it[i].update_time}} {{=it[i].status}}
 				</span>
 				<div class="cus_info">
 					<span>客户: {{=it[i].cname}}</span>
