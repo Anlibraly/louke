@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title>客户管理</title>
+	<title>未浏览更新</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,7 +25,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">楼客-客户管理</a>
+          <a class="navbar-brand" href="#">楼客-未浏览更新</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
           <ul class="nav navbar-nav">
@@ -37,22 +37,6 @@
       </div>
     </nav>
     <div class="container">
-		<div class="dropdown" style="padding-top: 15px;">
-			<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown">
-				<span id="status">所有</span>
-				<span class="caret"></span>
-			</button>
-			<ul id="dropStatus" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-				<li role="presentation"><a role="menuitem" tabindex="0" href="#">所有</a></li>
-				<li role="presentation"><a role="menuitem" tabindex="1" href="#">推楼带看</a></li>
-				<li role="presentation"><a role="menuitem" tabindex="2" href="#">成交手续</a></li>
-				<li role="presentation"><a role="menuitem" tabindex="3" href="#">成功</a></li>
-				<li role="presentation"><a role="menuitem" tabindex="4" href="#">死亡</a></li>
-				<li role="presentation"><a role="menuitem" tabindex="5" href="#">搁置</a></li>
-			</ul>
-			<select id="salesman" style="float:right;width:25%;height:33px;" onchange="setSalesman(this.options[this.options.selectedIndex].value)"></select>		
-		</div>
-	
 		<ul id="customs" class="list-group"></ul>
 	</div>
 
@@ -88,12 +72,6 @@
 		{{ } }}
 	</script>	
 
-	<script id="salesman-template" type="text/x-dot-template">
-		<option value="0">所有</option>
-		{{ for(var i in it) { }}
-			<option value="{{=it[i]._id}}">{{=it[i].nick_name}}</option>
-		{{ } }}
-	</script>	
 </body>
 </html>
 
@@ -101,29 +79,12 @@
 <script type="text/javascript" src="../lib/common.js"></script>
 <script type="text/javascript" src="../lib/underscore-min.js"></script>
 <script type="text/javascript" src="../lib/doT.min.js"></script>
-<script type="text/javascript">
-	var status  = 0, sale = 0, saleMans = [];
+<script type="text/javascript">					
 
-	$("#dropStatus a").click(function(){
-		$("#status").html($(this).text());
-
-		if (status != +$(this).attr("tabindex")) {
-			status = +$(this).attr("tabindex");
-			seeStatus(status, sale);
-		}
-	});
-
-	function setSalesman(s){
-		if(s && s>=0){
-			sale = s;
-			seeStatus(status, sale);
-		}
-	}
-						
-	function seeStatus(status, sale){
+	function seeStatus(){
 		$.ajax({
 	        type: "get",
-	        url: _dirname + '/system/admin/getcustom/'+status+'/'+sale,
+	        url: _dirname + '/system/admin/unreadCustom',
 	        dataType: "json",
 	        success: function(data){
 	        	try{
@@ -155,28 +116,6 @@
 	    });	
 	}
 
-	$.ajax({
-        type: "get",
-        url: _dirname + '/system/admin/getSalesman',
-        dataType: "json",
-        success: function(data){
-        	try{
-	        	if(data.code == 1){
-					saleMans = data.salesmans;    
-					var tpl = $("#salesman-template").text();
-					var tempFn = doT.template(tpl);
-					var rHtml = tempFn(saleMans);
-					$("#salesman").html(rHtml);	   		
-	        	}else{
-	        		alert('客户id信息错误');
-	        		saleMans = [];
-	        	}
-	        	seeStatus(0, 0);
-	        }catch(e){
-	        	alert('数据出错，稍后再试');
-	        	saleMans = [];
-	        }
-        }
-    });		
+	seeStatus();
 </script>
 

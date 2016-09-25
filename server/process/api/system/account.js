@@ -126,12 +126,42 @@ module.exports = ( router ) => {
 			};			
 		});		
 	})
+	.get('/admin/unreadCustom', function *() {
+		let qs = {
+			_key: 'custom',
+			_sort: 'update_time:desc',
+			read: 0
+		};
+
+		yield Promise.resolve()
+		.then(() => getThroughDataProc('db', 'query', qs))
+		.then((result) => {
+			this.body = {
+				code: 1,
+				customs: result.list
+			};				
+		})
+		.catch((err) => {
+			console.log(`[error] ${err.message}\n${err.stack}`)
+			this.body = {
+				code: -1,
+				desc: `[error] ${err.message}\n${err.stack}`
+			};			
+		});		
+	})
 	.get('/admin/custom/:cid',function *(){
 		let qs = {
 				_key: 'custom',
 				_id: this.params.cid
 		};
 		yield Promise.resolve()
+		.then(() => getThroughDataProc('db', 'save', {
+				_key: 'custom',
+				_save: [{
+					_id: +this.params.cid,
+					read: 1
+				}]
+		}))
 		.then(() => getThroughDataProc('db', 'query', qs))
 		.then((result) => {
 			this.body = {
