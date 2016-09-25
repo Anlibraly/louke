@@ -59,6 +59,8 @@
 			<li class="cunstom">
 				<span style="display: -webkit-box;margin: 2% 0;">
 					{{=it[i]._id}}-{{=it[i].update_time}} {{=it[i].status}}
+					<br>
+					{{=it[i].saleManNick}}({{=it[i].saleManName}})
 				</span>
 				<div class="cus_info">
 					<span>客户: {{=it[i].cname}}</span>
@@ -87,9 +89,10 @@
 
 <script type="text/javascript" src="../lib/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../lib/common.js"></script>
+<script type="text/javascript" src="../lib/underscore-min.js"></script>
 <script type="text/javascript" src="../lib/doT.min.js"></script>
 <script type="text/javascript">
-	var status  = 0;
+	var status  = 0, saleMans = [];
 
 	$(".dropdown-menu a").click(function(){
 		$("#status").html($(this).text());
@@ -112,6 +115,14 @@
 						var tempFn = doT.template(tpl);
 						var date = new Date();
 						for (var i = 0; i < data.customs.length; i++) {
+							var man = _.where(saleMans, {_id: +data.customs[i].userid});
+							if(man.length > 0){
+								data.customs[i].saleManNick = man[0].nick_name;
+								data.customs[i].saleManName = man[0].username;
+							}else{
+								data.customs[i].saleManNick = '暂无';
+								data.customs[i].saleManName = '暂无';					
+							}
 							date.setTime(data.customs[i].update_time);
 							data.customs[i].update_time = date.getFullYear() + '-' 
 							+ (date.getMonth()+1) + '-' + date.getDate();
@@ -126,6 +137,25 @@
 	        }
 	    });	
 	}
-	seeStatus(0);
+
+	$.ajax({
+        type: "get",
+        url: _dirname + '/system/admin/getSalesman',
+        dataType: "json",
+        success: function(data){
+        	try{
+	        	if(data.code == 1){
+					saleMans = data.salesmans;       		
+	        	}else{
+	        		alert('客户id信息错误');
+	        		saleMans = [];
+	        	}
+	        	seeStatus(0);
+	        }catch(e){
+	        	alert('数据出错，稍后再试');
+	        	saleMans = [];
+	        }
+        }
+    });		
 </script>
 

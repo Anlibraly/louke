@@ -152,9 +152,17 @@ module.exports = ( router ) => {
 		yield Promise.resolve()
 		.then(() => getThroughDataProc('db', 'query', qs))
 		.then((result) => {
+			let saleMans = [];
+			_.each(result.list, (v) => {
+				saleMans.push({
+					_id: v._id,
+					username: v.username,
+					nick_name: v.nick_name
+				});
+			})
 			this.body = {
 				code: 1,
-				salesmans: result.list
+				salesmans: saleMans
 			};				
 		})
 		.catch((err) => {
