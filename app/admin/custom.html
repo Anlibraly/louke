@@ -75,6 +75,7 @@
 <script type="text/javascript" src="../lib/doT.min.js"></script>
 <script type="text/javascript">	
 	var salesman = 1;
+	var cid = getParameter('cid');
 
 	function setSalesman(s){
 		salesman = s;
@@ -106,6 +107,9 @@
 				now_address: now_address,
 				other_mark: other_mark
 			}
+			if(cid !== null && cid !== undefined && +cid >=0){
+				params._id = cid;
+			}
 			$.ajax({
 	            type: "post",
 	            url: _dirname + '/system/admin/addCustom',
@@ -131,7 +135,36 @@
 					var tpl = $("#salesman-template").text();
 					var tempFn = doT.template(tpl);
 					var rHtml = tempFn(data.salesmans);
-					$("#salesman").html(rHtml);		      		
+					$("#salesman").html(rHtml);		
+					if(cid !== null && cid !== undefined && +cid >=0){
+						$.ajax({
+					        type: "get",
+					        url: _dirname + '/system/admin/custom/'+cid,
+					        dataType: "json",
+					        success: function(data){
+					        	try{
+						        	if(data.code == 1){
+						        		var c = data.cunstoms[0];
+										$("#cname").val(c.cname),
+										$("#tel_num").val(c.tel_num),
+										$("#goal_fang").val(c.goal_fang),
+										$("#size").val(c.size),
+									    $("#price").val(c.price),
+										$("#deadline").val(c.deadline),
+									    $("#reason").val(c.move_reason),
+									 	$("#job").val(c.job), 
+										$("#now_address").val(c.now_address),
+										$("#other_mark").val(c.other_mark);		
+										$("#salesman").val(c.userid);			
+									}else{
+						        		alert('客户id信息错误');
+						        	}
+						        }catch(e){
+						        	alert('数据出错，稍后再试');
+						        }
+					        }
+					    });							
+					}      		
 	        	}else{
 	        		alert('信息错误');
 	        	}

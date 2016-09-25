@@ -176,7 +176,7 @@ module.exports = ( router ) => {
 	.post('/admin/addCustom',function *(){
 		let {cname, tel_num, goal_fang, job, size,
 			 price, deadline, reason, now_address,
-			 other_mark, salesman} = this.request.body;
+			 other_mark, salesman, _id} = this.request.body;
 		let date = new Date();
 		if(check(cname) && check(tel_num) && check(goal_fang) && check(size)
 		&& check(price) && check(deadline) && check(reason) && check(salesman)){
@@ -205,6 +205,9 @@ module.exports = ( router ) => {
 			  	status: 0,
 			  	add_status: 0
 			};
+			if(_id !== null && _id !== undefined && +_id >=0){
+				custom._id = _id;
+			}
 			let qs = {
 					_key: 'custom',
 					_save: [custom]
