@@ -141,10 +141,10 @@
 					        type: "get",
 					        url: _dirname + '/system/admin/custom/'+cid,
 					        dataType: "json",
-					        success: function(data){
+					        success: function(cdata){
 					        	try{
-						        	if(data.code == 1){
-						        		var c = data.cunstoms[0];
+						        	if(cdata.code == 1){
+						        		var c = cdata.cunstoms[0];
 										$("#cname").val(c.cname),
 										$("#tel_num").val(c.tel_num),
 										$("#goal_fang").val(c.goal_fang),
@@ -160,7 +160,7 @@
 						        		alert('客户id信息错误');
 						        	}
 						        }catch(e){
-						        	alert('数据出错，稍后再试');
+						        	alert('客户出错，稍后再试');
 						        }
 					        }
 					    });							
@@ -169,7 +169,7 @@
 	        		alert('信息错误');
 	        	}
 	        }catch(e){
-	        	alert('数据出错，稍后再试');
+	        	alert('地推员出错，稍后再试');
 	        }
         }
     });		    
