@@ -80,7 +80,7 @@
 <script type="text/javascript" src="../lib/underscore-min.js"></script>
 <script type="text/javascript" src="../lib/doT.min.js"></script>
 <script type="text/javascript">					
-
+	var saleMans = [];
 	function seeStatus(){
 		$.ajax({
 	        type: "get",
@@ -116,7 +116,24 @@
 	        }
 	    });	
 	}
-
-	seeStatus();
+	
+	$.ajax({
+        type: "get",
+        url: _dirname + '/system/admin/getSalesman',
+        dataType: "json",
+        success: function(data){
+        	try{
+	        	if(data.code == 1){
+					saleMans = data.salesmans;     		
+	        	}else{
+	        		saleMans = [];
+	        	}
+	        	seeStatus();
+	        }catch(e){
+	        	alert('数据出错，稍后再试');
+	        	saleMans = [];
+	        }
+        }
+    });	
 </script>
 
