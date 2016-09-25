@@ -429,6 +429,7 @@ module.exports = ( router ) => {
 					_save: [{
 						_id: +cid,
 						status: +status,
+						read: 0,
 						update_time: ctm						
 					}]
 			}))
