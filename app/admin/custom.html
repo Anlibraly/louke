@@ -144,13 +144,14 @@
 					        success: function(cdata){
 					        	try{
 						        	if(cdata.code == 1){
-						        		var c = cdata.cunstoms[0];
+						        		var c = cdata.customs[0];
+						        		console.log(c);
 										$("#cname").val(c.cname),
 										$("#tel_num").val(c.tel_num),
 										$("#goal_fang").val(c.goal_fang),
 										$("#size").val(c.size),
 									    $("#price").val(c.price),
-										$("#deadline").val(c.deadline),
+										//$("#deadline").val(c.deadline),
 									    $("#reason").val(c.move_reason),
 									 	$("#job").val(c.job), 
 										$("#now_address").val(c.now_address),
