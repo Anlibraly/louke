@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title>新增客户</title>
+	<title>客户</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,7 +23,7 @@
 				确定
           </button>
 		  <input style="margin: 2.6%;" class="back" type="button" value="返回" onclick="history.go(-1)"/>		
-          <a class="navbar-brand" href="#">楼客-新增客户</a>
+          <a class="navbar-brand" href="#">楼客-客户</a>
         </div>
       </div>
     </nav>
@@ -76,7 +76,7 @@
 <script type="text/javascript">	
 	var salesman = 1;
 	var cid = getParameter('cid');
-
+	console.log(cid);
 	function setSalesman(s){
 		salesman = s;
 	}
@@ -136,7 +136,7 @@
 					var tempFn = doT.template(tpl);
 					var rHtml = tempFn(data.salesmans);
 					$("#salesman").html(rHtml);		
-					if(cid !== null && cid !== undefined && +cid >=0){
+					if(cid && cid >=0){
 						$.ajax({
 					        type: "get",
 					        url: _dirname + '/system/admin/custom/'+cid,
