@@ -49,14 +49,7 @@
 				<li role="presentation"><a role="menuitem" tabindex="4" href="#">死亡</a></li>
 				<li role="presentation"><a role="menuitem" tabindex="5" href="#">搁置</a></li>
 			</ul>
-			
-			<button class="btn btn-default dropdown-toggle" type="button" id="dropdownSale" data-toggle="dropdown">
-				<span id="sale">所有</span>
-				<span class="caret"></span>
-			</button>
-			<ul id="dropSale" class="dropdown-menu" role="menu" aria-labelledby="dropdownSale">
-
-			</ul>			
+			<select id="salesman" style="width:40%;" onchange="setSalesman(this.options[this.options.selectedIndex].value)"></select>		
 		</div>
 	
 		<ul id="customs" class="list-group"></ul>
@@ -95,9 +88,8 @@
 	</script>	
 
 	<script id="salesman-template" type="text/x-dot-template">
-		<li role="presentation"><a role="menuitem" tabindex="0" href="#">所有</a></li>
-		{{ for(var i in it) { }}	
-			<li role="presentation"><a role="menuitem" tabindex="{{=it[i]._id}}" href="#">{{=it[i].nick_name}}</a></li>
+		{{ for(var i in it) { }}
+			<option value="{{=it[i]._id}}">{{=it[i].nick_name}}</option>
 		{{ } }}
 	</script>	
 </body>
@@ -119,14 +111,10 @@
 		}
 	});
 
-	$("#dropSale a").click(function(){
-		$("#sale").html($(this).text());
-
-		if (sale != +$(this).attr("tabindex")) {
-			sale = +$(this).attr("tabindex");
-			seeStatus(status, sale);
-		}
-	});
+	function setSalesman(s){
+		sale = s;
+		seeStatus(status, sale);
+	}
 
 	$.ajax({
         type: "get",
@@ -138,7 +126,7 @@
 					var tpl = $("#salesman-template").text();
 					var tempFn = doT.template(tpl);
 					var rHtml = tempFn(data.salesmans);
-					$("#dropSale").html(rHtml);		
+					$("#salesman").html(rHtml);		
 				}else{
 	        		alert('信息错误');
 	        	}
