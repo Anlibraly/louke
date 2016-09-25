@@ -49,7 +49,7 @@
 				<li role="presentation"><a role="menuitem" tabindex="4" href="#">死亡</a></li>
 				<li role="presentation"><a role="menuitem" tabindex="5" href="#">搁置</a></li>
 			</ul>
-			<select id="salesman" style="width:40%;" onchange="setSalesman(this.options[this.options.selectedIndex].value)"></select>		
+			<select id="salesman" style="float:right;width:25%;float:right;" onchange="setSalesman(this.options[this.options.selectedIndex].value)"></select>		
 		</div>
 	
 		<ul id="customs" class="list-group"></ul>
@@ -88,6 +88,7 @@
 	</script>	
 
 	<script id="salesman-template" type="text/x-dot-template">
+		<option value="0">所有</option>
 		{{ for(var i in it) { }}
 			<option value="{{=it[i]._id}}">{{=it[i].nick_name}}</option>
 		{{ } }}
