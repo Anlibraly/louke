@@ -145,13 +145,16 @@
 					        	try{
 						        	if(cdata.code == 1){
 						        		var c = cdata.customs[0];
+						        		var date = new Date();
 						        		console.log(c);
 										$("#cname").val(c.cname),
 										$("#tel_num").val(c.tel_num),
 										$("#goal_fang").val(c.goal_fang),
 										$("#size").val(c.size),
 									    $("#price").val(c.price),
-										//$("#deadline").val(c.deadline),
+									    date.setTime(c.deadline);
+										$("#deadline").val(date.getFullYear() + '-' 
+										+ (date.getMonth()+1) + '-' + date.getDate()),
 									    $("#reason").val(c.move_reason),
 									 	$("#job").val(c.job), 
 										$("#now_address").val(c.now_address),
