@@ -153,8 +153,12 @@
 										$("#size").val(c.size),
 									    $("#price").val(c.price),
 									    date.setTime(c.deadline);
+									    var m = date.getMonth()+1;
+									    if(m < 10){
+									    	m = '0' + m;
+									    }
 										$("#deadline").val(date.getFullYear() + '-' 
-										+ (date.getMonth()+1) + '-' + date.getDate()),
+										+ m + '-' + date.getDate()),
 									    $("#reason").val(c.move_reason),
 									 	$("#job").val(c.job), 
 										$("#now_address").val(c.now_address),
