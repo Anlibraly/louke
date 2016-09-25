@@ -58,7 +58,7 @@
 		{{ for(var i in it) { }}
 			<li class="cunstom list-group-item">
 				<span style="display: -webkit-box;margin: 4% 0 2% 0;font-size: 16px;font-weight: bold;">
-					{{=it[i]._id}}-{{=it[i].update_time}} {{=it[i].status}}
+					{{=it[i].update_time}}{{=it[i]._id}} {{=it[i].status}}
 				</span>
 				<div class="cus_info">
 					<span>客户: {{=it[i].cname}}</span>
@@ -112,8 +112,8 @@
 							var date = new Date();
 							for (var i = 0; i < data.customs.length; i++) {
 								date.setTime(data.customs[i].update_time);
-								data.customs[i].update_time = date.getFullYear() + '-' 
-								+ (date.getMonth()+1) + '-' + date.getDate();
+								data.customs[i].update_time = date.getFullYear() + '' 
+								+ (date.getMonth()+1) + '' + date.getDate();
 								data.customs[i].status = allstatus[+data.customs[i].status];
 							};
 							var rHtml = tempFn(data.customs);

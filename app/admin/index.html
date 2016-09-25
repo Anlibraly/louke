@@ -58,7 +58,7 @@
 		{{ for(var i in it) { }}
 			<li class="cunstom">
 				<span style="display: -webkit-box;margin: 2% 0;">
-					{{=it[i]._id}}-{{=it[i].update_time}} {{=it[i].status}}
+					{{=it[i].update_time}}{{=it[i]._id}} {{=it[i].status}}
 					<br>
 					{{=it[i].saleManNick}}({{=it[i].saleManName}})
 				</span>
@@ -125,8 +125,8 @@
 								data.customs[i].saleManName = '暂无';					
 							}
 							date.setTime(data.customs[i].update_time);
-							data.customs[i].update_time = date.getFullYear() + '-' 
-							+ (date.getMonth()+1) + '-' + date.getDate();
+							data.customs[i].update_time = date.getFullYear() + '' 
+							+ (date.getMonth()+1) + '' + date.getDate();
 							data.customs[i].status = allstatus[+data.customs[i].status];
 						};
 						var rHtml = tempFn(data.customs);
