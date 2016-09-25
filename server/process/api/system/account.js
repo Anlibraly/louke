@@ -260,6 +260,27 @@ module.exports = ( router ) => {
 			};			
 		});		
 	})
+	.get('/admin/getcotact/:cid', function *() {
+		yield Promise.resolve()
+		.then(() => getThroughDataProc('db', 'query', {
+			_key: 'contact',
+			_sort: 'contact_time:desc',
+			custom_id: this.params.cid
+		}))
+		.then((result) => {
+			this.body = {
+				code: 1,
+				contacts: result.list
+			};				
+		})
+		.catch((err) => {
+			console.log(`[error] ${err.message}\n${err.stack}`)
+			this.body = {
+				code: -1,
+				desc: `[error] ${err.message}\n${err.stack}`
+			};			
+		});		
+	})
 	.get('/salesman/getcustom/:status', function *() {
 		let qs = null;
 		if(this.params.status != undefined && this.params.status > 0){
