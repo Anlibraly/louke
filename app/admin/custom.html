@@ -76,7 +76,6 @@
 <script type="text/javascript">	
 	var salesman = 1;
 	var cid = getParameter('cid');
-	console.log(cid);
 	function setSalesman(s){
 		salesman = s;
 	}
@@ -146,19 +145,21 @@
 						        	if(cdata.code == 1){
 						        		var c = cdata.customs[0];
 						        		var date = new Date();
-						        		console.log(c);
 										$("#cname").val(c.cname),
 										$("#tel_num").val(c.tel_num),
 										$("#goal_fang").val(c.goal_fang),
 										$("#size").val(c.size),
 									    $("#price").val(c.price),
 									    date.setTime(c.deadline);
-									    var m = date.getMonth()+1;
+									    var m = date.getMonth()+1, d = date.getDate();
 									    if(m < 10){
 									    	m = '0' + m;
 									    }
+									    if(d < 10){
+									    	d = '0' + d;
+									    }
 										$("#deadline").val(date.getFullYear() + '-' 
-										+ m + '-' + date.getDate()),
+										+ m + '-' + d),
 									    $("#reason").val(c.move_reason),
 									 	$("#job").val(c.job), 
 										$("#now_address").val(c.now_address),
@@ -178,6 +179,7 @@
 	        		alert('信息错误');
 	        	}
 	        }catch(e){
+	        	console.log(e);
 	        	alert('地推员出错，稍后再试');
 	        }
         }
