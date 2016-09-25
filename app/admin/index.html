@@ -41,7 +41,7 @@
 				<span id="status">所有</span>
 				<span class="caret"></span>
 			</button>
-			<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+			<ul id="dropStatus" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
 				<li role="presentation"><a role="menuitem" tabindex="0" href="#">所有</a></li>
 				<li role="presentation"><a role="menuitem" tabindex="1" href="#">推楼带看</a></li>
 				<li role="presentation"><a role="menuitem" tabindex="2" href="#">成交手续</a></li>
@@ -49,6 +49,14 @@
 				<li role="presentation"><a role="menuitem" tabindex="4" href="#">死亡</a></li>
 				<li role="presentation"><a role="menuitem" tabindex="5" href="#">搁置</a></li>
 			</ul>
+			
+			<button class="btn btn-default dropdown-toggle" type="button" id="dropdownSale" data-toggle="dropdown">
+				<span id="sale">所有</span>
+				<span class="caret"></span>
+			</button>
+			<ul id="dropSale" class="dropdown-menu" role="menu" aria-labelledby="dropdownSale">
+
+			</ul>			
 		</div>
 	
 		<ul id="customs" class="list-group"></ul>
@@ -85,6 +93,13 @@
 			</li>
 		{{ } }}
 	</script>	
+
+	<script id="salesman-template" type="text/x-dot-template">
+		<li role="presentation"><a role="menuitem" tabindex="0" href="#">所有</a></li>
+		{{ for(var i in it) { }}	
+			<li role="presentation"><a role="menuitem" tabindex="{{=it[i]._id}}" href="#">{{=it[i].nick_name}}</a></li>
+		{{ } }}
+	</script>	
 </body>
 </html>
 
@@ -93,21 +108,51 @@
 <script type="text/javascript" src="../lib/underscore-min.js"></script>
 <script type="text/javascript" src="../lib/doT.min.js"></script>
 <script type="text/javascript">
-	var status  = 0, saleMans = [];
+	var status  = 0, sale = 0, saleMans = [];
 
-	$(".dropdown-menu a").click(function(){
+	$("#dropStatus a").click(function(){
 		$("#status").html($(this).text());
 
 		if (status != +$(this).attr("tabindex")) {
 			status = +$(this).attr("tabindex");
-			seeStatus(status);
+			seeStatus(status, sale);
 		}
 	});
 
-	function seeStatus(status){
+	$("#dropSale a").click(function(){
+		$("#sale").html($(this).text());
+
+		if (sale != +$(this).attr("tabindex")) {
+			sale = +$(this).attr("tabindex");
+			seeStatus(status, sale);
+		}
+	});
+
+	$.ajax({
+        type: "get",
+        url: _dirname + '/system/admin/getSalesman',
+        dataType: "json",
+        success: function(data){
+        	try{
+	        	if(data.code == 1){
+					var tpl = $("#salesman-template").text();
+					var tempFn = doT.template(tpl);
+					var rHtml = tempFn(data.salesmans);
+					$("#dropSale").html(rHtml);		
+				}else{
+	        		alert('信息错误');
+	        	}
+	        }catch(e){
+	        	console.log(e);
+	        	alert('地推员出错，稍后再试');
+	        }
+        }
+    });						
+
+	function seeStatus(status, sale){
 		$.ajax({
 	        type: "get",
-	        url: _dirname + '/system/admin/getcustom/'+status,
+	        url: _dirname + '/system/admin/getcustom/'+status+'/'+sale,
 	        dataType: "json",
 	        success: function(data){
 	        	try{

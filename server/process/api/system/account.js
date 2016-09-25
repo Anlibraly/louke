@@ -93,7 +93,7 @@ module.exports = ( router ) => {
 			};			
 		});
 	})
-	.get('/admin/getcustom/:status', function *() {
+	.get('/admin/getcustom/:status/:sid', function *() {
 		let qs = null;
 		if(this.params.status != undefined && this.params.status > 0){
 			qs = {
@@ -107,6 +107,9 @@ module.exports = ( router ) => {
 				_sort: 'update_time:desc'
 			};
 		}
+		if(this.params.sid != undefined && this.params.sid > 0){
+			qs.userid = +this.params.sid;
+		}		
 		yield Promise.resolve()
 		.then(() => getThroughDataProc('db', 'query', qs))
 		.then((result) => {
