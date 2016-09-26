@@ -76,7 +76,7 @@
 	        dataType: "json",
 	        success: function(data){
 	        	try{
-		        	if(data.code == 1){
+		        	if(data.code == 1 && data.customs.length > 0){
 						var tpl = $("#customs-template").text();
 						var tempFn = doT.template(tpl);
 						var date = new Date();
@@ -96,6 +96,8 @@
 						};
 						var rHtml = tempFn(data.customs);
 						$("#customs").html(rHtml);		        		
+		        	}else{
+		        		$("#customs").html(`<span style="margin: 30%;text-align: center;display: -webkit-box;">无未浏览客户更新</span>`);
 		        	}
 		        }catch(e){
 		        	console.log(e);
