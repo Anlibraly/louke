@@ -253,7 +253,7 @@ module.exports = ( router ) => {
 			  	add_status: 0
 			};
 			console.log(111, _id);
-			if(_id !== null && _id !== undefined && +_id >=0){
+			if(_id !== null && _id !== undefined && +_id >=0 && _id !== ''){
 				custom._id = _id;
 				desc = '修改成功';
 			}else{
