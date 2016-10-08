@@ -262,15 +262,17 @@ module.exports = ( router ) => {
 				add_time: '>='+today
 			}))
 			.then((result) => { 
-				console.log(result, 111, result.length);
-				let num = '01';
-				if(result && result.length > 8){
-					num = result.length+1;
-				}else if(result && result.length > 0){
-					num = '0' + (result.length+1);
-				}
+				if(custom._id == undefined){
+					result = result.list;
+					let num = '01';
+					if(result && result.length > 8){
+						num = result.length+1;
+					}else if(result && result.length > 0){
+						num = '0' + (result.length+1);
+					}
 
-				custom.cid = todate + '' + num;
+					custom.cid = todate + '' + num;
+				}
 				let qs = {
 						_key: 'custom',
 						_save: [custom]

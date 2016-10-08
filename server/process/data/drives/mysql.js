@@ -167,7 +167,6 @@ module.exports = {
 		let sql   = 'select ';
 		let where = [];
 		let sort  = [];
-		console.log(query);
 
 		// inlcude 
 		query.include = (query.include || []);
@@ -215,7 +214,6 @@ module.exports = {
 		}
 
 		sql += ';';
-		console.log(sql);
 
 		let countSql = sql.split(/\n/);
 		let {size, page} = query;
