@@ -219,8 +219,14 @@ module.exports = ( router ) => {
 			date.setMinutes(0);
 			date.setSeconds(0);
 
-			let todate = date.getFullYear() + '' + (date.getMonth()+1) + '' + date.getDate();
-			todate = todate.substring(2);
+			let y = date.getFullYear()-2000, m = date.getMonth()+1, d = date.getDate();
+		    if(m < 10){
+		    	m = '0' + m;
+		    }
+		    if(d < 10){
+		    	d = '0' + d;
+		    }			
+			let todate = `${y}${m}${d}`;
 			let today = date.getTime();
 			let t = deadline.split('-');
 			if(t.length == 3){
@@ -266,7 +272,7 @@ module.exports = ( router ) => {
 				}else if(result && result.length > 0){
 					num = '0' + result.length;
 				}
-				
+
 				custom.cid = todate + '' + num;
 				let qs = {
 						_key: 'custom',
