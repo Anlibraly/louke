@@ -252,7 +252,6 @@ module.exports = ( router ) => {
 			  	status: 0,
 			  	add_status: 0
 			};
-			console.log(111, _id);
 			if(_id !== null && _id !== undefined && +_id >=0 && _id !== ''){
 				custom._id = _id;
 				desc = '修改成功';
@@ -267,7 +266,6 @@ module.exports = ( router ) => {
 			.then((result) => { 
 				if(desc === '添加成功'){
 					result = result.list;
-					console.log(result, result.length);
 					let num = '01';
 					if(result && result.length > 8){
 						num = result.length+1;

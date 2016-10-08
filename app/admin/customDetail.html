@@ -33,7 +33,7 @@
 	<script id="custom-template" type="text/x-dot-template">
 			<li class="cunstom list-group-item">
 				<span style="display: -webkit-box;margin: 2% 0;">
-					{{=it.add_time_id}}{{=it._id}}
+					{{=it.cid}}
 				</span>
 				<div class="cus_info">
 					<span>客户: {{=it.cname}}</span>
@@ -103,15 +103,7 @@
 						data.customs[i].add_status = allstatus[+data.customs[i].add_status];
 						date.setTime(data.customs[i].add_time);
 						data.customs[i].add_time = date.getFullYear() + '-' 
-						+ (date.getMonth()+1) + '-' + date.getDate();		
-					    var y = date.getFullYear()-2000, m = date.getMonth()+1, d = date.getDate();
-					    if(m < 10){
-					    	m = '0' + m;
-					    }
-					    if(d < 10){
-					    	d = '0' + d;
-					    }							
-						data.customs[i].add_time_id = y + '' + m + '' + d;											
+						+ (date.getMonth()+1) + '-' + date.getDate();												
 					};
 					var rHtml = tempFn(data.customs[0]);
 					$("#custom").html(rHtml);		        		
