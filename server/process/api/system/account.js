@@ -262,8 +262,9 @@ module.exports = ( router ) => {
 				add_time: '>='+today
 			}))
 			.then((result) => { 
-				if(custom._id == undefined){
+				if(custom._id === undefined){
 					result = result.list;
+					console.log(result, result.length);
 					let num = '01';
 					if(result && result.length > 8){
 						num = result.length+1;
