@@ -266,11 +266,12 @@ module.exports = ( router ) => {
 				}]
 			}))
 			.then((result) => { 
+				console.log(result.length);
 				let num = '01';
-				if(result && result.length > 9){
-					num = result.length;
+				if(result && result.length > 8){
+					num = result.length+1;
 				}else if(result && result.length > 0){
-					num = '0' + result.length;
+					num = '0' + (result.length+1);
 				}
 
 				custom.cid = todate + '' + num;

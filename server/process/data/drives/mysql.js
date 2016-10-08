@@ -167,6 +167,7 @@ module.exports = {
 		let sql   = 'select ';
 		let where = [];
 		let sort  = [];
+		console.log(query);
 
 		// inlcude 
 		query.include = (query.include || []);
