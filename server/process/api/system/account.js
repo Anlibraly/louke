@@ -252,6 +252,7 @@ module.exports = ( router ) => {
 			  	status: 0,
 			  	add_status: 0
 			};
+			console.log(_id);
 			if(_id !== null && _id !== undefined && +_id >=0){
 				custom._id = _id;
 				desc = '修改成功';
