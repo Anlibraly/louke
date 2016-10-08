@@ -255,6 +255,8 @@ module.exports = ( router ) => {
 			if(_id !== null && _id !== undefined && +_id >=0){
 				custom._id = _id;
 				desc = '修改成功';
+			}else{
+				desc = '添加成功';			
 			}
 			yield Promise.resolve()
 			.then(() => getThroughDataProc('db', 'query', {
@@ -262,7 +264,7 @@ module.exports = ( router ) => {
 				add_time: '>='+today
 			}))
 			.then((result) => { 
-				if(custom._id === undefined){
+				if(desc === '添加成功'){
 					result = result.list;
 					console.log(result, result.length);
 					let num = '01';
