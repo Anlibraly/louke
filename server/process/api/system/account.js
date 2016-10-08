@@ -227,7 +227,7 @@ module.exports = ( router ) => {
 		    	d = '0' + d;
 		    }			
 			let todate = `${y}${m}${d}`;
-			let today = date.getTime();
+			let today = +date.getTime();
 			let t = deadline.split('-');
 			if(t.length == 3){
 				date.setFullYear(+t[0]);
@@ -262,7 +262,7 @@ module.exports = ( router ) => {
 				add_time: '>='+today
 			}))
 			.then((result) => { 
-				console.log(result.length);
+				console.log(result, 111, result.length);
 				let num = '01';
 				if(result && result.length > 8){
 					num = result.length+1;
