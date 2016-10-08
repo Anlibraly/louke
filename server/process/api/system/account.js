@@ -259,11 +259,7 @@ module.exports = ( router ) => {
 			yield Promise.resolve()
 			.then(() => getThroughDataProc('db', 'query', {
 				_key: 'custom',
-				_attrs: [{
-					'add_time': {
-						cips: [{cip: '>', val: today}]
-					}
-				}]
+				add_time: '>='+today
 			}))
 			.then((result) => { 
 				console.log(result.length);
