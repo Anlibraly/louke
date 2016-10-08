@@ -12,6 +12,7 @@ module.exports = {
 
 	custom : {
 		_remote: 'db',
+		cid: String,
 	  	userid: Number,
 	  	cname: String,
 	  	tel_num: String,

@@ -215,6 +215,13 @@ module.exports = ( router ) => {
 		if(check(cname) && check(tel_num) && check(goal_fang) && check(size)
 		&& check(price) && check(deadline) && check(reason) && check(salesman)){
 			let addtime = date.getTime();
+			date.setHours(0);
+			date.setMinutes(0);
+			date.setSeconds(0);
+
+			let todate = date.getFullYear() + '' + (date.getMonth()+1) + '' + date.getDate();
+			todate = todate.substring(2);
+			let today = date.getTime();
 			let t = deadline.split('-');
 			if(t.length == 3){
 				date.setFullYear(+t[0]);
@@ -243,12 +250,30 @@ module.exports = ( router ) => {
 				custom._id = _id;
 				desc = '修改成功';
 			}
-			let qs = {
-					_key: 'custom',
-					_save: [custom]
-			};
 			yield Promise.resolve()
-			.then(() => getThroughDataProc('db', 'save', qs))
+			.then(() => getThroughDataProc('db', 'query', {
+				_key: 'custom',
+				_attrs: [{
+					'add_time': {
+						cips: [{cip: '>', val: today}]
+					}
+				}]
+			}))
+			.then((result) => { 
+				let num = '01';
+				if(result && result.length > 9){
+					num = result.length;
+				}else if(result && result.length > 0){
+					num = '0' + result.length;
+				}
+				
+				custom.cid = todate + '' + num;
+				let qs = {
+						_key: 'custom',
+						_save: [custom]
+				};
+				return getThroughDataProc('db', 'save', qs);
+			})
 			.then((result) => {
 				this.body = {
 					code: 1,

@@ -95,6 +95,7 @@ var delRecord = (key, _id) => {
 	.then(() => true);
 };
 
+//'add_time' {cip: '>', val: 100}
 var cpiToSql = (field, cpi) => {
 	if(!field || !cpi){
 		throw new Error('field, cpi should not be empty');
@@ -182,7 +183,8 @@ module.exports = {
 		// attrs: table field filter
 		_.each(query.attrs, (v, k) => {
 			let subsql = [];
-			
+
+			//'add_time' {cip: '>', val: 100}
 			_.each(v.cpis, (sv) => {
 				subsql.push(cpiToSql(k, sv));
 			});
@@ -212,6 +214,7 @@ module.exports = {
 		}
 
 		sql += ';';
+		console.log(sql);
 
 		let countSql = sql.split(/\n/);
 		let {size, page} = query;
