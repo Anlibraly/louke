@@ -57,6 +57,7 @@ Action.db.save = (req = {}, res) => {
 	mysql.save({ key, add, update, del })
 	.then(({ar, ur, dr}) => {
 		let result = helper.createSaveObject({map, ar, ur, dr});
+		console.log(333, result);
 		return Promise.resolve(result);
 	})
 	.then((result) => helper.cbResponse(result, res))
