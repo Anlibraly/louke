@@ -121,7 +121,7 @@ var cpiToSql = (field, cpi) => {
 		subsql = `\`${field}\` like '${value}%'`;
 	}else if(cpi.cpi === '$='){
 		subsql = `\`${field}\` like '%${value}'`;
-	}else if(cpi.cpi === '^!'){
+	}else if(cpi.cpi === '#='){
 		subsql = `\`${field}\` not like '%${value}%'`;
 	}else if(cpi.cpi === '=='){
 		subsql = `\`${field}\` = '${value}'`;

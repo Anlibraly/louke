@@ -130,10 +130,7 @@ module.exports = ( router ) => {
 		let qs = {
 			_key: 'custom',
 			_sort: 'update_time:desc',
-			read: {
-				cpi: '^!', 
-				val: `${this.session.userid}-`
-			}
+			read: '#='+`${this.session.userid}-`
 		};
 
 		yield Promise.resolve()
