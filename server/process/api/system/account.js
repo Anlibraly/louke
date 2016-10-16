@@ -158,23 +158,26 @@ module.exports = ( router ) => {
 		.then(() => getThroughDataProc('db', 'query', qs))
 		.then((result) => {
 			let read = result.list[0].read;
+			console.log(111, read);
 			if(read.indexOf(`${this.session.userid}-`) < 0){
 				read += `${this.session.userid}-`;
 			}
-			getThroughDataProc('db', 'save', {
+			console.log(222, read);
+			return getThroughDataProc('db', 'save', {
 				_key: 'custom',
 				_save: [{
 					_id: +this.params.cid,
 					read: read
 				}]
-			})
-			.then(() => {
-				this.body = {
-					code: 1,
-					customs: result.list
-				};	
 			});
 		})
+		.then((result) => {
+			console.log(result);
+			this.body = {
+				code: 1,
+				customs: result
+			};	
+		});
 		.catch((err) => {
 			console.log(`[error] ${err.message}\n${err.stack}`)
 			this.body = {
