@@ -130,7 +130,7 @@ module.exports = ( router ) => {
 		let qs = {
 			_key: 'custom',
 			_sort: 'update_time:desc',
-			read: 0
+			read: `^!${this.session.userid}-`
 		};
 
 		yield Promise.resolve()
@@ -155,19 +155,25 @@ module.exports = ( router ) => {
 				_id: this.params.cid
 		};
 		yield Promise.resolve()
-		.then(() => getThroughDataProc('db', 'save', {
+		.then(() => getThroughDataProc('db', 'query', qs))
+		.then((result) => {
+			let read = result.list[0].read;
+			if(read.indexOf(`${this.session.userid}-`) < 0){
+				read += `${this.session.userid}-`;
+			}
+			getThroughDataProc('db', 'save', {
 				_key: 'custom',
 				_save: [{
 					_id: +this.params.cid,
-					read: 1
+					read: read
 				}]
-		}))
-		.then(() => getThroughDataProc('db', 'query', qs))
-		.then((result) => {
-			this.body = {
-				code: 1,
-				customs: result.list
-			};				
+			})
+			.then(() => {
+				this.body = {
+					code: 1,
+					customs: result.list
+				};	
+			});
 		})
 		.catch((err) => {
 			console.log(`[error] ${err.message}\n${err.stack}`)
@@ -250,7 +256,8 @@ module.exports = ( router ) => {
 			  	update_time: +addtime,
 			  	add_time: +addtime,
 			  	status: 0,
-			  	add_status: 0
+			  	add_status: 0,
+			  	read: `${this.session.userid}-`
 			};
 			if(_id !== null && _id !== undefined && +_id >=0 && _id !== ''){
 				custom._id = _id;
@@ -306,7 +313,8 @@ module.exports = ( router ) => {
 				_key: 'custom',
 				_save: [{
 					_id: +this.request.body.userid,
-					userid: +this.request.body.salesman
+					userid: +this.request.body.salesman,
+					read: `${this.session.userid}-`
 				}]
 		};
 		yield Promise.resolve()
@@ -461,7 +469,7 @@ module.exports = ( router ) => {
 					_save: [{
 						_id: +cid,
 						status: +status,
-						read: 0,
+						read: '',
 						update_time: ctm						
 					}]
 			}))

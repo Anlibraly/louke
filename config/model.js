@@ -29,7 +29,7 @@ module.exports = {
 	  	add_time: Number,
 	  	status: Number,
 	  	add_status: Number,
-	  	read: Number
+	  	read: String
   	},
 
 	fang : {
