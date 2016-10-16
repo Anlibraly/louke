@@ -97,7 +97,6 @@ var delRecord = (key, _id) => {
 
 //'add_time' {cip: '>', val: 100}
 var cpiToSql = (field, cpi) => {
-	console.log(field, cpi);
 	if(!field || !cpi){
 		throw new Error('field, cpi should not be empty');
 	}
@@ -220,7 +219,6 @@ module.exports = {
 		}
 
 		sql += ';';
-		console.log(sql);
 		let countSql = sql.split(/\n/);
 		let {size, page} = query;
 		let hasSize = (+size > 0 ? true : false);
