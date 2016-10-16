@@ -150,7 +150,7 @@ module.exports = ( router ) => {
 		});		
 	})
 	.get('/admin/custom/:cid',function *(){
-		let qs = {
+		let customs, qs = {
 				_key: 'custom',
 				_id: this.params.cid
 		};
@@ -163,6 +163,7 @@ module.exports = ( router ) => {
 				read += `${this.session.userid}-`;
 			}
 			console.log(222, read);
+			customs = result;
 			return getThroughDataProc('db', 'save', {
 				_key: 'custom',
 				_save: [{
@@ -175,7 +176,7 @@ module.exports = ( router ) => {
 			console.log(result);
 			this.body = {
 				code: 1,
-				customs: result
+				customs: customs.list
 			};	
 		})
 		.catch((err) => {
