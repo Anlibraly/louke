@@ -177,7 +177,7 @@ module.exports = ( router ) => {
 				code: 1,
 				customs: result
 			};	
-		});
+		})
 		.catch((err) => {
 			console.log(`[error] ${err.message}\n${err.stack}`)
 			this.body = {
