@@ -158,11 +158,9 @@ module.exports = ( router ) => {
 		.then(() => getThroughDataProc('db', 'query', qs))
 		.then((result) => {
 			let read = result.list[0].read;
-			console.log(111, read);
 			if(read.indexOf(`${this.session.userid}-`) < 0){
 				read += `${this.session.userid}-`;
 			}
-			console.log(222, read);
 			customs = result;
 			return getThroughDataProc('db', 'save', {
 				_key: 'custom',
@@ -173,7 +171,6 @@ module.exports = ( router ) => {
 			});
 		})
 		.then((result) => {
-			console.log(result);
 			this.body = {
 				code: 1,
 				customs: customs.list

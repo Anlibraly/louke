@@ -97,6 +97,7 @@ var delRecord = (key, _id) => {
 
 //'add_time' {cip: '>', val: 100}
 var cpiToSql = (field, cpi) => {
+	console.log(field, cpi);
 	if(!field || !cpi){
 		throw new Error('field, cpi should not be empty');
 	}
