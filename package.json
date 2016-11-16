@@ -4,7 +4,7 @@
   "description": "louke custom manage",
   "main": "product/app/luanch.js",
   "scripts": {
-    "start": "pm2 start product/server/launcher.js",
+    "start": "gulp && pm2 kill && npm run data && npm run api && pm2 logs",
     "api": "pm2 start product/server/launcher.js -- api",
     "web": "pm2 start product/server/launcher.js -- web",
     "data": "pm2 start product/server/launcher.js -- data",
