@@ -7,7 +7,7 @@ var conf 	 = require('../../../common/settings');
 var pool = mysql.createPool({
 	host: conf.dbHost,
 	user: conf.dbUser,
-	password: base64.decode(base64.decode(conf.dbPassword)),
+	password: conf.dbPassword,
 	database: conf.dbName
 });
 pool.on('connection', () 	=> console.log('mysql pool connect'));
